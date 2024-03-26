@@ -1,0 +1,31 @@
+body{
+    margin: 0;
+}
+
+.cajaPrincipal{
+    height: 100vh;
+    background-color: brown;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.container div{
+    border: 2px solid gray;
+    background-color: green;
+    box-sizing: border-box;
+    flex-shrink: 0;
+
+}
+
+.lateral{
+    color: blue;
+    flex: 1;
+}
+.cuadradoPrincipal{
+    color: aqua;
+    flex: 6;
+}
