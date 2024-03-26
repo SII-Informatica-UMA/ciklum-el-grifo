@@ -5,28 +5,25 @@ body{
 .cajaPrincipal{
     height: 100vh;
     background-color: brown;
-    box-sizing: border-box;
+    display: flex;
 }
 
 .cajaSuperior{
     background-color: lightsalmon;
-    height: 5%;
+    flex-basis: 20%;
 }
 
 .container {
     display: flex;
-    height: 95%;
-    box-sizing: border-box ;
+    flex-direction: column;
+    flex:1;
 }
-
-
 
 .lateral{
     flex: 1;
     background-color: lightblue;
 }
 .cuadradoPrincipal{
+    flex: 4;
     background-color: lightcyan;
-    color: lightgreen;
-    flex: 6;
 }
