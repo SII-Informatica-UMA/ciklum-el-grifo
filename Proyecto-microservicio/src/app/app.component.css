@@ -32,18 +32,6 @@ body{
     flex: 6;
     background-color: lightcyan;
 }
-
-.tablaCliente{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.tablaCliente th, .tablaCliente td {
-    padding: 8px; /* Añade espacio dentro de las celdas */
-    border: 1px solid black; /* Añade bordes a las celdas */
-    word-wrap: break-word; /* Permite que el texto se ajuste automáticamente */
-}
-
 /* Estilos para el botón */
 .boton {
     display: inline-block;
@@ -51,7 +39,7 @@ body{
     margin-top: 10px;
     font-size: 16px;
     font-weight: bold;
-    color: #fff;
+    color: #ffff;
     background-color: #007bff;
     border: 2px solid #007bff;
     border-radius: 5px;
@@ -69,8 +57,8 @@ body{
 
 /* Estilos al hacer clic */
 .boton:active {
-    background-color: #004080;
-    border-color: #004080;
+    background-color:   #ffffff;
+    border-color: #ffffff;
 }
 
 .navegador{

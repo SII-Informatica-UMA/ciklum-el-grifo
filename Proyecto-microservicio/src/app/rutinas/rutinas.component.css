@@ -1,0 +1,10 @@
+.tablaCliente{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tablaCliente th, .tablaCliente td {
+    padding: 8px; /* Añade espacio dentro de las celdas */
+    border: 1px solid black; /* Añade bordes a las celdas */
+    word-wrap: break-word; /* Permite que el texto se ajuste automáticamente */
+}
