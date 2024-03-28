@@ -3,14 +3,11 @@
   <div class = "cajaPrincipal">
 
     <div class="barraLateral">
-      <button class="button" type="menu">Buenas</button>
-      <button class="button" type="menu">Buenas</button>
-      <button class="button" type="menu">Buenas</button>
-      <button class="button" type="menu">Buenas</button>
-      <button class="button" type="menu">Buenas</button>
-      <button class="button" type="menu">Buenas</button>
-      <button class="button" type="menu">Buenas</button>
-      <button class="button" type="menu">Buenas</button>
+      <div class="foto"></div>
+      <nav class="navegador">
+        <a class="boton" routerLinkActive="active" routerLink ="/rutinas">Rutinas</a>
+        <a class="boton" routerLinkActive="active" routerLink ="/ejercicios">Ejercicios</a>
+      </nav>
     </div>
 
     <div class="container">
@@ -20,31 +17,7 @@
       </div>
 
       <div class="cuadradoPrincipal">
-        <table class="tablaCliente">
-          <head>
-
-            <tr>
-              <th>hola</th>
-              <th>hola</th>
-              <th>hola</th>
-              <th>hola</th>
-              <th>hola</th>
-              <th>hola</th>
-            </tr>
-            
-          </head>
-
-          <tbody>
-            <tr>
-              <td>ejemplo</td>
-              <td>ejemplo</td>
-              <td>ejemplo</td>
-              <td>ejemplodddddddddddddddddddddddd</td>
-              <td>ejemplo</td>
-              <td>ejemplo</td>
-            </tr>
-          </tbody>
-        </table>
+        <router-outlet></router-outlet>
       </div>  
 
     </div>
