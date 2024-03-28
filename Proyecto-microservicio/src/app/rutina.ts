@@ -1,6 +1,5 @@
 export interface Rutina{
-    id: number; 
-    nombre: string; 
-    fecha: Date; 
+    id?: number; 
+    nombre?: string; 
     nose: undefined; 
 }
