@@ -1,0 +1,58 @@
+body{
+    margin: 0;
+}
+
+.cajaPrincipal{
+    height: 100vh;
+    display: flex;
+}
+
+.containerPrincipal {
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    padding: 0%;
+}
+
+
+
+.barraSuperior{
+    background-color: lightsalmon;
+    flex: 1;
+}
+
+.cuadradoPrincipal{
+    flex: 6;
+    background-color: lightcyan;
+}
+
+.tablaCliente{
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+
+.margenBoton{
+    margin: 20px;
+}
+
+.barraLateral {
+    padding: 20px; /* Ajusta el padding según sea necesario */
+    box-sizing: border-box;
+    flex-basis: 20%;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.tablaCliente th, .tablaCliente td {
+    padding: 8px; /* Ajusta el padding según sea necesario */
+    border: 1px solid black;
+}
+
+@media screen and (max-width: 768px) {
+    /* Estilos específicos para pantallas más pequeñas, si es necesario */
+}
+

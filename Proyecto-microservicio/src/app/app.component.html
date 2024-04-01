@@ -1,0 +1,29 @@
+
+<body>
+
+  <div class = "cajaPrincipal">
+
+    <div class="barraLateral">
+      <button class="margenBoton" type="menu" (click)="mostrarRutinas()"  >Administrar Rutinas</button>
+      <button class="margenBoton" type="menu">Administrar Ejercicios</button>
+
+    </div>
+
+    <div class="containerPrincipal">
+
+      <div class="barraSuperior">
+        Barra superior
+      </div>
+
+      <div class="cuadradoPrincipal">
+    <!--  -->
+        <div *ngIf="componenteActual">
+          <ng-container *ngComponentOutlet="componenteActual"></ng-container>
+        </div>
+      </div>  
+
+    </div>
+    
+  </div>
+
+</body>
