@@ -1,15 +1,15 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import {Rutina } from '../rutina';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormularioContactoComponent} from '../formulario-contacto/formulario-contacto.component'
+import {FormularioRutinaComponent} from '../formulario-rutina/formulario-rutina.component'
 import { RutinasService } from '../rutina.service';
 
 @Component({
-  selector: 'app-detalle-contacto',
-  templateUrl: './detalle-contacto.component.html',
-  styleUrls: ['./detalle-contacto.component.css']
+  selector: 'app-detalle-rutina',
+  templateUrl: './detalle-rutina.component.html',
+  styleUrls: ['./detalle-rutina.component.css']
 })
-export class DetalleContactoComponent {
+export class DetalleRutinaComponent {
   @Input() rutina?: Rutina;
   @Output() rutinaEditada = new EventEmitter<Rutina>();
   @Output() rutinaEliminada = new EventEmitter<number>();
@@ -17,7 +17,7 @@ export class DetalleContactoComponent {
   constructor(private rutinasService: RutinasService, private modalService: NgbModal) { }
 
 editarContacto(): void {
-  let ref = this.modalService.open(FormularioContactoComponent);
+  let ref = this.modalService.open(FormularioRutinaComponent);
   ref.componentInstance.accion = "Editar";
   ref.componentInstance.rutina = {...this.rutina};
   ref.result.then((rutina: Rutina) => {

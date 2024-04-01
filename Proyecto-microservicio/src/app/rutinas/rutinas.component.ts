@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RutinasService } from '../rutina.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormularioContactoComponent} from '../formulario-contacto/formulario-contacto.component'
+import {FormularioRutinaComponent} from '../formulario-rutina/formulario-rutina.component'
 import {Rutina } from '../rutina';
 
 @Component({
@@ -16,7 +16,7 @@ export class RutinasComponent implements OnInit {
   constructor(private rutinasService: RutinasService, private modalService: NgbModal) { }
 
   editarRutina(rutina: Rutina): void {
-    let ref = this.modalService.open(FormularioContactoComponent);
+    let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Editar";
     ref.componentInstance.rutina = {...rutina};
     ref.result.then((rutina: Rutina) => {
@@ -35,7 +35,7 @@ export class RutinasComponent implements OnInit {
   }
 
   aniadirRutina(): void {
-    let ref = this.modalService.open(FormularioContactoComponent);
+    let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.contacto = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
     ref.result.then((rutina: Rutina) => {

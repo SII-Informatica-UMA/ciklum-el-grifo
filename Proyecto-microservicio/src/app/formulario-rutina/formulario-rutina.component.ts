@@ -3,11 +3,11 @@ import  {Rutina} from '../rutina';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-formulario-contacto',
-  templateUrl: './formulario-contacto.component.html',
-  styleUrls: ['./formulario-contacto.component.css']
+  selector: 'app-formulario-rutina',
+  templateUrl: './formulario-rutina.component.html',
+  styleUrls: ['./formulario-rutina.component.css']
 })
-export class FormularioContactoComponent {
+export class FormularioRutinaComponent {
   accion?: "Añadir" | "Editar";
   rutina: Rutina = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
 
