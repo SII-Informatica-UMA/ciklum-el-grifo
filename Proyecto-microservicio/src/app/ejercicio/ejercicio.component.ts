@@ -3,6 +3,7 @@ import { EjercicosService } from '../ejercicio.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormularioRutinaComponent } from '../formulario-rutina/formulario-rutina.component';
 import { Ejercicio } from '../ejercicio';
+import { FormularioEjercicioComponent } from '../formulario-ejercicio/formulario-ejercicio.component';
 
 @Component({
   selector: 'app-ejercicio',
@@ -15,7 +16,7 @@ export class EjercicioComponent{
   constructor(private ejerciciosService: EjercicosService, private modalService: NgbModal) { }
 
   editarEjercicio(ejercicio: Ejercicio): void {
-    let ref = this.modalService.open(FormularioRutinaComponent);
+    let ref = this.modalService.open(FormularioEjercicioComponent);
     ref.componentInstance.accion = "Editar";
     ref.componentInstance.rutina = {...ejercicio};
     ref.result.then((ejercicio: Ejercicio) => {
@@ -33,9 +34,9 @@ export class EjercicioComponent{
   }
 
   aniadirEjercicio(): void {
-    let ref = this.modalService.open(FormularioRutinaComponent);
+    let ref = this.modalService.open(FormularioEjercicioComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.contacto = {id: 0, nombre: '', descripcion: '', observaciones: ''};
+    ref.componentInstance.ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', marterial:'', musculosTrabajados:'',tipo:''};
     ref.result.then((ejercicio: Ejercicio) => {
       this.ejerciciosService.addEjercicos(ejercicio);
       this.ejercicios = this.ejerciciosService.getEjercicos();
