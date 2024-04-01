@@ -9,3 +9,10 @@ export interface Ejercicio{
     dificultad?: string;
     multimedia?: [string];
 }
+
+export interface ejerciciosDetallados{
+    series:number;
+    repeticiones:number;
+    duracionMinutos:number;
+    ejercicio: Ejercicio;
+}
