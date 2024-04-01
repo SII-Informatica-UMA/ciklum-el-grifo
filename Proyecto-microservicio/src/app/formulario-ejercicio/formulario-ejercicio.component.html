@@ -1,20 +1,17 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{accion}} contacto</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
+  <h4 class="modal-title" id="modal-basic-title">{{accion}} contacto</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+      <label for="nombre" > Nombre</label>
+      <input class="form-control" id="nombre" [(ngModel)]="ejercicio.nombre" placeholder="Nombre">
+
+      <label for="observaciones">Observaciones:</label>
+      <input class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" placeholder="(34) 123456789">
+
   </div>
-  <div class="modal-body">
-    <div class="form-group">
-  
-        <label for="nombre">Nombre:</label>
-        <input class="form-control" id="nombre" [(ngModel)]="rutina.nombre" placeholder="apellidos">
-        <label for="descripcion">Descripcion:</label>
-        <input class="form-control" id="descripcion" [(ngModel)]="rutina.descripcion" placeholder="fulanito@mengano.com">
-        <label for="observaciones">Observaciones:</label>
-        <input class="form-control" id="observaciones" [(ngModel)]="rutina.observaciones" placeholder="(34) 123456789">
-  
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="guardarContacto()">Guardar</button>
-  </div>
-  
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="guardarContacto()">Guardar</button>
+</div>
