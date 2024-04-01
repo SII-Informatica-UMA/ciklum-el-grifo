@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormularioRutinaComponent } from './formulario-rutina/formulario-rutina.component';
 import { RutinasComponent } from './rutinas/rutinas.component';
 import { EjercicioComponent } from './ejercicio/ejercicio.component';
+import { FormularioEjercicioComponent } from './formulario-ejercicio/formulario-ejercicio.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { EjercicioComponent } from './ejercicio/ejercicio.component';
     FormularioRutinaComponent,
     RutinasComponent,
     EjercicioComponent,
+    FormularioEjercicioComponent
   ],
   imports: [
     BrowserModule,
