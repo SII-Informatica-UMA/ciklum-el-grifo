@@ -23,7 +23,7 @@ body{
 
 .cuadradoPrincipal{
     flex: 6;
-    background-color: lightcyan;
+    background-color: white;
 }
 
 .tablaCliente{

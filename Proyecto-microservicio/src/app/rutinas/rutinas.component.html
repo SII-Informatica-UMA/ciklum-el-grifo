@@ -1,26 +1,22 @@
-<table class="tablaCliente">
-    <thead>
 
-      <tr>
-        <th>Nombre</th>
-        <th>Apellidos</th>
-        <th>Email</th>
-        <th>Teléfono</th>
-        <th>Acciones</th>
-      </tr>
-      
-    </thead>
-
+<table class="tablaRutinas">
     <tbody>
       <tr *ngFor="let rutina of rutinas">
-        <td>{{rutina?.nombre}}</td>
-        <td>{{rutina?.apellidos}}</td>
-        <td>{{rutina?.email}}</td>
-        <td>{{rutina?.telefono}}</td>
-        <td>
-          <button type="button" class="col-auto btn btn-outline-primary" (click)="editarRutina(rutina)"><i class="bi bi-pencil-fill"></i></button>
-          <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarRutina(rutina.id)"><i class="bi bi-trash-fill"></i></button>
-        </td>
+        <div class="fila">
+          <div class="casilla">
+            Nombre
+          </div>
+          <div class="casilla">
+            Duración
+          </div>
+          <div class="casilla">
+            Dificultad
+          </div>
+          <div class="casilla">
+            <button type="button" class="col-auto btn btn-outline-primary" (click)="editarRutina(rutina)"><i class="bi bi-pencil-fill"></i></button>
+            <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarRutina(rutina.id)"><i class="bi bi-trash-fill"></i></button>
+          </div>
+        </div>
       </tr>
     </tbody>
   </table>

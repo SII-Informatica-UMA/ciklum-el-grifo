@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 
 import { RutinasComponent } from './rutinas/rutinas.component';
+import { Rutina } from './rutina';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,5 @@ export class AppComponent  {
   mostrarRutinas(){
     this.componenteActual=RutinasComponent;
   }
-
-
   
 }

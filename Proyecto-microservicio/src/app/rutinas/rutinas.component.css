@@ -1,0 +1,25 @@
+.tablaRutinas{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fila{
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Aplica sombreado */
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.casilla{
+    margin: auto;
+}
+
+.fila button{
+    margin-right: 10px;
+}
+
+.añadir{
+    text-align: right;
+    margin: 10px;
+}
