@@ -1,0 +1,60 @@
+import { Component, OnInit } from '@angular/core';
+import { EjercicosService } from '../ejercicio.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormularioRutinaComponent } from '../formulario-rutina/formulario-rutina.component';
+import { Ejercicio } from '../ejercicio';
+
+@Component({
+  selector: 'app-ejercicio',
+  standalone: true,
+  imports: [],
+  templateUrl: './ejercicio.component.html',
+  styleUrl: './ejercicio.component.css'
+})
+export class EjercicioComponent implements OnInit{
+  rutinas: Rutina [] = [];
+  rutinaElegida?: Rutina;
+  rutina?: Rutina;
+  constructor(private rutinasService: RutinasService, private modalService: NgbModal) { }
+
+  editarRutina(rutina: Rutina): void {
+    let ref = this.modalService.open(FormularioRutinaComponent);
+    ref.componentInstance.accion = "Editar";
+    ref.componentInstance.rutina = {...rutina};
+    ref.result.then((rutina: Rutina) => {
+      this.rutinasService.editarRutinas(rutina); // Emitir el evento de edición con el contacto actualizado
+      this.rutinasService.getRutinas();
+    }, (reason) => {});
+  }
+  
+  ngOnInit(): void {
+    this.rutinas = this.rutinasService.getRutinas();
+  }
+
+  elegirRutina(rutina: Rutina): void {
+    this.rutinaElegida = rutina;
+  }
+
+  aniadirRutina(): void {
+    let ref = this.modalService.open(FormularioRutinaComponent);
+    ref.componentInstance.accion = "Añadir";
+    ref.componentInstance.contacto = {id: 0, nombre: '', descripcion: '', observaciones: ''};
+    ref.result.then((rutina: Rutina) => {
+      this.rutinasService.addRutinas(rutina);
+      this.rutinas = this.rutinasService.getRutinas();
+      this.rutinas.sort((a,b)=>a.nombre.localeCompare(b.nombre));
+    }, (reason) => {});
+
+  }
+  rutinaEditado(rutina: Rutina): void {
+    this.rutinasService.editarRutinas(rutina);
+    this.rutinas = this.rutinasService.getRutinas();
+    this.rutinaElegida = this.rutinas.find(c => c.id == rutina.id);
+  }
+
+  eliminarRutina(id: number): void {
+    this.rutinasService.eliminarRutinas(id);
+    this.rutinas = this.rutinasService.getRutinas();
+    this.rutinaElegida = undefined;
+  }
+}
