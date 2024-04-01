@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormularioRutinaComponent } from './formulario-rutina/formulario-rutina.component';
 import { RutinasComponent } from './rutinas/rutinas.component';
+import { EjercicioComponent } from './ejercicio/ejercicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormularioRutinaComponent,
     RutinasComponent,
+    EjercicioComponent,
   ],
   imports: [
     BrowserModule,

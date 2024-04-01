@@ -9,7 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FormularioRutinaComponent {
   accion?: "Añadir" | "Editar";
-  rutina: Rutina = {id: 0, nombre: '', descripcion: '', observaciones: ''};
+  rutina: Rutina = {id: 0, nombre: '', descripcion: '', observaciones: '', ejercicios: []};
 
   constructor(public modal: NgbActiveModal) { }
 

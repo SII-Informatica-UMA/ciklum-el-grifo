@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RutinasComponent } from './rutinas/rutinas.component';
 import { Rutina } from './rutina';
+import { EjercicioComponent } from './ejercicio/ejercicio.component';
 
 @Component({
   selector: 'app-root',
@@ -14,5 +15,10 @@ export class AppComponent  {
   mostrarRutinas(){
     this.componenteActual=RutinasComponent;
   }
+
+  mostrarEjercicios(){
+    this.componenteActual=EjercicioComponent;
+  }
+
   
 }

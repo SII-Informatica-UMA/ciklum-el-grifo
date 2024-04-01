@@ -1,9 +1,9 @@
 
-<table class="tablaRutinas table table-striped">
+<table class="tablaRutinas table table-bordered table-hover table table-striped" style="border-radius: 10px;">
   <thead>
 
     <tr>
-      <th>Id</th>
+      <th>ID</th>
       <th>Nombre</th>
       <th>Descripcion</th>
       <th>Observaciones</th>
@@ -19,12 +19,20 @@
       <td>{{rutina?.nombre}}</td>
       <td>{{rutina?.descripcion}}</td>
       <td>{{rutina?.observaciones}}</td>
-      <td>Falta completar</td>
+      <td>
+        <button type="button" class="col-auto btn btn-outline-danger" (click)="editarRutina(rutina)"><i class="bi bi-eye-fill"></i></button>
+      </td>
       <td>
         <button type="button" class="col-auto btn btn-outline-primary" (click)="editarRutina(rutina)"><i class="bi bi-pencil-fill"></i></button>
         <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarRutina(rutina.id)"><i class="bi bi-trash-fill"></i></button>
       </td>
       
     </tr>
+    
   </tbody>
+
 </table>
+<div class="botonCentrado">
+  <button type="button" class="col-auto btn btn-outline-success" (click)="aniadirRutina()"><i class="bi bi-plus"></i></button>
+</div>
+

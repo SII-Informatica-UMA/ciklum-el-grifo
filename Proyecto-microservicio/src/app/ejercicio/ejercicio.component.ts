@@ -6,55 +6,53 @@ import { Ejercicio } from '../ejercicio';
 
 @Component({
   selector: 'app-ejercicio',
-  standalone: true,
-  imports: [],
   templateUrl: './ejercicio.component.html',
-  styleUrl: './ejercicio.component.css'
 })
-export class EjercicioComponent implements OnInit{
-  rutinas: Rutina [] = [];
-  rutinaElegida?: Rutina;
-  rutina?: Rutina;
-  constructor(private rutinasService: RutinasService, private modalService: NgbModal) { }
+export class EjercicioComponent{
+  ejercicios: Ejercicio [] = [];
+  ejercicioElegido?: Ejercicio;
+  ejercicio?: Ejercicio;
+  constructor(private ejerciciosService: EjercicosService, private modalService: NgbModal) { }
 
-  editarRutina(rutina: Rutina): void {
+  editarEjercicio(ejercicio: Ejercicio): void {
     let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Editar";
-    ref.componentInstance.rutina = {...rutina};
-    ref.result.then((rutina: Rutina) => {
-      this.rutinasService.editarRutinas(rutina); // Emitir el evento de edición con el contacto actualizado
-      this.rutinasService.getRutinas();
+    ref.componentInstance.rutina = {...ejercicio};
+    ref.result.then((ejercicio: Ejercicio) => {
+      this.ejerciciosService.editarEjercicos(ejercicio); // Emitir el evento de edición con el contacto actualizado
+      this.ejerciciosService.getEjercicos();
     }, (reason) => {});
   }
   
   ngOnInit(): void {
-    this.rutinas = this.rutinasService.getRutinas();
+    this.ejercicios = this.ejerciciosService.getEjercicos();
   }
 
-  elegirRutina(rutina: Rutina): void {
-    this.rutinaElegida = rutina;
+  elegirEjercicio(ejercicio: Ejercicio): void {
+    this.ejercicioElegido = ejercicio;
   }
 
-  aniadirRutina(): void {
+  aniadirEjercicio(): void {
     let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.contacto = {id: 0, nombre: '', descripcion: '', observaciones: ''};
-    ref.result.then((rutina: Rutina) => {
-      this.rutinasService.addRutinas(rutina);
-      this.rutinas = this.rutinasService.getRutinas();
-      this.rutinas.sort((a,b)=>a.nombre.localeCompare(b.nombre));
+    ref.result.then((ejercicio: Ejercicio) => {
+      this.ejerciciosService.addEjercicos(ejercicio);
+      this.ejercicios = this.ejerciciosService.getEjercicos();
+      this.ejercicios.sort((a,b)=>a.nombre.localeCompare(b.nombre));
     }, (reason) => {});
 
   }
-  rutinaEditado(rutina: Rutina): void {
-    this.rutinasService.editarRutinas(rutina);
-    this.rutinas = this.rutinasService.getRutinas();
-    this.rutinaElegida = this.rutinas.find(c => c.id == rutina.id);
+  ejercicioEditado(ejercicio: Ejercicio): void {
+    this.ejerciciosService.editarEjercicos(ejercicio);
+    this.ejercicios = this.ejerciciosService.getEjercicos();
+    this.ejercicioElegido = this.ejercicios.find(c => c.id == ejercicio.id);
   }
 
-  eliminarRutina(id: number): void {
-    this.rutinasService.eliminarRutinas(id);
-    this.rutinas = this.rutinasService.getRutinas();
-    this.rutinaElegida = undefined;
+  eliminarEjercicio(id: number): void {
+    this.ejerciciosService.eliminarEjercicos(id);
+    this.ejercicios = this.ejerciciosService.getEjercicos();
+    this.ejercicioElegido = undefined;
   }
+
 }

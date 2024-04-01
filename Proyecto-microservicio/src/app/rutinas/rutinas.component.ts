@@ -3,6 +3,7 @@ import {RutinasService } from '../rutina.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioRutinaComponent} from '../formulario-rutina/formulario-rutina.component'
 import {Rutina } from '../rutina';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-rutinas',
@@ -40,7 +41,6 @@ export class RutinasComponent implements OnInit {
     ref.result.then((rutina: Rutina) => {
       this.rutinasService.addRutinas(rutina);
       this.rutinas = this.rutinasService.getRutinas();
-      this.rutinas.sort((a,b)=>a.nombre.localeCompare(b.nombre));
     }, (reason) => {});
 
   }
@@ -55,4 +55,6 @@ export class RutinasComponent implements OnInit {
     this.rutinas = this.rutinasService.getRutinas();
     this.rutinaElegida = undefined;
   }
+
+  
 }
