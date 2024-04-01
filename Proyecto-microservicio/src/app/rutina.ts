@@ -2,7 +2,7 @@
 export interface Rutina {
   id: number;
   nombre: string;
-  apellidos: string;
-  email: string;
-  telefono: string;
+  descripcion: string;
+  observaciones: string;
+  //ejercicios: Ejercicio; Quitar comentario, una vez creaddo el tipo Ejercicio
 }

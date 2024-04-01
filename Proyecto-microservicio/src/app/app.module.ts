@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DetalleRutinaComponent } from './detalle-rutina/detalle-rutina.component';
 import { FormularioRutinaComponent } from './formulario-rutina/formulario-rutina.component';
 import { RutinasComponent } from './rutinas/rutinas.component';
 

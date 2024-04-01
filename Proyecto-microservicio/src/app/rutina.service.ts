@@ -7,16 +7,19 @@ import { Rutina } from './rutina';
 
 export class RutinasService {
   private rutinas: Rutina [] = [
-    {id: 1, nombre: 'Juan', apellidos: 'Pérez', email: 'perez@uma.es', telefono: '666666666'},
-    {id: 2, nombre: 'Ana', apellidos: 'García', email: 'ana@uma.es', telefono: '55555555'},
-    {id: 3, nombre: 'Luis', apellidos: 'González', email: 'gonzalez@uma.es', telefono: '444444444'},
+    {id: 1, nombre: 'Parte pecho', descripcion: 'Pechito de fuego', observaciones: 'perez@uma.es'},
+    {id: 2, nombre: 'Culo insano', descripcion: 'Let him cook', observaciones: 'ana@uma.es'},
+    {id: 3, nombre: 'Wango', descripcion: 'Ulti estelar', observaciones: 'gonzalez@uma.es'},
   ];
 
   constructor() { }
 
-  getRutinas(): Rutina [] {
-    return this.rutinas.sort((a,b)=>a.nombre.localeCompare(b.nombre));;
-  }
+  getRutinas(): Rutina[] {
+    return this.rutinas.sort((a, b) => {
+        return a.id - b.id;
+    });
+}
+
 
   addRutinas(rutinas: Rutina) {
     rutinas.id = Math.max(...this.rutinas.map(c => c.id)) + 1;

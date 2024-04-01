@@ -27,7 +27,6 @@ export class RutinasComponent implements OnInit {
   
   ngOnInit(): void {
     this.rutinas = this.rutinasService.getRutinas();
-    this.rutinas.sort((a,b)=>a.nombre.localeCompare(b.nombre));
   }
 
   elegirRutina(rutina: Rutina): void {
@@ -37,7 +36,7 @@ export class RutinasComponent implements OnInit {
   aniadirRutina(): void {
     let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.contacto = {id: 0, nombre: '', apellidos: '', email: '', telefono: ''};
+    ref.componentInstance.contacto = {id: 0, nombre: '', descripcion: '', observaciones: ''};
     ref.result.then((rutina: Rutina) => {
       this.rutinasService.addRutinas(rutina);
       this.rutinas = this.rutinasService.getRutinas();
