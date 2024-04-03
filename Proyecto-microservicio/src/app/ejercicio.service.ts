@@ -5,7 +5,7 @@ import { Ejercicio } from './ejercicio';
   providedIn: 'root'
 })
 
-export class EjercicosService {
+export class EjerciciosService {
 
   private ejercicios: Ejercicio [] = [
     {id: 1, nombre: 'Parte pecho', descripcion: 'Pechito de fuego', tipo: 'perez@uma.es', musculosTrabajados: 'brazo'},
@@ -15,23 +15,23 @@ export class EjercicosService {
 
   constructor() { }
 
-  getEjercicos(): Ejercicio[] {
+  getEjercicios(): Ejercicio[] {
     return this.ejercicios.sort((a, b) => {
         return a.id - b.id;
     });
 }
 
-  addEjercicos(ejercicos: Ejercicio) {
+  addEjercicios(ejercicos: Ejercicio) {
     ejercicos.id = Math.max(...this.ejercicios.map(c => c.id)) + 1;
     this.ejercicios.push(ejercicos);
   }
 
-  editarEjercicos(ejercicos: Ejercicio) {
+  editarEjercicios(ejercicos: Ejercicio) {
     let indice = this.ejercicios.findIndex(c => c.id == ejercicos.id);
     this.ejercicios[indice] = ejercicos;
   }
 
-  eliminarEjercicos(id: number) {
+  eliminarEjercicios(id: number) {
     let indice = this.ejercicios.findIndex(c => c.id == id);
     this.ejercicios.splice(indice, 1);
   }

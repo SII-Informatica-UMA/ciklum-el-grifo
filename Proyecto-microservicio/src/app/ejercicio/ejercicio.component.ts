@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EjercicosService } from '../ejercicio.service';
+import { EjerciciosService } from '../ejercicio.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormularioRutinaComponent } from '../formulario-rutina/formulario-rutina.component';
 import { Ejercicio } from '../ejercicio';
 import { FormularioEjercicioComponent } from '../formulario-ejercicio/formulario-ejercicio.component';
 
@@ -9,24 +8,24 @@ import { FormularioEjercicioComponent } from '../formulario-ejercicio/formulario
   selector: 'app-ejercicio',
   templateUrl: './ejercicio.component.html',
 })
-export class EjercicioComponent{
+export class EjercicioComponent implements OnInit{
   ejercicios: Ejercicio [] = [];
   ejercicioElegido?: Ejercicio;
   ejercicio?: Ejercicio;
-  constructor(private ejerciciosService: EjercicosService, private modalService: NgbModal) { }
+  constructor(private ejercicioService: EjerciciosService, private modalService: NgbModal) { }
 
-  editarEjercicio(ejercicio: Ejercicio): void {
+  editarEjercicios(ejercicio: Ejercicio): void {
     let ref = this.modalService.open(FormularioEjercicioComponent);
     ref.componentInstance.accion = "Editar";
-    ref.componentInstance.rutina = {...ejercicio};
+    ref.componentInstance.ejercicio = {...ejercicio};
     ref.result.then((ejercicio: Ejercicio) => {
-      this.ejerciciosService.editarEjercicos(ejercicio); // Emitir el evento de edición con el contacto actualizado
-      this.ejerciciosService.getEjercicos();
+      this.ejercicioService.editarEjercicios(ejercicio); // Emitir el evento de edición con el contacto actualizado
+      this.ejercicioService.getEjercicios();
     }, (reason) => {});
   }
   
   ngOnInit(): void {
-    this.ejercicios = this.ejerciciosService.getEjercicos();
+    this.ejercicios = this.ejercicioService.getEjercicios();
   }
 
   elegirEjercicio(ejercicio: Ejercicio): void {
@@ -36,24 +35,23 @@ export class EjercicioComponent{
   aniadirEjercicio(): void {
     let ref = this.modalService.open(FormularioEjercicioComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', marterial:'', musculosTrabajados:'',tipo:''};
+    ref.componentInstance.contacto = {id: 0, nombre: '', descripcion: '', observaciones: ''};
     ref.result.then((ejercicio: Ejercicio) => {
-      this.ejerciciosService.addEjercicos(ejercicio);
-      this.ejercicios = this.ejerciciosService.getEjercicos();
-      this.ejercicios.sort((a,b)=>a.nombre.localeCompare(b.nombre));
+      this.ejercicioService.addEjercicios(ejercicio);
+      this.ejercicios = this.ejercicioService.getEjercicios();
     }, (reason) => {});
 
   }
-  ejercicioEditado(ejercicio: Ejercicio): void {
-    this.ejerciciosService.editarEjercicos(ejercicio);
-    this.ejercicios = this.ejerciciosService.getEjercicos();
+  rutinaEjercicio(ejercicio: Ejercicio): void {
+    this.ejercicioService.editarEjercicios(ejercicio);
+    this.ejercicios = this.ejercicioService.getEjercicios();
     this.ejercicioElegido = this.ejercicios.find(c => c.id == ejercicio.id);
   }
 
   eliminarEjercicio(id: number): void {
-    this.ejerciciosService.eliminarEjercicos(id);
-    this.ejercicios = this.ejerciciosService.getEjercicos();
+    this.ejercicioService.eliminarEjercicios(id);
+    this.ejercicios = this.ejercicioService.getEjercicios();
     this.ejercicioElegido = undefined;
   }
-
+  
 }
