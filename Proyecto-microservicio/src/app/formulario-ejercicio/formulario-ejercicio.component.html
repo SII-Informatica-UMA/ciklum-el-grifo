@@ -5,17 +5,23 @@
 <div class="modal-body">
   <div class="form-group">
       <label for="nombre" > Nombre</label>
-      <input class="form-control" id="nombre" [(ngModel)]="ejercicio.nombre" placeholder="Nombre">
-      <label for="observaciones">Observaciones:</label>
-      <input class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" placeholder="(34) 123456789">
-      <label for="observaciones">Observaciones:</label>
-      <input class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" placeholder="(34) 123456789">
-      <label for="observaciones">Observaciones:</label>
-      <input class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" placeholder="(34) 123456789">
-      <label for="observaciones">Observaciones:</label>
-      <input class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" placeholder="(34) 123456789">
-      <label for="observaciones">Observaciones:</label>
-      <input class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" placeholder="(34) 123456789">
+      <input class="form-control" id="nombre" [(ngModel)]="ejercicio.nombre" placeholder="">
+      <label for="descripcion">Descripcion</label>
+      <input class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" placeholder="">
+      <label for="tipo">Tipo:</label>
+      <input class="form-control" id="tipo" [(ngModel)]="ejercicio.tipo" placeholder="">
+      <label for="musculosTrabajados">Musculos Trabajados:</label>
+      <input class="form-control" id="musculosTrabajados" [(ngModel)]="ejercicio.musculosTrabajados" placeholder="">
+      <label for="marterial">Marterial:</label>
+      <input class="form-control" id="marterial" [(ngModel)]="ejercicio.marterial" placeholder="">
+      <label for="dificultad">Dificultad:</label>
+      <select class="form-control" id="dificultad" [(ngModel)]="ejercicio.dificultad" name="dificultad">
+        <option value="facil">Fácil</option>
+        <option value="media">Media</option>
+        <option value="dificil">Difícil</option>
+      </select>
+      <label for="multimedia">Multimedia:</label>
+      <input class="form-control" id="multimedia" [(ngModel)]="ejercicio.multimedia" placeholder="">
 
   </div>
 </div>

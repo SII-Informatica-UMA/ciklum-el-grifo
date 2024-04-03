@@ -7,7 +7,7 @@ export interface Ejercicio{
     musculosTrabajados: string; 
     marterial?: string;
     dificultad?: string;
-    multimedia?: [string];
+    multimedia?: string;
 }
 
 export interface ejerciciosDetallados{

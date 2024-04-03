@@ -6,8 +6,11 @@
         <th>Id</th>
         <th>Nombre</th>
         <th>Descripcion</th>
+        <th>Tipo</th>  
         <th>Musculos Trabajados</th>
-        <th>Ejercicios</th>
+        <th>Marterial</th>
+        <th>Dificultad</th>  
+        <th>Multimedia</th>  
         <th>Acciones</th>  
       </tr>
       
@@ -19,7 +22,14 @@
         <td>{{ejercicio?.nombre}}</td>
         <td>{{ejercicio?.descripcion}}</td>
         <td>{{ejercicio?.musculosTrabajados}}</td>
-        <td>Falta completar</td>
+        <td>{{ejercicio?.tipo}}</td>
+        <td>{{ejercicio?.marterial}}</td>
+        <td>{{ejercicio?.dificultad}}</td>
+        <td>
+          <!-- Enlace al video -->
+          <a [href]="ejercicio?.multimedia" target="_blank">Ver Video</a>
+        </td>
+  
         <td>
           <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicio(ejercicio)"><i class="bi bi-pencil-fill"></i></button>
           <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarEjercicio(ejercicio.id)"><i class="bi bi-trash-fill"></i></button>
