@@ -1,44 +1,44 @@
-
 <table class="tablaEjercicios table table-bordered table-hover table table-striped"  style="border-radius: 10px; text-align: center;">
-    <thead>
-  
-      <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Descripcion</th>
-        <th>Tipo</th>  
-        <th>Musculos Trabajados</th>
-        <th>Marterial</th>
-        <th>Dificultad</th>  
-        <th>Multimedia</th>  
-        <th>Acciones</th>  
-      </tr>
-      
-    </thead>
-  
-    <tbody>
-      <tr *ngFor="let ejercicio of ejercicios">
-        <td>{{ejercicio?.id}}</td>
-        <td>{{ejercicio?.nombre}}</td>
-        <td>{{ejercicio?.descripcion}}</td>
-        <td>{{ejercicio?.musculosTrabajados}}</td>
-        <td>{{ejercicio?.tipo}}</td>
-        <td>{{ejercicio?.marterial}}</td>
-        <td>{{ejercicio?.dificultad}}</td>
-        <td>
-          <!-- Enlace al video -->
-          <a [href]="ejercicio?.multimedia" target="_blank">Ver Video</a>
-        </td>
-  
-        <td>
-          <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicios(ejercicio)"><i class="bi bi-pencil-fill"></i></button>
-          <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarEjercicio(ejercicio.id)"><i class="bi bi-trash-fill"></i></button>
-        </td>
-        
-      </tr>
-    </tbody>
-  </table>
+  <thead>
 
-  <div style="text-align: center;">
-    <button type="button" class="col-auto btn btn-outline-success"  (click)="aniadirEjercicio()"><i class="bi bi-plus"></i></button>
-  </div>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Descripcion</th>
+      <th>Tipo</th>  
+      <th>Musculos Trabajados</th>
+      <th>Material</th>
+      <th>Dificultad</th>  
+      <th>Multimedia</th>  
+      <th>Acciones</th>  
+    </tr>
+    
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let ejercicio of ejercicios">
+      <td>{{ejercicio?.id}}</td>
+      <td>{{ejercicio?.nombre}}</td>
+      <td>{{ejercicio?.descripcion}}</td>
+      <td>{{ejercicio?.musculosTrabajados}}</td>
+      <td>{{ejercicio?.tipo}}</td>
+      <td>{{ejercicio?.material}}</td>
+      <td>{{ejercicio?.dificultad}}</td>
+      <td>
+        <!-- Reproductor de video -->
+        <button type="button" class="col-auto btn btn-outline-dark" (click)="reproducirVideo(ejercicio.multimedia)"><i class="bi bi-play-fill"></i></button>
+
+      </td>
+
+      <td>
+        <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicio(ejercicio)"><i class="bi bi-pencil-fill"></i></button>
+        <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarEjercicio(ejercicio.id)"><i class="bi bi-trash-fill"></i></button>
+      </td>
+      
+    </tr>
+  </tbody>
+</table>
+
+<div style="text-align: center;">
+  <button type="button" class="col-auto btn btn-outline-success"  (click)="aniadirEjercicio()"><i class="bi bi-plus"></i></button>
+</div>

@@ -5,23 +5,33 @@
 <div class="modal-body">
   <div class="form-group">
       <label for="nombre" > Nombre</label>
-      <input class="form-control" id="nombre" [(ngModel)]="ejercicio.nombre" placeholder="">
+      <input class="form-control" id="nombre" [(ngModel)]="ejercicio.nombre" placeholder="" >
       <label for="descripcion">Descripcion</label>
       <input class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" placeholder="">
       <label for="tipo">Tipo:</label>
-      <input class="form-control" id="tipo" [(ngModel)]="ejercicio.tipo" placeholder="">
+        <select class="form-control" id="tipo" [(ngModel)]="ejercicio.tipo">
+          <option value="Fuerza">Fuerza</option>
+          <option value="Hipertrofia">Hipertrofia</option>
+          <option value="Resistencia">Resistencia</option>
+          <option value="Flexibilidad">Flexibilidad</option>
+        </select>
       <label for="musculosTrabajados">Musculos Trabajados:</label>
       <input class="form-control" id="musculosTrabajados" [(ngModel)]="ejercicio.musculosTrabajados" placeholder="">
-      <label for="marterial">Marterial:</label>
-      <input class="form-control" id="marterial" [(ngModel)]="ejercicio.marterial" placeholder="">
+      <label for="marterial">Material:</label>
+      <input class="form-control" id="marterial" [(ngModel)]="ejercicio.material" placeholder="">
       <label for="dificultad">Dificultad:</label>
       <select class="form-control" id="dificultad" [(ngModel)]="ejercicio.dificultad" name="dificultad">
         <option value="facil">Fácil</option>
         <option value="media">Media</option>
         <option value="dificil">Difícil</option>
       </select>
+
       <label for="multimedia">Multimedia:</label>
-      <input class="form-control" id="multimedia" [(ngModel)]="ejercicio.multimedia" placeholder="">
+      <input type="file" class="form-control" id="multimedia" (change)="onFileSelected($event)" accept="video/*">
+      <!-- Reproductor de video -->
+    <video controls class="video-modal" *ngIf="ejercicio.multimedia">
+      <source [src]="getVideoURL()" type="video/mp4">
+    </video>
 
   </div>
 </div>

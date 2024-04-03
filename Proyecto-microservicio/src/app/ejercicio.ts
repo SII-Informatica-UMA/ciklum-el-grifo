@@ -5,7 +5,7 @@ export interface Ejercicio{
     descripcion: string; 
     tipo: string; 
     musculosTrabajados: string; 
-    marterial?: string;
+    material?: string;
     dificultad?: string;
     multimedia?: string;
 }
