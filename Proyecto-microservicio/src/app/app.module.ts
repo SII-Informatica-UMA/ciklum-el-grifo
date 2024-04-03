@@ -9,6 +9,7 @@ import { RutinasComponent } from './rutinas/rutinas.component';
 import { EjercicioComponent } from './ejercicio/ejercicio.component';
 import { FormularioEjercicioComponent } from './formulario-ejercicio/formulario-ejercicio.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

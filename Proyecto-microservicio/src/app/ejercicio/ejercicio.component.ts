@@ -18,7 +18,7 @@ export class EjercicioComponent{
   editarEjercicio(ejercicio: Ejercicio): void {
     let ref = this.modalService.open(FormularioEjercicioComponent);
     ref.componentInstance.accion = "Editar";
-    ref.componentInstance.rutina = {...ejercicio};
+    ref.componentInstance.ejercicio = {...ejercicio};
     ref.result.then((ejercicio: Ejercicio) => {
       this.ejerciciosService.editarEjercicios(ejercicio); // Emitir el evento de edición con el contacto actualizado
       this.ejerciciosService.getEjercicios();
@@ -56,46 +56,45 @@ export class EjercicioComponent{
     this.ejercicioElegido = undefined;
   }
 
-  reproducirVideo(src: string | undefined): void {
-    if (src) {
+  reproducirVideo(url: string | undefined): void {
+    if (url) {
+      window.open(url, '_blank'); // Abre el enlace en una nueva pestaña
+    }
+  }
+  
+/*
+  reproducirVideo(url: string | undefined): void {
+    if (url) {
       const videoContainer = document.createElement('div');
-      videoContainer.style.position = 'fixed'; // Establece la posición fija para que esté por encima de todo
+      videoContainer.style.position = 'fixed';
       videoContainer.style.top = '0';
       videoContainer.style.left = '0';
       videoContainer.style.width = '100%';
       videoContainer.style.height = '100%';
-      videoContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // Fondo semitransparente para superponerse al contenido
+      videoContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
       videoContainer.style.zIndex = '9999';
-  
-      const videoPlayer = document.createElement('video');
-      videoPlayer.src = src;
-      videoPlayer.controls = true;
-      videoPlayer.autoplay = true;
-      videoPlayer.style.position = 'absolute'; // Establece la posición absoluta dentro del contenedor
-      videoPlayer.style.top = '50%'; // Coloca el reproductor de video en el centro verticalmente
-      videoPlayer.style.left = '50%'; // Coloca el reproductor de video en el centro horizontalmente
-      videoPlayer.style.transform = 'translate(-50%, -50%)'; // Centra el reproductor de video
-      videoPlayer.style.width = '80%'; // Ajusta el ancho del video al 80% del contenedor
-      videoPlayer.style.height = 'auto'; // Ajusta la altura del video automáticamente
-  
+
+      const videoPlayer = document.createElement('iframe');
+      videoPlayer.src = url;
+      videoPlayer.style.width = '100%';
+      videoPlayer.style.height = '100%';
+      videoPlayer.style.border = 'none';
+
       const closeButton = document.createElement('button');
       closeButton.innerText = 'X';
       closeButton.style.position = 'absolute';
       closeButton.style.top = '10px';
       closeButton.style.right = '10px';
-      closeButton.style.zIndex = '10000'; // Asegura que el botón esté por encima del video
-      closeButton.addEventListener('click', (event) => {
-        videoContainer.remove(); // Elimina el contenedor del video al hacer clic en el botón de cierre
-        if (event.target === videoContainer) {
-          videoContainer.remove(); // Cerrar el video al hacer clic en el fondo semitransparente
-        }
+      closeButton.style.zIndex = '10000';
+      closeButton.addEventListener('click', () => {
+        videoContainer.remove();
       });
-  
+
       videoContainer.appendChild(videoPlayer);
       videoContainer.appendChild(closeButton);
       document.body.appendChild(videoContainer);
     }
   }
-  
+  */
 }
 
