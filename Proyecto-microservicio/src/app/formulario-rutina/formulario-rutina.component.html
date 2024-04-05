@@ -1,8 +1,8 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">{{accion}} contacto</h4>
+  <h4 class="modal-title" id="modal-basic-title">{{accion}} rutina</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
 </div>
-<div class="modal-body">
+<div class="modal-body">  
   <div class="form-group">
 
       <label for="nombre">Nombre:</label>
@@ -11,9 +11,12 @@
       <input class="form-control" id="descripcion" [(ngModel)]="rutina.descripcion" placeholder="fulanito@mengano.com">
       <label for="observaciones">Observaciones:</label>
       <input class="form-control" id="observaciones" [(ngModel)]="rutina.observaciones" placeholder="(34) 123456789">
-
+      <label for="ejercicios">Ejercicios:</label>
+      <div>
+        <button type="button" class="col-auto btn btn-outline-success" (click)="aniadirEjercicio()"><i class="bi bi-plus"></i></button>
+      </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="guardarContacto()">Guardar</button>
+  <button type="button" class="btn btn-outline-dark" (click)="guardarRutina()">Guardar</button>
 </div>

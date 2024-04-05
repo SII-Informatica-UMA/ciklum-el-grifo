@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { EjerciciosService } from '../ejercicio.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormularioRutinaComponent } from '../formulario-rutina/formulario-rutina.component';
@@ -13,7 +13,7 @@ export class EjercicioComponent{
   ejercicios: Ejercicio [] = [];
   ejercicioElegido?: Ejercicio;
   ejercicio?: Ejercicio;
-  constructor(private ejerciciosService: EjerciciosService, private modalService: NgbModal, private elRef: ElementRef) { }
+  constructor(private ejerciciosService: EjerciciosService, private modalService: NgbModal) { }
 
   editarEjercicio(ejercicio: Ejercicio): void {
     let ref = this.modalService.open(FormularioEjercicioComponent);
@@ -56,9 +56,9 @@ export class EjercicioComponent{
     this.ejercicioElegido = undefined;
   }
 
-  reproducirVideo(url: string | undefined): void {
-    if (url) {
-      window.open(url, '_blank'); // Abre el enlace en una nueva pestaña
+  reproducirVideo(path: string | undefined): void {
+    if (path) {
+      window.open(path, '_blank'); // Abre el enlace en una nueva pestaña
     }
   }
   

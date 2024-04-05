@@ -14,7 +14,7 @@ export class FormularioEjercicioComponent {
 
   constructor(public modal: NgbActiveModal) { }
 
-  guardarContacto(): void {
+  guardarEjercicio(): void {
     this.modal.close(this.ejercicio);
   }
 }

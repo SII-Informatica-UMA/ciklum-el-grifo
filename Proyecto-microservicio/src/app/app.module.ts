@@ -8,6 +8,7 @@ import { FormularioRutinaComponent } from './formulario-rutina/formulario-rutina
 import { RutinasComponent } from './rutinas/rutinas.component';
 import { EjercicioComponent } from './ejercicio/ejercicio.component';
 import { FormularioEjercicioComponent } from './formulario-ejercicio/formulario-ejercicio.component';
+import { EjerciciosRutinaComponent } from './ejercicios-rutina/ejercicios-rutina.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormularioEjercicioComponent } from './formulario-ejercicio/formulario-
     FormularioRutinaComponent,
     RutinasComponent,
     EjercicioComponent,
-    FormularioEjercicioComponent
+    FormularioEjercicioComponent,
+    EjerciciosRutinaComponent
   ],
   imports: [
     BrowserModule,

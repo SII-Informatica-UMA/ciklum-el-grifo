@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{accion}} ejercicios</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
+  </div>
+  <div class="modal-body modal-custom">  
+    <div class="form-group">
+      
+      <table class="tablaEjercicios table table-bordered table-hover table table-striped"  style="border-radius: 10px; text-align: center;">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>  
+            <th>Músculos</th>
+            <th>Dificultad</th>  
+            <th>Añadir</th>  
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ejercicio of ejercicios">
+            <td>{{ejercicio?.nombre}}</td>
+            <td>{{ejercicio?.tipo}}</td>
+            <td>{{ejercicio?.musculosTrabajados}}</td>
+            <td>{{ejercicio?.dificultad}}</td>
+            <td><button type="button" class="col-auto btn btn-outline-success"  (click)="aniadirEjercicio()"><i class="bi bi-plus"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+        
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="guardarEjercicio()">Guardar</button>
+  </div>
+  
