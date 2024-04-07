@@ -19,16 +19,16 @@ export class EjerciciosService {
     return this.ejercicios.sort((a, b) => {
         return a.id - b.id;
     });
-}
-
-  addEjercicios(ejercicos: Ejercicio) {
-    ejercicos.id = Math.max(...this.ejercicios.map(c => c.id)) + 1;
-    this.ejercicios.push(ejercicos);
   }
 
-  editarEjercicios(ejercicos: Ejercicio) {
-    let indice = this.ejercicios.findIndex(c => c.id == ejercicos.id);
-    this.ejercicios[indice] = ejercicos;
+  addEjercicios(ejercicios: Ejercicio) {
+    ejercicios.id = Math.max(...this.ejercicios.map(c => c.id)) + 1;
+    this.ejercicios.push(ejercicios);
+  }
+
+  editarEjercicios(ejercicios: Ejercicio) {
+    let indice = this.ejercicios.findIndex(c => c.id == ejercicios.id);
+    this.ejercicios[indice] = ejercicios;
   }
 
   eliminarEjercicios(id: number) {

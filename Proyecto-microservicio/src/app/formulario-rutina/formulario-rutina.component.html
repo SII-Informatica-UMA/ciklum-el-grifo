@@ -15,6 +15,29 @@
       <div>
         <button type="button" class="col-auto btn btn-outline-success" (click)="aniadirEjercicio()"><i class="bi bi-plus"></i></button>
       </div>
+       <table class="tablaEjercicios table table-bordered table-hover table table-striped"  style="border-radius: 10px; text-align: center;">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>  
+            <th>Músculos</th>
+            <th>Dificultad</th>  
+            <th>Editar / Eliminar</th>  
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ejercicio of ejerciciosRutina">
+            <td>{{ejercicio?.nombre}}</td>
+            <td>{{ejercicio?.tipo}}</td>
+            <td>{{ejercicio?.musculosTrabajados}}</td>
+            <td>{{ejercicio?.dificultad}}</td>
+            <td>
+              <button type="button" class="col-auto btn btn-outline-primary" (click)="editarRutina(rutina)"><i class="bi bi-pencil-fill"></i></button>
+              <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarRutina(rutina.id)"><i class="bi bi-trash-fill"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
   </div>
 </div>
 <div class="modal-footer">
