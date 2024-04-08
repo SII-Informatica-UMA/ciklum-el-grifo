@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
-import { EjerciciosService } from '../ejercicio.service';
+import { EjerciciosService } from '../services/ejercicio.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormularioRutinaComponent } from '../formulario-rutina/formulario-rutina.component';
-import { Ejercicio } from '../ejercicio';
+import { Ejercicio } from '../entities/ejercicio';
 import { FormularioEjercicioComponent } from '../formulario-ejercicio/formulario-ejercicio.component';
 
 @Component({

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Ejercicio } from '../ejercicio';
-import { EjerciciosService } from '../ejercicio.service';
+import { Ejercicio } from '../entities/ejercicio';
+import { EjerciciosService } from '../services/ejercicio.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ejercicios-rutina',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './ejercicios-rutina.component.html',
   styleUrls: ['./ejercicios-rutina.component.css']
 })
@@ -19,11 +22,8 @@ export class EjerciciosRutinaComponent implements OnInit {
     this.ejercicios = this.ejerciciosService.getEjercicios();
   }
 
-  guardarEjercicio(): void {
-    this.modal.close(this.ejercicio);
-  }
   aniadirEjercicio():void{
-    
+    this.modal.close(this.ejercicio);
   }
   
 }

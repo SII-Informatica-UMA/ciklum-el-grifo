@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {RutinasService } from '../rutina.service';
+import {RutinasService } from '../services/rutina.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioRutinaComponent} from '../formulario-rutina/formulario-rutina.component'
-import {Rutina } from '../rutina';
-import { AppComponent } from '../app.component';
+import {Rutina } from '../entities/rutina';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-rutinas',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './rutinas.component.html',
   styleUrls: ['./rutinas.component.css']
 })
@@ -37,12 +39,10 @@ export class RutinasComponent implements OnInit {
   aniadirRutina(): void {
     let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.contacto = {id: 0, nombre: '', descripcion: '', observaciones: ''};
     ref.result.then((rutina: Rutina) => {
       this.rutinasService.addRutinas(rutina);
-      this.rutinas = this.rutinasService.getRutinas();
+      this.rutinasService.getRutinas();
     }, (reason) => {});
-
   }
   rutinaEditado(rutina: Rutina): void {
     this.rutinasService.editarRutinas(rutina);

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Rutina } from './rutina';
+import { Rutina } from '../entities/rutina';
 
 @Injectable({
   providedIn: 'root'
