@@ -6,12 +6,12 @@ export interface Rutina {
   nombre: string;
   descripcion: string;
   observaciones: string;
-  ejercicios: EjercicioDetalles [] 
+  ejercicios: Ejercicio [] 
 }
 
-export interface EjercicioDetalles {
-  series: number;
+export interface ejerciciosDetallados{
+  series:number;
   repeticiones:number;
-  duracionMinutos: number;
+  duracionMinutos:number;
   ejercicio: Ejercicio;
 }

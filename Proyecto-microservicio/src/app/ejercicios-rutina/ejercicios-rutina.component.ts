@@ -19,11 +19,8 @@ export class EjerciciosRutinaComponent implements OnInit {
     this.ejercicios = this.ejerciciosService.getEjercicios();
   }
 
-  guardarEjercicio(): void {
-    this.modal.close(this.ejercicio);
-  }
   aniadirEjercicio():void{
-    
+    this.modal.close(this.ejercicio);
   }
   
 }
