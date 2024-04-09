@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modal-basic-title">{{accion}} rutina</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cerrarVentana(rutina.id)"></button>
 </div>
 <div class="modal-body">  
   <div class="form-group">
@@ -32,8 +32,8 @@
             <td>{{ejercicio?.musculosTrabajados}}</td>
             <td>{{ejercicio?.dificultad}}</td>
             <td>
-              <button type="button" class="col-auto btn btn-outline-primary" (click)="editarRutina(rutina)"><i class="bi bi-pencil-fill"></i></button>
-              <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarRutina(rutina.id)"><i class="bi bi-trash-fill"></i></button>
+              <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicio(rutina)"><i class="bi bi-pencil-fill"></i></button>
+              <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarEjercicio(rutina.id)"><i class="bi bi-trash-fill"></i></button>
             </td>
           </tr>
         </tbody>
