@@ -41,4 +41,10 @@ export class EjercicioRutinaService {
       this.ejerciciosRutina.set(rutinaId, ejercicios);
     }
   }
+
+  eliminarRutina(rutinaId: number){
+    this.getEjerciciosRutina(rutinaId).splice(0, this.ejerciciosRutina.size);
+    this.ejerciciosRutina.delete(rutinaId);
+  }
+
 }

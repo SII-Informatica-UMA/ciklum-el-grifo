@@ -5,6 +5,7 @@ import { Ejercicio } from '../entities/ejercicio';
 import { Rutina } from '../entities/rutina';
 import { EjercicioRutinaService } from '../services/ejercicio-rutina.service';
 import { EjerciciosRutinaComponent } from '../ejercicios-rutina/ejercicios-rutina.component';
+import { RutinasService } from '../services/rutina.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -20,22 +21,25 @@ export class FormularioRutinaComponent implements OnInit {
   rutina: Rutina = { id: 0, nombre: '', descripcion: '', observaciones: '', ejercicios: [] };
   ejerciciosRutina: Ejercicio[] = [];
   ejercicio?: Ejercicio;
+  rutinas: Rutina [] = [];
 
-  constructor(public modal: NgbActiveModal, private modalService: NgbModal, private ejercicioRutinaService: EjercicioRutinaService) { }
+  constructor(public modal: NgbActiveModal, private modalService: NgbModal, private ejercicioRutinaService: EjercicioRutinaService, private rutinasService: RutinasService) { }
 
   ngOnInit(): void {
-    if (this.rutina.id) {
-      this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
-    }
-  }
+    if (this.accion === "Añadir") {
+      this.rutinasService.addRutinas(this.rutina);
+    }       
+    this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
 
+  }
+  
   guardarRutina(): void {
-    this.modal.close(this.rutina);
+    this.modal.close(this.ejercicio);
   }
 
-  aniadirEjercicio(): void {
+  aniadirEjercicio(): void{
     let ref = this.modalService.open(EjerciciosRutinaComponent);
-    ref.componentInstance.accion = "Añadir";
+    ref.componentInstance.accion = "Editar";
     ref.result.then((ejercicio) => {
       if (ejercicio) {
         this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicio);
@@ -45,12 +49,22 @@ export class FormularioRutinaComponent implements OnInit {
     }, (reason) => { });
   }
 
-  editarRutina(rutina: Rutina){
+
+  editarEjercicio(rutina: Rutina){
 
   }
 
-  eliminarRutina(id: number){
+  eliminarEjercicio(id: number){
 
+  }
+
+  cerrarVentana(id: number){
+    if(this.accion === "Añadir"){
+      this.rutinasService.eliminarRutinas(id);
+      this.rutinas = this.rutinasService.getRutinas();
+      this.ejercicioRutinaService.eliminarRutina(id);
+    }
+    this.modal.close(this.rutina);
   }
 
 }
