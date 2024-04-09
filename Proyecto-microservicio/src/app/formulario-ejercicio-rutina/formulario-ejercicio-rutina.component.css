@@ -1,0 +1,10 @@
+.series{
+    display: flex;
+}
+
+.series div{
+    width: 10%;
+    margin: auto;
+}
+
+

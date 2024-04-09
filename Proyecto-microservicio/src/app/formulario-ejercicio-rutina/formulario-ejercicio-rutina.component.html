@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{ accion }} ejercicio</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cierre usuario')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="series">
+        <div>
+          <label for="repeticiones">Repeticiones</label>
+          <input class="form-control" id="repeticiones" [(ngModel)]="ejercicioDetalle.repeticiones" placeholder="Rep.">
+        </div>
+        <div>
+          <label for="series">Series</label>
+          <input class="form-control" id="series" [(ngModel)]="ejercicioDetalle.series" placeholder="Ser.">
+        </div>
+        <div>
+          <label for="duracionMinutos">Duracion:</label>
+          <input class="form-control" id="duracionMinutos" [(ngModel)]="ejercicioDetalle.duracionMinutos" placeholder="Min.">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="guardarEjercicio()">Guardar</button>
+  </div>
+  
