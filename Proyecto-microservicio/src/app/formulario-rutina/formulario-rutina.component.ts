@@ -8,6 +8,7 @@ import { EjerciciosRutinaComponent } from '../ejercicios-rutina/ejercicios-rutin
 import { RutinasService } from '../services/rutina.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormularioEjercicioRutinaComponent } from '../formulario-ejercicio-rutina/formulario-ejercicio-rutina.component';
 
 @Component({
   selector: 'app-formulario-rutina',
@@ -51,11 +52,19 @@ export class FormularioRutinaComponent implements OnInit {
 
 
   editarEjercicio(rutina: Rutina){
-
+    let ref = this.modalService.open(FormularioEjercicioRutinaComponent);
+    ref.componentInstance.accion = "Editar";
+    ref.result.then((ejercicio) => {
+      if (ejercicio) {
+        this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicio);
+        this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
+        this.ejerciciosRutina.sort((a, b) => a.nombre.localeCompare(b.nombre));
+      }
+    }, (reason) => { });
   }
 
   eliminarEjercicio(id: number){
-
+    this.ejercicioRutinaService.eliminarEjercicios(this.rutina.id, id);
   }
 
   cerrarVentana(id: number){
