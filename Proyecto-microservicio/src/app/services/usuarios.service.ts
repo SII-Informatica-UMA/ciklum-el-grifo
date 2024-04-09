@@ -13,7 +13,7 @@ import { BackendService } from "./backend.service";
 })
 export class UsuariosService {
   _rolCentro?: RolCentro;
-
+  // USAR BackendService para usar Backend real o USAR BackendFakeService para los ficheros locales de prueba
   constructor(private backend: BackendFakeService) {}
 
   doLogin(login: Login): Observable<UsuarioSesion> {

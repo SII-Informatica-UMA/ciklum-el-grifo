@@ -4,6 +4,8 @@ import { Usuario } from "../entities/usuario";
 import { HttpClient } from "@angular/common/http";
 import { BACKEND_URI } from "../config/config";
 import { JwtResponse } from "../entities/login";
+import { Rutina } from "../entities/rutina";
+import { Ejercicio } from "../entities/ejercicio";
 
 // Este servicio usa el backend real
 
@@ -45,5 +47,50 @@ export class BackendService {
 
   resetPassword(token: string, password: string): Observable<void> {
     return this.httpClient.post<void>(BACKEND_URI + '/passwordreset', {token: token, password: password});
+  }
+
+  //-------------------------------------------RUTINAS----------------------------------------------------------
+
+  getRutina(id: number): Observable<Rutina> {
+    return this.httpClient.get<Rutina>(BACKEND_URI + '/rutina'+id);
+  }
+
+  putRutina(rutina: Rutina): Observable<Rutina> {
+    return this.httpClient.put<Rutina>(BACKEND_URI + '/rutina/' + rutina.id, rutina);
+  }
+
+  deleteRutina(id: number): Observable<void> {
+    return this.httpClient.delete<void>(BACKEND_URI + '/rutina/' + id);
+  }
+  
+  getRutinas(): Observable<Rutina[]> {
+    return this.httpClient.get<Rutina[]>(BACKEND_URI + '/rutina');
+  }
+
+  postRutina(rutina: Rutina): Observable<Rutina> {
+    return this.httpClient.post<Rutina>(BACKEND_URI + '/rutina', rutina);
+  }
+
+
+  //-------------------------------------------EJERCICIOS----------------------------------------------------------
+
+  getEjercicio(id: number): Observable<Ejercicio> {
+    return this.httpClient.get<Ejercicio>(BACKEND_URI + '/ejercicio'+id);
+  }
+
+  putEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+    return this.httpClient.put<Ejercicio>(BACKEND_URI + '/ejercicio/' + ejercicio.id, ejercicio);
+  }
+
+  deleteEjercicio(id: number): Observable<void> {
+    return this.httpClient.delete<void>(BACKEND_URI + '/ejercicio/' + id);
+  }
+
+  getEjercicios(): Observable<Ejercicio[]> {
+    return this.httpClient.get<Ejercicio[]>(BACKEND_URI + '/ejercicio');
+  }
+
+  postEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+    return this.httpClient.post<Ejercicio>(BACKEND_URI + '/ejercicio', ejercicio);
   }
 }

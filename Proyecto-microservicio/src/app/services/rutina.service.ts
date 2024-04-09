@@ -7,9 +7,9 @@ import { Rutina } from '../entities/rutina';
 
 export class RutinasService {
   private rutinas: Rutina [] = [
-    {id: 1, nombre: 'Parte pecho', descripcion: 'Pechito de fuego', observaciones: 'perez@uma.es', ejercicios: []},
-    {id: 2, nombre: 'Culo insano', descripcion: 'Let him cook', observaciones: 'ana@uma.es', ejercicios: []},
-    {id: 3, nombre: 'Wango', descripcion: 'Ulti estelar', observaciones: 'gonzalez@uma.es', ejercicios: []},
+    {id: 1, nombre: 'Parte pecho', descripcion: 'Pechito de fuego', observaciones: 'rutina no aconsejable', ejercicios: []},
+    {id: 2, nombre: 'Culo insano', descripcion: 'Let him cook', observaciones: 'no apto para gays', ejercicios: []},
+    {id: 3, nombre: 'Wango', descripcion: 'Ulti estelar', observaciones: 'venir comio de casa', ejercicios: []},
   ];
 
   constructor() { }
