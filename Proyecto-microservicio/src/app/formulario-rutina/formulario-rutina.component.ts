@@ -31,23 +31,21 @@ export class FormularioRutinaComponent implements OnInit {
       this.rutinasService.addRutinas(this.rutina);
     }       
     this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
-
   }
   
   guardarRutina(): void {
-    this.modal.close(this.ejercicio);
+    this.modal.close(this.rutina);
   }
 
-  aniadirEjercicio(): void{
+  aniadirEjercicio(): void {
     let ref = this.modalService.open(EjerciciosRutinaComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.result.then((ejercicio) => {
-      if (ejercicio) {
+    ref.componentInstance.ejercicio = this.ejercicio;
+    ref.result.then((ejercicio: Ejercicio) => {
         this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicio);
         this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
         this.ejerciciosRutina.sort((a, b) => a.nombre.localeCompare(b.nombre));
-      }
-    }, (reason) => { });
+    }, (reason) => {});
   }
 
 

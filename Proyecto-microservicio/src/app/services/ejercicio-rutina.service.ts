@@ -42,6 +42,7 @@ export class EjercicioRutinaService {
     }
   }
 
+  // Elimina la lista de ejercicios de la rutina
   eliminarRutina(rutinaId: number){
     this.getEjerciciosRutina(rutinaId).splice(0, this.ejerciciosRutina.size);
     this.ejerciciosRutina.delete(rutinaId);

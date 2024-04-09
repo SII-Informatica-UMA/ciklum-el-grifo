@@ -16,7 +16,7 @@ import { FormularioEjercicioRutinaComponent } from '../formulario-ejercicio-ruti
 })
 export class EjerciciosRutinaComponent implements OnInit {
   accion?: "Añadir" | "Editar";
-  ejercicio: Ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', material:'', musculosTrabajados:'',tipo:'',multimedia: ''};
+  ejercicio: Ejercicio = {id: 0, nombre: '', descripcion: '',observaciones: '', dificultad: '', material:'', musculosTrabajados:'',tipo:'',multimedia: ''};
   ejercicios: Ejercicio [] = [];
 
   constructor(public modal: NgbActiveModal, private modalService: NgbModal, private ejerciciosService: EjerciciosService, private ejercicioRutinaService: EjercicioRutinaService) { }
@@ -24,13 +24,15 @@ export class EjerciciosRutinaComponent implements OnInit {
   ngOnInit(): void {
     this.ejercicios = this.ejerciciosService.getEjercicios();
   }
-
-  aniadirEjercicio():void{
+  
+  aniadirEjercicio(): void {
     let ref = this.modalService.open(FormularioEjercicioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.result.then(() => {
-      this.modal.close(this.ejercicio);
-    }, (reason) => { });
+    ref.result.then((ejercicio: Ejercicio) => {
+      if (ejercicio) {
+        this.modal.close(ejercicio); // Envía el ejercicio de vuelta al componente principal
+      }
+    }, (reason) => {});
   }
-  
+
 }

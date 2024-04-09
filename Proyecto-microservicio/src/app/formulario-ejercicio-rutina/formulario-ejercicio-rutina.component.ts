@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class FormularioEjercicioRutinaComponent {
   accion?: "Añadir" | "Editar";
-  ejercicio: Ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', material:'', musculosTrabajados:'',tipo:'',multimedia: ''};
+  ejercicio: Ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', observaciones: '',material:'', musculosTrabajados:'',tipo:'',multimedia: ''};
   ejercicioDetalle: ejerciciosDetallados = {series: 0, repeticiones: 0, duracionMinutos: 0,ejercicio: this.ejercicio};
 
   constructor(public modal: NgbActiveModal) { }
