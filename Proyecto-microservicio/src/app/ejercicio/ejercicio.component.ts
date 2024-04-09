@@ -1,22 +1,37 @@
 import { Component, OnInit} from '@angular/core';
 import { EjerciciosService } from '../services/ejercicio.service';
+import { UsuariosService } from '../services/usuarios.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormularioRutinaComponent } from '../formulario-rutina/formulario-rutina.component';
 import { Ejercicio } from '../entities/ejercicio';
 import { FormularioEjercicioComponent } from '../formulario-ejercicio/formulario-ejercicio.component';
 import { FormsModule } from '@angular/forms';
+import { Usuario, UsuarioImpl } from '../entities/usuario';
+import { Rol } from '../entities/login';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-ejercicio',
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './ejercicio.component.html',
 })
+
 export class EjercicioComponent{
+
   ejercicios: Ejercicio [] = [];
   ejercicioElegido?: Ejercicio;
   ejercicio?: Ejercicio;
-  constructor(private ejerciciosService: EjerciciosService, private modalService: NgbModal) { }
+  constructor(private ejerciciosService: EjerciciosService,private usuariosService: UsuariosService, private modalService: NgbModal) { }
+
+  private get rol() {
+    return this.usuariosService.rolCentro;
+  }
+
+  isAdministrador(): boolean {
+    console.log("Pregunta admin: "+this.rol);
+    return this.rol?.rol == Rol.ADMINISTRADOR;
+  }
 
   editarEjercicio(ejercicio: Ejercicio): void {
     let ref = this.modalService.open(FormularioEjercicioComponent);
