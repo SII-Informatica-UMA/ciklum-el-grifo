@@ -3,8 +3,6 @@ import {RutinasService } from '../services/rutina.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormularioRutinaComponent} from '../formulario-rutina/formulario-rutina.component'
 import {Rutina } from '../entities/rutina';
-import { AppComponent } from '../app.component';
-import { EjercicioRutinaService } from '../services/ejercicio-rutina.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,7 +16,7 @@ export class RutinasComponent implements OnInit {
   rutinas: Rutina [] = [];
   rutinaElegida?: Rutina;
   rutina?: Rutina;
-  constructor(private rutinasService: RutinasService, private modalService: NgbModal, private ejercicioRutinaService: EjercicioRutinaService) { }
+  constructor(private rutinasService: RutinasService, private modalService: NgbModal) { }
 
   editarRutina(rutina: Rutina): void {
     let ref = this.modalService.open(FormularioRutinaComponent);
@@ -42,6 +40,7 @@ export class RutinasComponent implements OnInit {
     let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
     ref.result.then((rutina: Rutina) => {
+      this.rutinasService.addRutinas(rutina);
       this.rutinasService.getRutinas();
     }, (reason) => {});
   }
@@ -54,7 +53,8 @@ export class RutinasComponent implements OnInit {
   eliminarRutina(id: number): void {
     this.rutinasService.eliminarRutinas(id);
     this.rutinas = this.rutinasService.getRutinas();
-    this.ejercicioRutinaService.eliminarRutina(id);
+    this.rutinaElegida = undefined;
   }
 
+  
 }
