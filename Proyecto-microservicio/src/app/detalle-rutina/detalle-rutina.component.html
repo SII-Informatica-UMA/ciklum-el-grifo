@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ver ejercicios</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="cerrarVentana()"></button>
+  </div>
+  <div class="modal-body">  
+    <div class="form-group">
+        <div class="table-container">
+        <table class="tablaEjercicios table table-bordered table-hover table table-striped"  style="border-radius: 10px; text-align: center;">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>  
+              <th>Músculos</th>
+              <th>Dificultad</th>  
+              <th>Series</th>
+              <th>Duracion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ejercicio of ejerciciosRutina">
+              <td>{{ejercicio?.nombre}}</td>
+              <td>{{ejercicio?.tipo}}</td>
+              <td>{{ejercicio?.musculosTrabajados}}</td>
+              <td>{{ejercicio?.dificultad}}</td>
+              <td>{{ejercicioDetallado?.repeticiones}} x {{ejercicioDetallado?.series}}</td>
+              <td>{{ejercicioDetallado?.duracionMinutos}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="cerrarVentana()">Cerrar</button>
+  </div>

@@ -6,6 +6,8 @@ import {FormularioRutinaComponent} from '../formulario-rutina/formulario-rutina.
 import {Rutina } from '../entities/rutina';
 import { Rol } from '../entities/login';
 import { CommonModule } from '@angular/common';
+import { EjercicioRutinaService } from '../services/ejercicio-rutina.service';
+import { DetalleRutinaComponent } from '../detalle-rutina/detalle-rutina.component';
 
 @Component({
   selector: 'app-rutinas',
@@ -19,7 +21,7 @@ export class RutinasComponent implements OnInit {
   rutinaElegida?: Rutina;
   rutina?: Rutina;
   
-  constructor(private rutinasService: RutinasService,private usuariosService: UsuariosService, private modalService: NgbModal) { }
+  constructor(private rutinasService: RutinasService,private usuariosService: UsuariosService, private modalService: NgbModal, private ejercicioRutinaService: EjercicioRutinaService) { }
 
   private get rol() {
     return this.usuariosService.rolCentro;
@@ -44,14 +46,14 @@ export class RutinasComponent implements OnInit {
   }
 
   elegirRutina(rutina: Rutina): void {
-    this.rutinaElegida = rutina;
+    const ref = this.modalService.open(DetalleRutinaComponent);
+    ref.componentInstance.rutina = rutina;
   }
 
   aniadirRutina(): void {
     let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
     ref.result.then((rutina: Rutina) => {
-      this.rutinasService.addRutinas(rutina);
       this.rutinasService.getRutinas();
     }, (reason) => {});
   }
@@ -65,6 +67,7 @@ export class RutinasComponent implements OnInit {
     this.rutinasService.eliminarRutinas(id);
     this.rutinas = this.rutinasService.getRutinas();
     this.rutinaElegida = undefined;
+    this.ejercicioRutinaService.eliminarRutina(id);
   }
 
   
