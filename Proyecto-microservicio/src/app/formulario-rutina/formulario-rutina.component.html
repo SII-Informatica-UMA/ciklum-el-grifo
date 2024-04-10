@@ -29,16 +29,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ejercicio of ejerciciosRutina">
-              <td>{{ejercicio?.nombre}}</td>
-              <td>{{ejercicio?.tipo}}</td>
-              <td>{{ejercicio?.musculosTrabajados}}</td>
-              <td>{{ejercicio?.dificultad}}</td>
-              <td>{{ejercicioDetallado?.repeticiones}} x {{ejercicioDetallado?.series}}</td>
-              <td>{{ejercicioDetallado?.duracionMinutos}}</td>
+            <tr *ngFor="let ejercicioDetalles of ejerciciosRutina">
+              <td>{{ejercicioDetalles.ejercicio?.nombre}}</td>
+              <td>{{ejercicioDetalles.ejercicio?.tipo}}</td>
+              <td>{{ejercicioDetalles.ejercicio?.musculosTrabajados}}</td>
+              <td>{{ejercicioDetalles.ejercicio?.dificultad}}</td>
+              <td>{{ejercicioDetalles.repeticiones || 'N/A'}} x {{ejercicioDetalles.series || 'N/A'}}</td>
+              <td>{{ejercicioDetalles.duracionMinutos}}</td>
               <td class="acciones">
                 <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicio(rutina)"><i class="bi bi-pencil-fill"></i></button>
-                <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarEjercicio(ejercicio.id)"><i class="bi bi-trash-fill"></i></button>
+                <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarEjercicio(ejercicioDetalles.ejercicio.id)"><i class="bi bi-trash-fill"></i></button>
               </td>
             </tr>
           </tbody>

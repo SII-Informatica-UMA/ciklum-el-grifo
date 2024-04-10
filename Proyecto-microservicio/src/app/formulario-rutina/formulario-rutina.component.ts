@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Ejercicio, ejerciciosDetallados } from '../entities/ejercicio';
-import { Rutina } from '../entities/rutina';
+import { Ejercicio} from '../entities/ejercicio';
+import { Rutina, EjercicioDetalles } from '../entities/rutina';
 import { EjercicioRutinaService } from '../services/ejercicio-rutina.service';
 import { EjerciciosRutinaComponent } from '../ejercicios-rutina/ejercicios-rutina.component';
 import { RutinasService } from '../services/rutina.service';
@@ -19,9 +19,9 @@ import { FormularioEjercicioRutinaComponent } from '../formulario-ejercicio-ruti
 export class FormularioRutinaComponent implements OnInit {
   accion?: "Añadir" | "Editar";
   rutina: Rutina = { id: 0, nombre: '', descripcion: '', observaciones: '', ejercicios: [] };
-  ejerciciosRutina: Ejercicio[] = [];
+  ejerciciosRutina: EjercicioDetalles[] = [];
   ejercicio?: Ejercicio;
-  ejercicioDetallado?: ejerciciosDetallados;
+  ejercicioDetalles?: EjercicioDetalles;
 
   constructor(public modal: NgbActiveModal, private modalService: NgbModal, private ejercicioRutinaService: EjercicioRutinaService, private rutinasService: RutinasService) { }
 
@@ -39,10 +39,10 @@ export class FormularioRutinaComponent implements OnInit {
   aniadirEjercicio(): void {
     let ref = this.modalService.open(EjerciciosRutinaComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.result.then((ejercicio: Ejercicio) => {
-        this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicio);
+    ref.result.then((ejercicioDetalles: EjercicioDetalles) => {
+        this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicioDetalles);
         this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
-        this.ejerciciosRutina.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        this.ejerciciosRutina.sort((a, b) => a.ejercicio.nombre.localeCompare(b.ejercicio.nombre));
     }, (reason) => {});
   }
 
@@ -50,12 +50,10 @@ export class FormularioRutinaComponent implements OnInit {
   editarEjercicio(rutina: Rutina){
     let ref = this.modalService.open(FormularioEjercicioRutinaComponent);
     ref.componentInstance.accion = "Editar";
-    ref.result.then((ejercicio) => {
-      if (ejercicio) {
-        this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicio);
+    ref.result.then((ejercicioDetalles) => {
+        this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicioDetalles);
         this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
-        this.ejerciciosRutina.sort((a, b) => a.nombre.localeCompare(b.nombre));
-      }
+        this.ejerciciosRutina.sort((a, b) => a.ejercicio.nombre.localeCompare(b.ejercicio.nombre));
     }, (reason) => { });
   }
 

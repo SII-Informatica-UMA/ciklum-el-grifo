@@ -35,4 +35,10 @@ export class RutinasService {
     let indice = this.rutinas.findIndex(c => c.id == id);
     this.rutinas.splice(indice, 1);
   }
+
+  getRutinaPorId(id: number): Rutina | undefined {
+    return this.rutinas.find(rutina => rutina.id === id);
+  }
+
+
 }

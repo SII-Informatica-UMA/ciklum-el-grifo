@@ -6,6 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EjercicioRutinaService } from '../services/ejercicio-rutina.service';
 import { FormularioEjercicioRutinaComponent } from '../formulario-ejercicio-rutina/formulario-ejercicio-rutina.component';
+import { EjercicioDetalles } from '../entities/rutina';
+import { Rutina } from '../entities/rutina';
+import { RutinasService } from '../services/rutina.service';
 
 @Component({
   selector: 'app-ejercicios-rutina',
@@ -17,9 +20,9 @@ import { FormularioEjercicioRutinaComponent } from '../formulario-ejercicio-ruti
 export class EjerciciosRutinaComponent implements OnInit {
   accion?: "Añadir" | "Editar";
   ejercicios: Ejercicio [] = [];
-  ejercicio?: Ejercicio;
+  rutina?: Rutina;
 
-  constructor(public modal: NgbActiveModal, private modalService: NgbModal, private ejerciciosService: EjerciciosService, private ejercicioRutinaService: EjercicioRutinaService) { }
+  constructor(public modal: NgbActiveModal, private modalService: NgbModal, private ejerciciosService: EjerciciosService, private ejercicioRutinaService: EjercicioRutinaService, private rutinasService: RutinasService) { }
 
   ngOnInit(): void {
     this.ejercicios = this.ejerciciosService.getEjercicios();
@@ -29,9 +32,11 @@ export class EjerciciosRutinaComponent implements OnInit {
     let ref = this.modalService.open(FormularioEjercicioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.ejercicio = this.ejerciciosService.getEjercicioPorId(id);
-    ref.result.then((ejercicio: Ejercicio) => {
-        this.modal.close(ejercicio); // Envía el ejercicio de vuelta al componente principal
+    ref.result.then((ejercicioDetalles: EjercicioDetalles) => {
+        this.modal.close(ejercicioDetalles); // Envía el ejercicio de vuelta al componente principal
     }, (reason) => {});
   }
+
+  
 
 }
