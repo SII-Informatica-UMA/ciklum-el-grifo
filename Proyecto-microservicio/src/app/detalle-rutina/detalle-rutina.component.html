@@ -18,11 +18,11 @@
           </thead>
           <tbody>
             <tr *ngFor="let ejercicioDetalles of ejerciciosRutina">
-              <td>{{ejercicioDetalles.ejercicio?.nombre}}</td>
-              <td>{{ejercicioDetalles.ejercicio?.tipo}}</td>
-              <td>{{ejercicioDetalles.ejercicio?.musculosTrabajados}}</td>
-              <td>{{ejercicioDetalles.ejercicio?.dificultad}}</td>
-              <td>{{ejercicioDetalles.repeticiones || 'N/A'}} - {{ejercicioDetalles.series || 'N/A'}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.nombre}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.tipo}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.musculosTrabajados}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.dificultad}}</td>
+              <td>{{ejercicioDetalles?.repeticiones || 'N/A'}} - {{ejercicioDetalles.series || 'N/A'}}</td>
               <td>{{ejercicioDetalles.duracionMinutos}}</td>
             </tr>
           </tbody>

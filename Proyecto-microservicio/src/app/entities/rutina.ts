@@ -15,3 +15,4 @@ export interface EjercicioDetalles {
   duracionMinutos: number;
   ejercicio: Ejercicio;
 }
+

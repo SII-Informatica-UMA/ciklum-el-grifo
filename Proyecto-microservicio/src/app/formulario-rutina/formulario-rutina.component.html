@@ -6,11 +6,11 @@
     <div class="form-group">
 
         <label for="nombre">Nombre:</label>
-        <input class="form-control" id="nombre" [(ngModel)]="rutina.nombre" placeholder="apellidos">
+        <input class="form-control" id="nombre" [(ngModel)]="rutina.nombre" placeholder="Asigne un nombre a la rutina...">
         <label for="descripcion">Descripcion:</label>
-        <input class="form-control" id="descripcion" [(ngModel)]="rutina.descripcion" placeholder="fulanito@mengano.com">
+        <input class="form-control" id="descripcion" [(ngModel)]="rutina.descripcion" placeholder="Añada una descripción...">
         <label for="observaciones">Observaciones:</label>
-        <input class="form-control" id="observaciones" [(ngModel)]="rutina.observaciones" placeholder="(34) 123456789">
+        <input class="form-control" id="observaciones" [(ngModel)]="rutina.observaciones" placeholder="Añada una observación...">
         <label for="ejercicios">Ejercicios:</label>
         <div>
           <button type="button" class="col-auto btn btn-outline-success" (click)="aniadirEjercicio()"><i class="bi bi-plus"></i></button>
@@ -30,14 +30,14 @@
           </thead>
           <tbody>
             <tr *ngFor="let ejercicioDetalles of ejerciciosRutina">
-              <td>{{ejercicioDetalles.ejercicio?.nombre}}</td>
-              <td>{{ejercicioDetalles.ejercicio?.tipo}}</td>
-              <td>{{ejercicioDetalles.ejercicio?.musculosTrabajados}}</td>
-              <td>{{ejercicioDetalles.ejercicio?.dificultad}}</td>
-              <td>{{ejercicioDetalles.repeticiones || 'N/A'}} x {{ejercicioDetalles.series || 'N/A'}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.nombre}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.tipo}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.musculosTrabajados}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.dificultad}}</td>
+              <td>{{ejercicioDetalles.repeticiones || '0'}} x {{ejercicioDetalles.series || '0'}}</td>
               <td>{{ejercicioDetalles.duracionMinutos}}</td>
               <td class="acciones">
-                <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicio(rutina)"><i class="bi bi-pencil-fill"></i></button>
+                <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicio(rutina.id)"><i class="bi bi-pencil-fill"></i></button>
                 <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarEjercicio(ejercicioDetalles.ejercicio.id)"><i class="bi bi-trash-fill"></i></button>
               </td>
             </tr>

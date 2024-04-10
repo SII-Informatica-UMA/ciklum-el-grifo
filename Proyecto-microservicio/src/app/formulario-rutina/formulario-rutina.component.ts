@@ -47,11 +47,12 @@ export class FormularioRutinaComponent implements OnInit {
   }
 
 
-  editarEjercicio(rutina: Rutina){
+  editarEjercicio(id: number){
     let ref = this.modalService.open(FormularioEjercicioRutinaComponent);
     ref.componentInstance.accion = "Editar";
+    ref.componentInstance.ejercicioDetalles = this.ejercicioDetalles;
     ref.result.then((ejercicioDetalles) => {
-        this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicioDetalles);
+        this.ejercicioRutinaService.editarEjercicios(id, ejercicioDetalles);
         this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
         this.ejerciciosRutina.sort((a, b) => a.ejercicio.nombre.localeCompare(b.ejercicio.nombre));
     }, (reason) => { });
