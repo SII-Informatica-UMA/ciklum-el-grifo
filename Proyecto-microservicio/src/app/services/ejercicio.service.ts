@@ -21,6 +21,10 @@ export class EjerciciosService {
     });
 }
 
+getEjercicioPorId(id: number): Ejercicio | undefined {
+  return this.ejercicios.find(ejercicio => ejercicio.id === id);
+}
+
   addEjercicios(ejercicios: Ejercicio) {
     ejercicios.id = Math.max(...this.ejercicios.map(c => c.id)) + 1;
     this.ejercicios.push(ejercicios);

@@ -21,7 +21,7 @@
             <td>{{ejercicio?.tipo}}</td>
             <td>{{ejercicio?.musculosTrabajados}}</td>
             <td>{{ejercicio?.dificultad}}</td>
-            <td><button type="button" class="col-auto btn btn-outline-success"  (click)="aniadirEjercicio()"><i class="bi bi-plus"></i></button>
+            <td><button type="button" class="col-auto btn btn-outline-success"  (click)="aniadirEjercicio(ejercicio.id)"><i class="bi bi-plus"></i></button>
             </td>
           </tr>
         </tbody>

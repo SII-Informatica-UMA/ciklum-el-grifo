@@ -1,4 +1,3 @@
-// formulario-rutina.component.ts
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Ejercicio, ejerciciosDetallados } from '../entities/ejercicio';
@@ -40,7 +39,6 @@ export class FormularioRutinaComponent implements OnInit {
   aniadirEjercicio(): void {
     let ref = this.modalService.open(EjerciciosRutinaComponent);
     ref.componentInstance.accion = "Añadir";
-    ref.componentInstance.ejercicio = this.ejercicio;
     ref.result.then((ejercicio: Ejercicio) => {
         this.ejercicioRutinaService.addEjerciciosRutina(this.rutina.id, ejercicio);
         this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
