@@ -44,7 +44,7 @@ export class EjerciciosFakeService {
       return of(u)
   }
 
-  getEjercicio(id: number): Observable<Ejercicio> {
+  getEjercicio(id: number,entrenadorId: number): Observable<Ejercicio> {
         let u=this.ejercicio.find(ejercicio => ejercicio.id === id);
         if(!u){
             return new Observable<Ejercicio>(observer=>{
@@ -66,7 +66,7 @@ export class EjerciciosFakeService {
     return of(ejercicio)
   }
 
-  putEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+  putEjercicio(ejercicioId: number,ejercicio: Ejercicio, entrenadorId: number): Observable<Ejercicio> {
     let u = this.ejercicio.find(u => u.id === ejercicio.id);
     if(!u){
         return new Observable<Ejercicio>(observer =>{
@@ -78,7 +78,7 @@ export class EjerciciosFakeService {
     return of(ejercicio);
   }
 
-  deleteEjercicio(id: number): Observable<void> {
+  deleteEjercicio(id: number,entrenadorId: number): Observable<void> {
     let indice = this.ejercicio.findIndex(c => c.id == id);
     if (indice < 0) {
         return new Observable<void>(observer => {

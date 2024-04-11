@@ -15,7 +15,7 @@ export class RutinasFakeService {
   constructor() { }
 
  
-  getRutina(id: number): Observable<Rutina>  {
+  getRutina(id: number,entrenadorId: number): Observable<Rutina>  {
     let u =this.rutina.find(rutina => rutina.id === id);
     if (!u){
       return new Observable<Rutina>(observer =>{
@@ -25,7 +25,7 @@ export class RutinasFakeService {
     return  of(u);
   }
 
-  postRutina(rutina: Rutina): Observable<Rutina>  {
+  postRutina(rutina: Rutina,entrenadorId: number): Observable<Rutina>  {
     let u = this.rutina.find(u => u.id === rutina.id);
     if(u){
       return new Observable<Rutina>(observer =>{
@@ -37,7 +37,7 @@ export class RutinasFakeService {
     return of(rutina);
   }
 
-  deleteRutina(id: number): Observable<void> {
+  deleteRutina(id: number,entrenadorId: number): Observable<void> {
     let indice = this.rutina.findIndex(c => c.id == id);
     if (indice < 0) {
       return new Observable<void>(observer => {
@@ -48,13 +48,13 @@ export class RutinasFakeService {
     return of();
   }
 
-  getRutinas(): Observable<Rutina[]> {
+  getRutinas(entrenadorId: number): Observable<Rutina[]> {
     let u= this.rutina.sort((a, b) => {
       return a.id - b.id;
     });
     return of(u);
   }
-  putRutina(rutina: Rutina):Observable<Rutina> {
+  putRutina(id: number,rutina: Rutina,entrenadorId: number):Observable<Rutina> {
     let u = this.rutina.find(u => u.id === rutina.id);
     if(!u){
       return new Observable<Rutina>(observer =>{
