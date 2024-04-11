@@ -12,7 +12,7 @@
               <th>Tipo</th>  
               <th>Músculos</th>
               <th>Dificultad</th>  
-              <th>Series - Repeticiones</th>
+              <th>Series x Repeticiones</th>
               <th>Duracion</th>
             </tr>
           </thead>
@@ -22,7 +22,7 @@
               <td>{{ejercicioDetalles?.ejercicio?.tipo}}</td>
               <td>{{ejercicioDetalles?.ejercicio?.musculosTrabajados}}</td>
               <td>{{ejercicioDetalles?.ejercicio?.dificultad}}</td>
-              <td>{{ejercicioDetalles?.repeticiones || 'N/A'}} - {{ejercicioDetalles.series || 'N/A'}}</td>
+              <td>{{ejercicioDetalles.series}} x {{ejercicioDetalles?.repeticiones}}</td>
               <td>{{ejercicioDetalles.duracionMinutos}}</td>
             </tr>
           </tbody>

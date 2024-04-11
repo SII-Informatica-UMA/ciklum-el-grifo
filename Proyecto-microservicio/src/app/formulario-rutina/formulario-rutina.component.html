@@ -23,7 +23,7 @@
               <th>Tipo</th>  
               <th>Músculos</th>
               <th>Dificultad</th>  
-              <th>Series</th>
+              <th>Series x Repeticiones</th>
               <th>Duracion</th>
               <th>Editar / Eliminar</th>  
             </tr>
@@ -34,10 +34,10 @@
               <td>{{ejercicioDetalles?.ejercicio?.tipo}}</td>
               <td>{{ejercicioDetalles?.ejercicio?.musculosTrabajados}}</td>
               <td>{{ejercicioDetalles?.ejercicio?.dificultad}}</td>
-              <td>{{ejercicioDetalles.repeticiones || '0'}} x {{ejercicioDetalles.series || '0'}}</td>
+              <td>{{ejercicioDetalles.series || '0'}} x {{ejercicioDetalles.repeticiones || '0'}}</td>
               <td>{{ejercicioDetalles.duracionMinutos}}</td>
               <td class="acciones">
-                <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicio(rutina.id)"><i class="bi bi-pencil-fill"></i></button>
+                <button type="button" class="col-auto btn btn-outline-primary" (click)="editarEjercicio(rutina.id, ejercicioDetalles)"><i class="bi bi-pencil-fill"></i></button>
                 <button type="button" class="col-auto btn btn-outline-danger" (click)="eliminarEjercicio(ejercicioDetalles.ejercicio.id)"><i class="bi bi-trash-fill"></i></button>
               </td>
             </tr>

@@ -18,6 +18,7 @@ export class FormularioEjercicioRutinaComponent {
   accion?: "Añadir" | "Editar";
   ejercicio: Ejercicio = { id: 0, nombre: '', descripcion: '', observaciones: '', tipo: '', musculosTrabajados: '' };
   ejercicioDetalles: EjercicioDetalles = { series: 0, repeticiones: 0, duracionMinutos: 0, ejercicio: this.ejercicio};
+  ejercicioDetallesAntiguo: EjercicioDetalles = { series: 0, repeticiones: 0, duracionMinutos: 0, ejercicio: this.ejercicio};
 
   constructor(public modal: NgbActiveModal, private ejercicioRutinaService: EjercicioRutinaService, private rutinasService: RutinasService) { }
 
@@ -25,4 +26,13 @@ export class FormularioEjercicioRutinaComponent {
       this.ejercicioDetalles.ejercicio = this.ejercicio;
       this.modal.close(this.ejercicioDetalles);
   }
+
+  cerrarVentana(ejercicioDetallesAntiguo: EjercicioDetalles): void{
+    if(this.accion == "Editar"){
+      this.modal.close(ejercicioDetallesAntiguo);
+    }else if(this.accion == "Añadir"){
+      this.modal.dismiss();
+    }
+  }
+
 }

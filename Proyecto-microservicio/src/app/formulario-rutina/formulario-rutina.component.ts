@@ -23,6 +23,7 @@ export class FormularioRutinaComponent implements OnInit {
   ejercicio?: Ejercicio;
   ejercicioDetalles?: EjercicioDetalles;
 
+
   constructor(public modal: NgbActiveModal, private modalService: NgbModal, private ejercicioRutinaService: EjercicioRutinaService, private rutinasService: RutinasService) { }
 
   ngOnInit(): void {
@@ -47,15 +48,16 @@ export class FormularioRutinaComponent implements OnInit {
   }
 
 
-  editarEjercicio(id: number){
+  editarEjercicio(id: number, ejercicioDetalles: EjercicioDetalles){
     let ref = this.modalService.open(FormularioEjercicioRutinaComponent);
     ref.componentInstance.accion = "Editar";
-    ref.componentInstance.ejercicioDetalles = this.ejercicioDetalles;
-    ref.result.then((ejercicioDetalles) => {
+    ref.componentInstance.ejercicioDetallesAntiguo = { ...ejercicioDetalles };
+    ref.componentInstance.ejercicioDetalles = ejercicioDetalles;
+    ref.result.then((ejercicioDetalles: EjercicioDetalles) => {
         this.ejercicioRutinaService.editarEjercicios(id, ejercicioDetalles);
         this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
         this.ejerciciosRutina.sort((a, b) => a.ejercicio.nombre.localeCompare(b.ejercicio.nombre));
-    }, (reason) => { });
+    }, (reason) => {});
   }
 
   eliminarEjercicio(id: number){
