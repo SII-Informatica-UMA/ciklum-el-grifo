@@ -11,27 +11,28 @@ import { Rutina } from "../entities/rutina";
   export class RutinasDBService {
 
     constructor(private httpClient: HttpClient) {}
-//-------------------------------------------RUTINAS----------------------------------------------------------
+  //-------------------------------------------RUTINAS----------------------------------------------------------
 
-  getRutina(id: number): Observable<Rutina> {
-    return this.httpClient.get<Rutina>(BACKEND_URI + '/rutina'+id);
-  }
-
-  putRutina(rutina: Rutina): Observable<Rutina> {
-    return this.httpClient.put<Rutina>(BACKEND_URI + '/rutina/' + rutina.id, rutina);
+  getRutinas(entrenadorId: number): Observable<Rutina[]> {
+    return this.httpClient.get<Rutina[]>(`${BACKEND_URI}/rutina?entrenador=${entrenadorId}`);
   }
 
-  deleteRutina(id: number): Observable<void> {
-    return this.httpClient.delete<void>(BACKEND_URI + '/rutina/' + id);
-  }
-  
-  getRutinas(): Observable<Rutina[]> {
-    return this.httpClient.get<Rutina[]>(BACKEND_URI + '/rutina');
+  postRutina(rutina: Rutina, entrenadorId: number): Observable<Rutina> {
+  return this.httpClient.post<Rutina>(`${BACKEND_URI}/rutina?entrenador=${entrenadorId}`, rutina);
   }
 
-  postRutina(rutina: Rutina): Observable<Rutina> {
-    return this.httpClient.post<Rutina>(BACKEND_URI + '/rutina', rutina);
+  getRutina(id: number, entrenadorId: number): Observable<Rutina> {
+  return this.httpClient.get<Rutina>(`${BACKEND_URI}/rutina/${id}?entrenador=${entrenadorId}`);
   }
+
+  putRutina(id: number, rutina: Rutina, entrenadorId: number): Observable<Rutina> {
+  return this.httpClient.put<Rutina>(`${BACKEND_URI}/rutina/${id}?entrenador=${entrenadorId}`, rutina);
+  }
+
+  deleteRutina(id: number, entrenadorId: number): Observable<void> {
+  return this.httpClient.delete<void>(`${BACKEND_URI}/rutina/${id}?entrenador=${entrenadorId}`);
+  }
+
 
 
   

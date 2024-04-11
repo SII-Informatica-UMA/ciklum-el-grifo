@@ -40,11 +40,13 @@ export class RutinasComponent implements OnInit {
       this.rutinasService.getRutinas();
     }, (reason) => {});
   }
-  
-  ngOnInit(): void {
+  actualizarRutinas(){
     this.rutinasService.getRutinas().subscribe(rutinas=>{
       this.rutinas=rutinas;
     })
+  }
+  ngOnInit(): void {
+    this.actualizarRutinas();
   }
 
   elegirRutina(rutina: Rutina): void {
@@ -56,22 +58,22 @@ export class RutinasComponent implements OnInit {
     let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
     ref.result.then((rutina: Rutina) => {
-      this.rutinasService.getRutinas();
-    }, (reason) => {});
+      this.rutinasService.addRutinas(rutina).subscribe(() => {
+        this.actualizarRutinas();
+      });
+    }, () => {});
   }
   rutinaEditado(rutina: Rutina): void {
-    this.rutinasService.editarRutinas(rutina);
-    this.rutinasService.getRutinas().subscribe(rutinas=>{
-      this.rutinas=rutinas;
-    })
+    this.rutinasService.editarRutinas(rutina).subscribe(() => {
+      this.actualizarRutinas();
+    });
     this.rutinaElegida = this.rutinas.find(c => c.id == rutina.id);
   }
 
   eliminarRutina(id: number): void {
-    this.rutinasService.eliminarRutinas(id);
-    this.rutinasService.getRutinas().subscribe(rutinas=>{
-      this.rutinas=rutinas;
-    })
+    this.rutinasService.eliminarRutinas(id).subscribe(() => {
+      this.actualizarRutinas();
+    });
     this.rutinaElegida = undefined;
     this.ejercicioRutinaService.eliminarRutina(id);
   }
