@@ -30,7 +30,7 @@
             <td>{{ejercicio?.dificultad}}</td>
             <td>
               <!-- Reproductor de video -->
-              <button *ngIf="ejercicio?.multimedia" type="button" class="col-auto btn btn-outline-dark" (click)="reproducirVideo(ejercicio.multimedia)"><i class="bi bi-play-fill"></i></button>
+              <button *ngFor="let multimedia of ejercicio.multimedia"  type="button" class="col-auto btn btn-outline-dark" (click)="reproducirVideo(ejercicio.multimedia)"><i class="bi bi-play-fill"></i></button>
               
             </td>
             

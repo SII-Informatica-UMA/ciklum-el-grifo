@@ -18,6 +18,13 @@ export class FormularioEjercicioComponent {
   constructor(public modal: NgbActiveModal) { }
 
   guardarEjercicio(): void {
+    if(typeof this.ejercicio.multimedia == "string"){
+      // @ts-ignore 
+    if(this.ejercicio.multimedia != ""){
+      // @ts-ignore 
+      this.ejercicio.multimedia = this.ejercicio.multimedia.split(',')
+    }
+  }
     this.modal.close(this.ejercicio);
   }
 }
