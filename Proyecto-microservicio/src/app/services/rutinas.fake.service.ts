@@ -7,9 +7,9 @@ import { Observable, of } from "rxjs";
 })
 export class RutinasFakeService {
   private rutina: Rutina [] = [
-    {id: 1, nombre: 'Parte pecho', descripcion: 'Pechito de fuego', observaciones: 'rutina no aconsejable', ejercicios: []},
-    {id: 2, nombre: 'Culo insano', descripcion: 'Let him cook', observaciones: 'no apto para gays', ejercicios: []},
-    {id: 3, nombre: 'Wango', descripcion: 'Ulti estelar', observaciones: 'venir comio de casa', ejercicios: []},
+    {id: 1, nombre: 'Rutina1', descripcion: 'Desc Rut 1', observaciones: 'Obs Rut 1', ejercicios: []},
+    {id: 2, nombre: 'Rutina2', descripcion: 'Desc Rut 2', observaciones: 'Obs Rut 2', ejercicios: []},
+    {id: 3, nombre: 'Rutina3', descripcion: 'Desc Rut 3', observaciones: 'Obs Rut 3', ejercicios: []},
   ];
 
   constructor() { }

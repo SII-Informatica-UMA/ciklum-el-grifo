@@ -16,7 +16,7 @@ import { RutinasService } from '../services/rutina.service';
 })
 export class FormularioEjercicioRutinaComponent {
   accion?: "Añadir" | "Editar";
-  ejercicio: Ejercicio = { id: 0, nombre: '', descripcion: '', observaciones: '', tipo: '', musculosTrabajados: '' };
+  ejercicio: Ejercicio = { id: 0, nombre: '', descripcion: '', observaciones: '', tipo: '', musculosTrabajados: '',dificultad:'' };
   ejercicioDetalles: EjercicioDetalles = { series: 0, repeticiones: 0, duracionMinutos: 0, ejercicio: this.ejercicio};
   ejercicioDetallesAntiguo: EjercicioDetalles = { series: 0, repeticiones: 0, duracionMinutos: 0, ejercicio: this.ejercicio};
 

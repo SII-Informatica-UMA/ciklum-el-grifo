@@ -8,9 +8,9 @@ import { Observable, of } from "rxjs";
 export class EjerciciosFakeService {
 
   private ejercicio: Ejercicio [] = [
-    {id: 1, nombre: 'Parte pecho', descripcion: 'Pechito de fuego', observaciones: 'debería mejorar', tipo: 'pecho', musculosTrabajados: 'brazo',dificultad: 'difícil',material: `Homero`,multimedia:'https://www.youtube.com/watch?v=-uEwcXUu-CU'},
-    {id: 2, nombre: 'Culo insano', descripcion: 'Let him cook', observaciones: 'bien hecho', tipo: 'glúteo', musculosTrabajados: 'culo'},
-    {id: 3, nombre: 'Wango', descripcion: 'Ulti estelar', observaciones: 'mejorando', tipo: 'persona', musculosTrabajados: 'pierna'},
+    {id: 1, nombre: 'Ejercicio1', descripcion: 'Desc Ej 1', observaciones: 'Obs Ej 1', tipo: 'Tipo Ej 1', musculosTrabajados: 'Musculo Ej1',dificultad: 'difícil',material: `Balon De Futbol`,multimedia:'https://www.youtube.com/watch?v=6yUeQeOZkAE'},
+    {id: 2, nombre: 'Ejercicio2', descripcion: 'Desc Ej 2', observaciones: 'Obs Ej 2', tipo: 'Tipo Ej 2', musculosTrabajados: 'Musculo Ej2',dificultad: 'facíl'},
+    {id: 3, nombre: 'Ejercicio3', descripcion: 'Desc Ej 3', observaciones: 'Obs Ej 3', tipo: 'Tipo Ej 3', musculosTrabajados: 'Musculo Ej3',dificultad: 'medio'},
   ];
  
   constructor() { }

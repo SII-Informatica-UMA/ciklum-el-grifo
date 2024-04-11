@@ -6,8 +6,8 @@ export interface Ejercicio{
     observaciones: string;
     tipo: string; 
     musculosTrabajados: string; 
+    dificultad: string;
     material?: string;
-    dificultad?: string;
     multimedia?: string;
 
 }
