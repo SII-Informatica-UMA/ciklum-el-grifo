@@ -3,6 +3,7 @@ import { EjerciciosFakeService } from "./ejercicios.fake.service";
 import { Ejercicio } from '../entities/ejercicio';
 import { Injectable } from '@angular/core';
 import { EjerciciosDBService } from "./ejercicios.db.service";
+import { UsuariosService } from "./usuarios.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,27 +11,46 @@ import { EjerciciosDBService } from "./ejercicios.db.service";
 export class EjerciciosService{
 
   // CAMBIAR EjerciciosFakeService POR EjerciciosDBService
-  constructor(private ejercicio: EjerciciosFakeService){}
+  constructor(private ejercicio: EjerciciosDBService,private usuarioService: UsuariosService){}
 
   getEjercicios(): Observable<Ejercicio[]>{
-    return this.ejercicio.getEjercicios();
+    let entrenadorId = this.usuarioService.getUsuarioActualId();
+    if (entrenadorId === null) {
+      throw new Error('No se pudo obtener el ID del usuario');
+    }
+    return this.ejercicio.getEjercicios(entrenadorId);
   }
 
   addEjercicios(ejercicio: Ejercicio): Observable<Ejercicio>{
-    return this.ejercicio.postEjercicio(ejercicio);
+    let entrenadorId= this.usuarioService.getUsuarioActualId();
+    if (entrenadorId === null) {
+      throw new Error ('No se pudo obtener el ID del usuario');
+    }
+    return this.ejercicio.postEjercicio(ejercicio,entrenadorId);
   }
 
   editarEjercicios(ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.ejercicio.putEjercicio(ejercicio);
+    let entrenadorId= this.usuarioService.getUsuarioActualId();
+    if (entrenadorId === null) {
+      throw new Error ('No se pudo obtener el ID del usuario');
+    }
+    return this.ejercicio.putEjercicio(ejercicio.id,ejercicio,entrenadorId);
   }
 
   eliminarEjercicios(id: number): Observable<void> {
-    
-    return this.ejercicio.deleteEjercicio(id);
+    let entrenadorId= this.usuarioService.getUsuarioActualId();
+    if (entrenadorId === null) {
+      throw new Error ('No se pudo obtener el ID del usuario');
+    }
+    return this.ejercicio.deleteEjercicio(id,entrenadorId);
   }
 
   getEjercicioPorId(id: number):Observable<Ejercicio>  {
-    return this.ejercicio.getEjercicio(id);
+    let entrenadorId= this.usuarioService.getUsuarioActualId();
+    if (entrenadorId === null) {
+      throw new Error ('No se pudo obtener el ID del usuario');
+    }
+    return this.ejercicio.getEjercicio(id,entrenadorId);
   }
 
 }

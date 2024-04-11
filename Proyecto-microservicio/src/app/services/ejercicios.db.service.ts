@@ -12,23 +12,26 @@ import { Ejercicio } from "../entities/ejercicio";
     constructor(private httpClient: HttpClient) {}
 
   
-  getEjercicio(id: number): Observable<Ejercicio> {
-    return this.httpClient.get<Ejercicio>(BACKEND_URI + '/ejercicio'+id);
-  }
+    getEjercicios(entrenadorId: number): Observable<Ejercicio[]> {
+      return this.httpClient.get<Ejercicio[]>(`${BACKEND_URI}/ejercicio?entrenador=${entrenadorId}`);
+    }
 
-  putEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.httpClient.put<Ejercicio>(BACKEND_URI + '/ejercicio/' + ejercicio.id, ejercicio);
-  }
 
-  deleteEjercicio(id: number): Observable<void> {
-    return this.httpClient.delete<void>(BACKEND_URI + '/ejercicio/' + id);
-  }
+    postEjercicio(Ejercicio: Ejercicio,entrenadorId: number): Observable<Ejercicio> {
+      return this.httpClient.post<Ejercicio>(`${BACKEND_URI}/ejercicio?entrenador=${entrenadorId}`, Ejercicio);
+    }
 
-  getEjercicios(): Observable<Ejercicio[]> {
-    return this.httpClient.get<Ejercicio[]>(BACKEND_URI + '/ejercicio');
-  }
 
-  postEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.httpClient.post<Ejercicio>(BACKEND_URI + '/ejercicio', ejercicio);
-  }
+  putEjercicio(idEjercicio: number, Ejercicio: Ejercicio,entrenadorId: number): Observable<Ejercicio> {
+      return this.httpClient.put<Ejercicio>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`, Ejercicio);
+}
+
+deleteEjercicio(idEjercicio: number,entrenadorId: number): Observable<void> {
+      return this.httpClient.delete<void>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`);
+ 
+}
+
+  getEjercicio(idEjercicio: number,entrenadorId: number): Observable<Ejercicio> {
+      return this.httpClient.get<Ejercicio>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`);
+}
   }

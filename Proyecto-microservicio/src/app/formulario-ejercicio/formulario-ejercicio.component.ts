@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class FormularioEjercicioComponent {
   accion?: "Añadir" | "Editar";
-  ejercicio: Ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', observaciones: '', material:'', musculosTrabajados:'',tipo:'',multimedia: ''};
+  ejercicio: Ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', observaciones: '', material:'', musculosTrabajados:'',tipo:'',multimedia: []};
 
   constructor(public modal: NgbActiveModal) { }
 

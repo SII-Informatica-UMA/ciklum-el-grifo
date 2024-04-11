@@ -10,11 +10,11 @@ import { RutinasDBService } from './rutinas.db.services';
 export class RutinasService {
   
   //CAMBIAR A RutinasDBService PARA USAR BACKEND O RutinasFakeService PARA USAR LOCAL
-  constructor(private rutina:RutinasFakeService) { }
+  constructor(private rutina:RutinasDBService) { }
 
   getRutinas(): Observable<Rutina[]> {
     return this.rutina.getRutinas();
-}
+  }
   
 
   addRutinas(rutina: Rutina): Observable<Rutina>{
@@ -30,7 +30,7 @@ export class RutinasService {
     return this.rutina.deleteRutina(id);
   }
 
-  getRutinaPorId(id: number):Observable<Rutina>  {
+  getRutinaPorId(id: number): Observable<Rutina>  {
     return this.rutina.getRutina(id);
   }
 

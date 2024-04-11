@@ -38,15 +38,18 @@ export class EjercicioComponent{
     ref.componentInstance.accion = "Editar";
     ref.componentInstance.ejercicio = {...ejercicio};
     ref.result.then((ejercicio: Ejercicio) => {
-      this.ejerciciosService.editarEjercicios(ejercicio); // Emitir el evento de edición con el contacto actualizado
-      this.ejerciciosService.getEjercicios();
+      this.ejercicioEditado(ejercicio); // Emitir el evento de edición con el contacto actualizado
+      
     }, (reason) => {});
   }
   
+  actualizarEjercicios() {
+    this.ejerciciosService.getEjercicios().subscribe(ejercicios => {
+      this.ejercicios = ejercicios;
+    });
+  }
   ngOnInit(): void {
-    this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
-      this.ejercicios=ejercicios;
-    })
+    this.actualizarEjercicios();
     
   }
 
@@ -59,33 +62,35 @@ export class EjercicioComponent{
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', marterial:'', musculosTrabajados:'',tipo:''};
     ref.result.then((ejercicio: Ejercicio) => {
-      this.ejerciciosService.addEjercicios(ejercicio);
-      this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
-        this.ejercicios=ejercicios;
-      })
+      this.ejerciciosService.addEjercicios(ejercicio).subscribe(()=> {
+        this.actualizarEjercicios();
+      });
+      
       this.ejercicios.sort((a,b)=>a.nombre.localeCompare(b.nombre));
-    }, (reason) => {});
+    }, () => {});
 
   }
   ejercicioEditado(ejercicio: Ejercicio): void {
-    this.ejerciciosService.editarEjercicios(ejercicio);
-    this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
-      this.ejercicios=ejercicios;
-    })
+    this.ejerciciosService.editarEjercicios(ejercicio).subscribe(()=> {
+      this.actualizarEjercicios();
+    });
+    
     this.ejercicioElegido = this.ejercicios.find(c => c.id == ejercicio.id);
   }
 
   eliminarEjercicio(id: number): void {
-    this.ejerciciosService.eliminarEjercicios(id);
-    this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
-      this.ejercicios=ejercicios;
-    })
+    this.ejerciciosService.eliminarEjercicios(id).subscribe(() => {
+      this.actualizarEjercicios();
+    });
     this.ejercicioElegido = undefined;
   }
 
-  reproducirVideo(path: string | undefined): void {
+  reproducirVideo(path: string[] | undefined): void {
     if (path) {
-      window.open(path, '_blank'); // Abre el enlace en una nueva pestaña
+      for  (let i=0;i<path.length;i++){
+        window.open(path[i], '_blank');
+      }
+      // Abre el enlace en una nueva pestaña
     }
   }
   

@@ -14,7 +14,7 @@ import { BackendService } from "./backend.service";
 export class UsuariosService {
   _rolCentro?: RolCentro;
   // USAR BackendService para usar Backend real o USAR BackendFakeService para los ficheros locales de prueba
-  constructor(private backend: BackendFakeService) {}
+  constructor(private backend: BackendService) {}
 
   doLogin(login: Login): Observable<UsuarioSesion> {
     let jwtObs = this.backend.login(login.email, login.password);
@@ -102,6 +102,14 @@ export class UsuariosService {
     return this.backend.postUsuario(usuario);
   }
 
+  getUsuarioActualId(): number | null {
+    let usuarioSesionString: string | null = localStorage.getItem('usuario');
+    if (usuarioSesionString !== null) {
+      let usuarioSesion: UsuarioSesion = JSON.parse(usuarioSesionString);
+      return usuarioSesion ? usuarioSesion.id : null;
+    }
+    return null;
+  }
 
 
 }

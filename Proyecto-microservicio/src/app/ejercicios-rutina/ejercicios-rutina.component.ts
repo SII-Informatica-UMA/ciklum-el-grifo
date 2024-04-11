@@ -25,8 +25,8 @@ export class EjerciciosRutinaComponent implements OnInit {
   constructor(public modal: NgbActiveModal, private modalService: NgbModal, private ejerciciosService: EjerciciosService, private ejercicioRutinaService: EjercicioRutinaService, private rutinasService: RutinasService) { }
 
   ngOnInit(): void {
-    this.ejerciciosService.getEjercicios().subscribe(ejercicio=>{
-      this.ejercicios=ejercicio;
+    this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
+      this.ejercicios=ejercicios;
     })
   }
   
