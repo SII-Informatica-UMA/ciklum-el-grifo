@@ -8,9 +8,9 @@ import { Ejercicio } from '../entities/ejercicio';
 export class EjerciciosService {
 
   private ejercicios: Ejercicio [] = [
-    {id: 1, nombre: 'Parte pecho', descripcion: 'Pechito de fuego', observaciones: 'debería mejorar', tipo: 'pecho', musculosTrabajados: 'brazo',dificultad: 'difícil',material: `Homero`,multimedia:'https://www.youtube.com/watch?v=-uEwcXUu-CU'},
-    {id: 2, nombre: 'Culo insano', descripcion: 'Let him cook', observaciones: 'bien hecho', tipo: 'glúteo', musculosTrabajados: 'culo'},
-    {id: 3, nombre: 'Wango', descripcion: 'Ulti estelar', observaciones: 'mejorando', tipo: 'persona', musculosTrabajados: 'pierna'},
+    {id: 1, nombre: 'Ejercicio 1', descripcion: 'Ejercicio texto ', observaciones: 'Ejercicio comment', tipo: 'pecho', musculosTrabajados: 'brazo',dificultad: 'difícil',material: `Homero`,multimedia:'https://www.youtube.com/'},
+    {id: 2, nombre: 'Ejercicio 2 ', descripcion: 'Ejercicio texto', observaciones: 'Ejercicio comment', tipo: 'glúteo', musculosTrabajados: 'culo'},
+    {id: 3, nombre: 'Ejercicio 3', descripcion: 'Ejercicio texto', observaciones: 'Ejercicio comment', tipo: 'persona', musculosTrabajados: 'pierna'},
   ];
  
   constructor() { }
