@@ -67,7 +67,9 @@ export class FormularioRutinaComponent implements OnInit {
   cerrarVentana(id: number){
     if(this.accion === "Añadir"){
       this.ejercicioRutinaService.eliminarRutina(id);
-      this.rutinasService.eliminarRutinas(id);
+      this.rutinasService.eliminarRutinas(id).subscribe(() => {
+      this.rutina.id=id;
+      });
       this.rutinasService.getRutinas();
     }
     this.modal.close(this.rutina);
