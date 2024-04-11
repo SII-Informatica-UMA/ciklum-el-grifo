@@ -22,16 +22,16 @@ import { Ejercicio } from "../entities/ejercicio";
     }
 
 
-  putEjercicio(idEjercicio: number, Ejercicio: Ejercicio,entrenadorId: number): Observable<Ejercicio> {
+    putEjercicio(idEjercicio: number, Ejercicio: Ejercicio,entrenadorId: number): Observable<Ejercicio> {
       return this.httpClient.put<Ejercicio>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`, Ejercicio);
-}
+    }
 
-deleteEjercicio(idEjercicio: number,entrenadorId: number): Observable<void> {
+    deleteEjercicio(idEjercicio: number,entrenadorId: number): Observable<void> {
       return this.httpClient.delete<void>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`);
  
-}
+    }
 
-  getEjercicio(idEjercicio: number,entrenadorId: number): Observable<Ejercicio> {
+    getEjercicio(idEjercicio: number,entrenadorId: number): Observable<Ejercicio> {
       return this.httpClient.get<Ejercicio>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`);
-}
+    } 
   }
