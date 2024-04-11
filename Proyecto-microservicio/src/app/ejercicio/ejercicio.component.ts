@@ -44,7 +44,10 @@ export class EjercicioComponent{
   }
   
   ngOnInit(): void {
-    this.ejercicios = this.ejerciciosService.getEjercicios();
+    this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
+      this.ejercicios=ejercicios;
+    })
+    
   }
 
   elegirEjercicio(ejercicio: Ejercicio): void {
@@ -57,20 +60,26 @@ export class EjercicioComponent{
     ref.componentInstance.ejercicio = {id: 0, nombre: '', descripcion: '',dificultad: '', marterial:'', musculosTrabajados:'',tipo:''};
     ref.result.then((ejercicio: Ejercicio) => {
       this.ejerciciosService.addEjercicios(ejercicio);
-      this.ejercicios = this.ejerciciosService.getEjercicios();
+      this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
+        this.ejercicios=ejercicios;
+      })
       this.ejercicios.sort((a,b)=>a.nombre.localeCompare(b.nombre));
     }, (reason) => {});
 
   }
   ejercicioEditado(ejercicio: Ejercicio): void {
     this.ejerciciosService.editarEjercicios(ejercicio);
-    this.ejercicios = this.ejerciciosService.getEjercicios();
+    this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
+      this.ejercicios=ejercicios;
+    })
     this.ejercicioElegido = this.ejercicios.find(c => c.id == ejercicio.id);
   }
 
   eliminarEjercicio(id: number): void {
     this.ejerciciosService.eliminarEjercicios(id);
-    this.ejercicios = this.ejerciciosService.getEjercicios();
+    this.ejerciciosService.getEjercicios().subscribe(ejercicios=>{
+      this.ejercicios=ejercicios;
+    })
     this.ejercicioElegido = undefined;
   }
 

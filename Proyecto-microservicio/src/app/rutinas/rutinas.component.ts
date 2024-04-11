@@ -42,7 +42,9 @@ export class RutinasComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.rutinas = this.rutinasService.getRutinas();
+    this.rutinasService.getRutinas().subscribe(rutinas=>{
+      this.rutinas=rutinas;
+    })
   }
 
   elegirRutina(rutina: Rutina): void {
@@ -59,13 +61,17 @@ export class RutinasComponent implements OnInit {
   }
   rutinaEditado(rutina: Rutina): void {
     this.rutinasService.editarRutinas(rutina);
-    this.rutinas = this.rutinasService.getRutinas();
+    this.rutinasService.getRutinas().subscribe(rutinas=>{
+      this.rutinas=rutinas;
+    })
     this.rutinaElegida = this.rutinas.find(c => c.id == rutina.id);
   }
 
   eliminarRutina(id: number): void {
     this.rutinasService.eliminarRutinas(id);
-    this.rutinas = this.rutinasService.getRutinas();
+    this.rutinasService.getRutinas().subscribe(rutinas=>{
+      this.rutinas=rutinas;
+    })
     this.rutinaElegida = undefined;
     this.ejercicioRutinaService.eliminarRutina(id);
   }

@@ -1,43 +1,37 @@
 import { Injectable } from '@angular/core';
 import { Rutina } from '../entities/rutina';
-
+import { RutinasFakeService } from './rutinas.fake.service';
+import { Observable, of } from "rxjs";
+import { RutinasDBService } from './rutinas.db.services';
 @Injectable({
   providedIn: 'root'
 })
 
 export class RutinasService {
-  private rutinas: Rutina [] = [
-    {id: 1, nombre: 'Parte pecho', descripcion: 'Pechito de fuego', observaciones: 'rutina no aconsejable', ejercicios: []},
-    {id: 2, nombre: 'Culo insano', descripcion: 'Let him cook', observaciones: 'no apto para gays', ejercicios: []},
-    {id: 3, nombre: 'Wango', descripcion: 'Ulti estelar', observaciones: 'venir comio de casa', ejercicios: []},
-  ];
+  
+  //CAMBIAR A RutinasDBService PARA USAR BACKEND O RutinasFakeService PARA USAR LOCAL
+  constructor(private rutina:RutinasFakeService) { }
 
-  constructor() { }
-
-  getRutinas(): Rutina[] {
-    return this.rutinas.sort((a, b) => {
-        return a.id - b.id;
-    });
+  getRutinas(): Observable<Rutina[]> {
+    return this.rutina.getRutinas();
 }
+  
 
-
-  addRutinas(rutinas: Rutina) {
-    rutinas.id = Math.max(...this.rutinas.map(c => c.id)) + 1;
-    this.rutinas.push(rutinas);
+  addRutinas(rutina: Rutina): Observable<Rutina>{
+    return this.rutina.postRutina(rutina);
   }
 
-  editarRutinas(rutinas: Rutina) {
-    let indice = this.rutinas.findIndex(c => c.id == rutinas.id);
-    this.rutinas[indice] = rutinas;
+  editarRutinas(rutina: Rutina): Observable<Rutina> {
+    return this.rutina.putRutina(rutina);
   }
 
-  eliminarRutinas(id: number) {
-    let indice = this.rutinas.findIndex(c => c.id == id);
-    this.rutinas.splice(indice, 1);
+  eliminarRutinas(id: number): Observable<void> {
+    
+    return this.rutina.deleteRutina(id);
   }
 
-  getRutinaPorId(id: number): Rutina | undefined {
-    return this.rutinas.find(rutina => rutina.id === id);
+  getRutinaPorId(id: number):Observable<Rutina>  {
+    return this.rutina.getRutina(id);
   }
 
 

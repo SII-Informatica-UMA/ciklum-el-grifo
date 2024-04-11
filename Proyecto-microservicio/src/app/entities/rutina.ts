@@ -7,6 +7,7 @@ export interface Rutina {
   descripcion: string;
   observaciones: string;
   ejercicios: EjercicioDetalles [] 
+  
 }
 
 export interface EjercicioDetalles {
