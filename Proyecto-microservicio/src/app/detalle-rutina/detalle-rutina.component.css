@@ -1,0 +1,4 @@
+.table-container {
+    max-height: calc(100vh - 200px); /* ajusta la altura máxima según la ventana gráfica disponible */
+    overflow-y: auto; /* agrega desbordamiento vertical si es necesario */
+  }

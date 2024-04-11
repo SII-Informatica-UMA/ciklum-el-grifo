@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Ver ejercicios</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="cerrarVentana()"></button>
+  </div>
+  <div class="modal-body">  
+    <div class="form-group">
+        <div class="table-container">
+        <table class="tablaEjercicios table table-bordered table-hover table table-striped"  style="border-radius: 10px; text-align: center;">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>  
+              <th>Músculos</th>
+              <th>Dificultad</th>  
+              <th>Series x Repeticiones</th>
+              <th>Duracion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ejercicioDetalles of ejerciciosRutina">
+              <td>{{ejercicioDetalles?.ejercicio?.nombre}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.tipo}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.musculosTrabajados}}</td>
+              <td>{{ejercicioDetalles?.ejercicio?.dificultad}}</td>
+              <td>{{ejercicioDetalles.series}} x {{ejercicioDetalles?.repeticiones}}</td>
+              <td>{{ejercicioDetalles.duracionMinutos}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="cerrarVentana()">Cerrar</button>
+  </div>

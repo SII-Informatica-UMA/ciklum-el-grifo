@@ -1,0 +1,7 @@
+.video-modal {
+    width: 100%; /* Ancho máximo del video */
+    height: auto; /* Altura automática para mantener la proporción */
+    max-height: 70vh; /* Altura máxima del video para ajustarse dentro del modal */
+    margin: 0 auto; /* Centrar horizontalmente el video */
+    display: block; /* Mostrar el video como un bloque */
+  }
