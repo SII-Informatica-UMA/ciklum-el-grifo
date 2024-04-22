@@ -8,7 +8,7 @@ export interface Ejercicio{
     musculosTrabajados: string; 
     material?: string;
     dificultad?: string;
-    multimedia?: string;
+    multimedia?: string //TODO CAMBIAR MULTIMEDIA A STRING
 
 }
 
