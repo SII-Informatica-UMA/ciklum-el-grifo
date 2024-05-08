@@ -1,3 +1,5 @@
+package grifo.spring.jpa.demo.services;
+
 @RestController
 @RequestMapping("/ejericico")
 public class ControladorEjercicios {
@@ -23,6 +25,16 @@ public class ControladorEjercicios {
         return ResponseEntity.of(this.ejercicioService.obtenerEjercicio(idEjercicio).map(EjercicioDTO::fromEntity));
     }
 
-    
+    @PutMapping("/{idEjercicio}")
+     public EjercicioDTO actualizarEjercicio(Long idEjercicio, EjercicioDTO ejercicio) {
+        Ejercicio ejercicioComprobado = this.ejercicioService.obtenerEjercicio(idEjercicio).orElseThrow(() -> {
+            return new EjercicioNoEncontradoException(); //Esto pasaría en el momento en el que no existiera o no se encontrara ese id
+        });
+        Ejercicio g = ejercicio.toEntity();
+        g.setId(idEjercicio);
+        g.setIdEntrenador(original.getIdEntrenador());
+        return EjercicioDTO.fromEntity(this.ejercicioService.crearActualizarEjercicio(g));
+    }
+
 
 }

@@ -1,12 +1,12 @@
 @Transactonal
 @Service
 public class EjercicioService {
-	private EjercicioRepo ejercicioRepo;
-	private RutinaRepo rutinaRepo;
+	private EjercicioRepo ejercicioRepository;
+	private RutinaRepo rutinaRepository;
 	
-	public EjercicioService(EjercicioRepo ejercicioRepo, RutinaRepo rutinaRepo) {
-        this.ejercicioRepo = ejercicioRepo;
-        this.rutinaRepo = rutinaRepo;
+	public EjercicioService(EjercicioRepository ejercicioRepository, RutinaRepository rutinaRepository) {
+        this.ejercicioRepository = ejercicioRepository;
+        this.rutinaRepository = rutinaRepository;
     }
 
     public List<Ejercicio> obtenerEjercicios(Long idEntrenador) {
@@ -15,7 +15,7 @@ public class EjercicioService {
     }
 
     public Optional<Ejercicio> obtenerEjercicio(Long idEjercicio) {
-        Optional<Ejercicio> ejercicio = this.ejercicioRepo.findById(idEjercicio);
+        Optional<Ejercicio> ejercicio = this.ejercicioRepository.findById(idEjercicio);
         ejercicio.ifPresent(this::comprobarPermiso);
         return ejercicio;
     }
@@ -28,14 +28,14 @@ public class EjercicioService {
 
     public Ejercicio crearActualizarEjercicio(Ejercicio ejercicio) {
         comprobarPermiso(ejercicio);
-        return (Ejercicio) this.ejercicioRepo.save(ejercicio);
+        return (Ejercicio) this.ejercicioRepository.save(ejercicio);
     }
 
     public void eliminarEjercicio(Long id) {
-        if (this.rutinaRepo.existsRutinaWithEjercicio(id)) {
+        if (this.rutinaRepository.existsRutinaWithEjercicio(id)) {
             throw new EjercicioEnRutinaException();
         }
-        this.ejercicioRepo.deleteById(id);
+        this.ejercicioRepository.deleteById(id);
     }
 
 }
