@@ -1,3 +1,7 @@
+package grifo.spring.jpa.demo.dtos;
+
+import java.util.List;
+
 import lombok.*;
 
 @Getter

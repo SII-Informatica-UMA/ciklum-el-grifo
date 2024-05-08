@@ -1,8 +1,21 @@
-@Transactonal
+package grifo.spring.jpa.demo.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import grifo.spring.jpa.demo.entities.Ejercicio;
+import grifo.spring.jpa.demo.repositories.EjercicioRepository;
+import grifo.spring.jpa.demo.repositories.RutinaRepository;
+import grifo.spring.jpa.demo.services.Excepciones.EjercicioEnRutinaException;
+import jakarta.transaction.Transactional;
+
+@Transactional
 @Service
 public class EjercicioService {
-	private EjercicioRepo ejercicioRepository;
-	private RutinaRepo rutinaRepository;
+	private EjercicioRepository ejercicioRepository;
+	private RutinaRepository rutinaRepository;
 	
 	public EjercicioService(EjercicioRepository ejercicioRepository, RutinaRepository rutinaRepository) {
         this.ejercicioRepository = ejercicioRepository;
@@ -11,7 +24,7 @@ public class EjercicioService {
 
     public List<Ejercicio> obtenerEjercicios(Long idEntrenador) {
         comprobarPermiso(idEntrenador);
-        return this.ejercicioRepo.findByIdEntrenador(idEntrenador);
+        return this.ejercicioRepository.findByIdEntrenador(idEntrenador);
     }
 
     public Optional<Ejercicio> obtenerEjercicio(Long idEjercicio) {
@@ -33,7 +46,7 @@ public class EjercicioService {
 
     public void eliminarEjercicio(Long id) {
         if (this.rutinaRepository.existsRutinaWithEjercicio(id)) {
-            throw new EjercicioEnRutinaException();
+            throw new EjercicioEnRutinaException(); 
         }
         this.ejercicioRepository.deleteById(id);
     }

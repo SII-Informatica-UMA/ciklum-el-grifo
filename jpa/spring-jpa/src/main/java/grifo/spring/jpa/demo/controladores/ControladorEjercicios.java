@@ -1,4 +1,20 @@
-package grifo.spring.jpa.demo.services;
+package grifo.spring.jpa.demo.controladores;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import grifo.spring.jpa.demo.dtos.EjercicioDTO;
+import grifo.spring.jpa.demo.dtos.EjercicioNuevoDTO;
+import grifo.spring.jpa.demo.entities.Ejercicio;
+import grifo.spring.jpa.demo.services.EjercicioService;
 
 @RestController
 @RequestMapping("/ejericico")
@@ -6,9 +22,13 @@ public class ControladorEjercicios {
 
 	private EjercicioService servicio;
 
+        public ControladorEjercicios(EjercicioService ejercicioService) {
+        this.servicio = ejercicioService;
+        }
+
     @GetMapping //Devuelvo la lista de ejercicios pertenecientes al entrenador con id "idEntrenador"
    public List<EjercicioDTO> obtenerEjercicios(Long idEntrenador) {
-        return this.ejercicioService.obtenerEjercicios(idEntrenador).stream().map(EjercicioDTO::fromEntity).toList();
+        return this.servicio.obtenerEjercicios(idEntrenador).stream().map(EjercicioDTO::fromEntity).toList();
     }
 
     @PostMapping
