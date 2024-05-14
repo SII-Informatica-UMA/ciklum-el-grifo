@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Ejercicio {
+
     @Id @GeneratedValue
     private Long id;
     private String nombre;
@@ -24,6 +25,7 @@ public class Ejercicio {
     private Long idEntrenador;
 
     public Ejercicio(final Long id, final String nombre, final String descripcion, final String observaciones, final String tipo, final String musculosTrabajados, final String material, final String dificultad, final List<String> multimedia, final Long idEntrenador) {
+
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -34,8 +36,10 @@ public class Ejercicio {
         this.dificultad = dificultad;
         this.multimedia = multimedia;
         this.idEntrenador = idEntrenador;
-    }
 
+        
+    }
+    
 
     public Long getIdEntrenador() {
         return this.idEntrenador;
