@@ -1,11 +1,10 @@
-import { UsuarioSesion } from './../entities/login';
-import { Component } from '@angular/core';
-import { UsuariosService } from '../services/usuarios.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
-import { Usuario, UsuarioImpl } from '../entities/usuario';
+import { Component } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Rol } from '../entities/login';
+import { Usuario, UsuarioImpl } from '../entities/usuario';
 import { FormularioUsuarioComponent } from '../formulario-usuario/formulario-usuario.component';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-listado-usuario',

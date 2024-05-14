@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Ejercicio} from '../entities/ejercicio';
-import { Rutina, EjercicioDetalles } from '../entities/rutina';
-import { EjercicioRutinaService } from '../services/ejercicio-rutina.service';
-import { EjerciciosRutinaComponent } from '../ejercicios-rutina/ejercicios-rutina.component';
-import { RutinasService } from '../services/rutina.service';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EjerciciosRutinaComponent } from '../ejercicios-rutina/ejercicios-rutina.component';
+import { Ejercicio } from '../entities/ejercicio';
+import { EjercicioDetalles, Rutina } from '../entities/rutina';
 import { FormularioEjercicioRutinaComponent } from '../formulario-ejercicio-rutina/formulario-ejercicio-rutina.component';
+import { EjercicioRutinaService } from '../services/ejercicio-rutina.service';
+import { RutinasService } from '../services/rutina.service';
 
 @Component({
   selector: 'app-formulario-rutina',
@@ -29,7 +29,7 @@ export class FormularioRutinaComponent implements OnInit {
   ngOnInit(): void {
     if (this.accion === "Añadir") {
       this.rutinasService.addRutinas(this.rutina);
-    }       
+    }
     this.ejerciciosRutina = this.ejercicioRutinaService.getEjerciciosRutina(this.rutina.id);
   }
   
@@ -67,9 +67,7 @@ export class FormularioRutinaComponent implements OnInit {
   cerrarVentana(id: number){
     if(this.accion === "Añadir"){
       this.ejercicioRutinaService.eliminarRutina(id);
-      this.rutinasService.eliminarRutinas(id).subscribe(rutinas=>{
-        
-      });
+      this.rutinasService.eliminarRutinas(id);
       this.rutinasService.getRutinas();
     }
     this.modal.close(this.rutina);
