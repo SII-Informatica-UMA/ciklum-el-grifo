@@ -32,7 +32,7 @@ public class EjercicioService {
         ejercicio.ifPresent(this::comprobarPermiso);
         return ejercicio;
     }
-
+    
     private void comprobarPermiso(Ejercicio ejercicio) {
     }
 
