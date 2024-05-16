@@ -18,11 +18,11 @@ public class RutinaNuevaDTO {
     private String nombre;
     private String descripcion;
     private String observaciones;
-    private List<FragmentoRutina> ejercicios;
+    private List<FragmentoRutinaDTO> ejercicios;
 
 
     public Rutina toEntity() {
-        return new Rutina(null, nombre, descripcion, observaciones, ejercicios, null);
+        return new Rutina(null, nombre, descripcion, observaciones, FragmentoRutinaDTO.toEntityList(ejercicios), null);
     }
 
 
