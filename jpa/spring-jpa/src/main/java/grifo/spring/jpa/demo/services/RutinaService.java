@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
-/* loaded from: fitness-1.0.0-SNAPSHOT(1).jar:BOOT-INF/classes/es/uma/informatica/sii/fitness/ejercicios/services/RutinaService.class */
+
 public class RutinaService {
     private RutinaRepository rutinaRepository;
 

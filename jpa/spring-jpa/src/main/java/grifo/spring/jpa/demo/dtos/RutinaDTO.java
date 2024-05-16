@@ -2,6 +2,8 @@ package grifo.spring.jpa.demo.dtos;
 
 import java.util.List;
 
+import grifo.spring.jpa.demo.entities.FragmentoRutina;
+import grifo.spring.jpa.demo.entities.Rutina;
 import lombok.*;
 
 @Getter
@@ -12,12 +14,16 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 
-public class RutinaDTO {
+public class RutinaDTO extends RutinaNuevaDTO{
     
     private Long id;
     private String nombre;
     private String descripcion;
     private String observaciones;
-    private List<FragmentoRutinaDTO> ejercicios;
+    private List<FragmentoRutina> ejercicios;
 
+    
+
+
+    
 }

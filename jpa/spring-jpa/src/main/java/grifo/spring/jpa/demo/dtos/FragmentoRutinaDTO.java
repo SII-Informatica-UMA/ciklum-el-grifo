@@ -17,4 +17,8 @@ public class FragmentoRutinaDTO {
     private Long duracionMinutos;
     private EjercicioDTO ejercicio;
 
+    public FragmentoRutinaDTO toEntity() {
+        return new FragmentoRutinaDTO(series, repeticiones, duracionMinutos, ejercicio);
+    }
+
 }
