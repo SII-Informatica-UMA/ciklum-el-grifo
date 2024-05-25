@@ -40,7 +40,7 @@ public class ControladorEjercicios {
 
 
     @PostMapping
-     public ResponseEntity<EjercicioDTO> creacionEjercicio(Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
+     public ResponseEntity<EjercicioDTO> creacionEjercicio(@RequestParam Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
         Ejercicio ejercicioNuevo = ejercicioNuevoDTO.toEntity();
         ejercicioNuevo.setId(null);
         ejercicioNuevo.setIdEntrenador(idEntrenador);
@@ -51,7 +51,7 @@ public class ControladorEjercicios {
 
  
     @GetMapping("/{idEjercicio}")
-    public ResponseEntity<EjercicioDTO> obtenerEjercicioPorId(Long idEjercicio) {
+    public ResponseEntity<EjercicioDTO> obtenerEjercicioPorId(@RequestParam Long idEjercicio) {
         return ResponseEntity.of(this.EjercicioService.obtenerEjercicio(idEjercicio).map(EjercicioDTO::fromEntity));
     }
 

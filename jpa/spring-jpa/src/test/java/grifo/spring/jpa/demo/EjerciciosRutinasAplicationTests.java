@@ -17,9 +17,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.web.util.DefaultUriBuilderFactory;
-import org.springframework.web.util.UriBuilder;
-import org.springframework.web.util.UriBuilderFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import grifo.spring.jpa.demo.dtos.EjercicioDTO;
@@ -32,7 +29,6 @@ import grifo.spring.jpa.demo.repositories.RutinaRepository;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) 
 @DisplayName("En el servicio de Rutinas y Ejercicios")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-
 public class EjerciciosRutinasAplicationTests {
     
     @Autowired
@@ -40,6 +36,8 @@ public class EjerciciosRutinasAplicationTests {
 
     @Value(value = "${local.server.port}")
     private int port;
+
+    private String jwtToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.IBSSjpqzoW51MJn_pfxJbD_apZGaKI-6WQEk0ZkGKKo";
 
     @Autowired
     private EjercicioRepository ejercicioRepository;
@@ -53,20 +51,20 @@ public class EjerciciosRutinasAplicationTests {
         rutinaRepository.deleteAll();
     }
 
-    private URI uri(String scheme, String host, int port, String... paths) {
-        UriBuilderFactory ubf = new DefaultUriBuilderFactory();
-        UriBuilder ub = ubf.builder()
-            .scheme(scheme)
-            .host(host).port(port);
-        for (String path : paths) {
-            ub = ub.path(path);
-        }
-        return ub.build();
+    private URI uri(String scheme, String host, int port, String paths) {
+        URI uri = UriComponentsBuilder.newInstance()
+        .scheme(scheme)
+        .host(host).port(port)
+        .path(paths)
+        .queryParam("entrenador",1)
+        .build()
+        .toUri();
+        return uri;
     }
 
     private RequestEntity<Void> get(String scheme, String host, int port, String path) {
-        URI uri = UriComponentsBuilder.newInstance().scheme(scheme).host(host).port(port).path(path).queryParam("entrenador",1).build().toUri();
-        var peticion = RequestEntity.get(uri)//TODO .header("Authorization", "Bearer "+ jwtToken)
+        URI uri = uri(scheme, host, port, path);
+        var peticion = RequestEntity.get(uri).header("Authorization", "Bearer "+ jwtToken)
             .accept(MediaType.APPLICATION_JSON)
             .build();
         return peticion;
@@ -74,14 +72,14 @@ public class EjerciciosRutinasAplicationTests {
 
     private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
         URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.delete(uri)
+        var peticion = RequestEntity.delete(uri).header("Authorization", "Bearer "+ jwtToken)
             .build();
         return peticion;
     }
 
     private <T> RequestEntity<T> post(String scheme, String host, int port,  T object,String path) {
         URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.post(uri)
+        var peticion = RequestEntity.post(uri).header("Authorization", "Bearer "+ jwtToken)
             .contentType(MediaType.APPLICATION_JSON)
             .body(object);
         return peticion;
@@ -89,13 +87,13 @@ public class EjerciciosRutinasAplicationTests {
 
     private <T> RequestEntity<T> put(String scheme, String host, int port,  T object,String path) {
         URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.put(uri)
+        var peticion = RequestEntity.put(uri).header("Authorization", "Bearer "+ jwtToken)
             .contentType(MediaType.APPLICATION_JSON)
             .body(object);
         return peticion;
     }
 
-      @Nested
+    @Nested
     @DisplayName("cuando no hay ejercicios")
     public class EjerciciosVacios {
 
