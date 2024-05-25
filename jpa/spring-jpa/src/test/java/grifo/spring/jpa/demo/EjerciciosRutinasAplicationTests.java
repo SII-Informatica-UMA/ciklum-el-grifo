@@ -66,7 +66,7 @@ public class EjerciciosRutinasAplicationTests {
 
     private RequestEntity<Void> get(String scheme, String host, int port, String path) {
         URI uri = UriComponentsBuilder.newInstance().scheme(scheme).host(host).port(port).path(path).queryParam("entrenador",1).build().toUri();
-        var peticion = RequestEntity.get(uri)
+        var peticion = RequestEntity.get(uri)//TODO .header("Authorization", "Bearer "+ jwtToken)
             .accept(MediaType.APPLICATION_JSON)
             .build();
         return peticion;

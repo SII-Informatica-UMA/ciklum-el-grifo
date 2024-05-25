@@ -29,9 +29,9 @@ public class ControladorEjercicios {
 
 	private EjercicioService EjercicioService;
 
-        public ControladorEjercicios(EjercicioService ejercicioService) {
-        this.EjercicioService = ejercicioService;
-        }
+    public ControladorEjercicios(EjercicioService ejercicioService) {
+    this.EjercicioService = ejercicioService;
+    }
 
     @GetMapping //Devuelvo la lista de ejercicios pertenecientes al entrenador con id "idEntrenador"
    public List<EjercicioDTO> obtenerEjercicios(@RequestParam Long idEntrenador) {
