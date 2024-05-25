@@ -191,35 +191,35 @@ public class EjerciciosRutinasAplicationTests {
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
         }
-    }
-
-    @Test
-    @DisplayName("Error al actualizar una rutina especifica no existente")
-    public void actualizarRutinaNoExiste() {
-        Long idEjercicio = 1L;
-        RutinaDTO rutinaActualizada = new RutinaDTO();
-        rutinaActualizada.setNombre("Nuevo Ejercicio 1");
-
-        var peticion = put("http", "localhost", port, rutinaActualizada, "/ejercicios/" + idEjercicio);
-
-        var respuesta = restTemplate.exchange(peticion, Rutina.class);
-
-        assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
-    }
-
     
-    @Test
-    @DisplayName("error al eliminar rutina especifica no existente")
-    public void eliminarRutinaNoExiste() {
-        Long idRutina = 1L;
 
-        var peticion = delete("http", "localhost", port, "/rutinas/" + idRutina);
-        var respuesta = restTemplate.exchange(peticion, Void.class);
+        @Test
+        @DisplayName("Error al actualizar una rutina especifica no existente")
+        public void actualizarRutinaNoExiste() {
+            Long idEjercicio = 1L;
+            RutinaDTO rutinaActualizada = new RutinaDTO();
+            rutinaActualizada.setNombre("Nuevo Ejercicio 1");
 
-        assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
-    }
+            var peticion = put("http", "localhost", port, rutinaActualizada, "/ejercicios/" + idEjercicio);
 
-    @Test
+            var respuesta = restTemplate.exchange(peticion, Rutina.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+
+        
+        @Test
+        @DisplayName("error al eliminar rutina especifica no existente")
+        public void eliminarRutinaNoExiste() {
+            Long idRutina = 1L;
+
+            var peticion = delete("http", "localhost", port, "/rutinas/" + idRutina);
+            var respuesta = restTemplate.exchange(peticion, Void.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+
+        @Test
         @DisplayName("Pone una rutina correctamente con la base de datos vacia")
         public void ponerRutinaNoExiste() {
             Long idRutina = 1L;
@@ -231,5 +231,5 @@ public class EjerciciosRutinasAplicationTests {
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
-
+    }
 }
