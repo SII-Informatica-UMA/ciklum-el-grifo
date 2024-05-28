@@ -227,7 +227,7 @@ public class EjerciciosRutinasAplicationTests {
     @Nested
     @DisplayName("cuando hay datos ")
     public class EjerciciosPuestos {
-        
+
 
     }
 }
