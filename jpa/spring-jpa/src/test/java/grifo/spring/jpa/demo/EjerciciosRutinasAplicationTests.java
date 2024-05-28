@@ -94,7 +94,7 @@ public class EjerciciosRutinasAplicationTests {
     }
 
     @Nested
-    @DisplayName("cuando no hay ejercicios")
+    @DisplayName("cuando no hay datos")
     public class EjerciciosVacios {
 
         @Test
@@ -159,16 +159,9 @@ public class EjerciciosRutinasAplicationTests {
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
 
-
-    }
-
-    @Nested
-    @DisplayName("cuando no hay rutinas")
-    public class RutinasVacias {
-
         @Test
         @DisplayName("devuelve la lista de rutinas vacía")
-        public void devuelveEjercicios() {
+        public void devuelveRutinas() {
             var peticion = get("http", "localhost", port, "/rutinas");
 
             var respuesta = restTemplate.exchange(peticion,
@@ -229,5 +222,12 @@ public class EjerciciosRutinasAplicationTests {
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
+    }
+
+    @Nested
+    @DisplayName("cuando hay datos ")
+    public class EjerciciosPuestos {
+        
+
     }
 }

@@ -2,14 +2,15 @@ package grifo.spring.jpa.demo.controladores;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,7 +18,6 @@ import grifo.spring.jpa.demo.dtos.RutinaDTO;
 import grifo.spring.jpa.demo.dtos.RutinaNuevaDTO;
 import grifo.spring.jpa.demo.entities.Rutina;
 import grifo.spring.jpa.demo.services.RutinaService;
-import grifo.spring.jpa.demo.services.Excepciones.EjercicioEnRutinaException;
 import grifo.spring.jpa.demo.services.Excepciones.RutinaNoExisteException;
 
 @RequestMapping({"/rutina"})
@@ -30,12 +30,12 @@ public class ControladorRutina {
     }
 
     @GetMapping
-    public List<RutinaDTO> obteneRutina(Long idEntrenador){
+    public List<RutinaDTO> obteneRutina(@RequestParam(value = "entrenador",required = true) Long idEntrenador){
         return  this.rutinaService.obtenerRutinas(idEntrenador).stream().map(RutinaDTO::fromEntity).toList();
     }
 
     @PostMapping
-    public ResponseEntity<RutinaDTO> crearRutina(Long idEntrenador,@RequestBody RutinaNuevaDTO rutinaNuevaDTO, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<RutinaDTO> crearRutina(@RequestParam(value = "entrenador",required = true) Long idEntrenador,@RequestBody RutinaNuevaDTO rutinaNuevaDTO, UriComponentsBuilder uriBuilder){
         Rutina rutina = rutinaNuevaDTO.toEntity();
         rutina.setIdEntrenador(idEntrenador);
         rutina.setId(null);
@@ -44,12 +44,12 @@ public class ControladorRutina {
     }
 
     @GetMapping({"{/idRutina}"})
-    public ResponseEntity<RutinaDTO> obtenerRutinaPorId(Long idRutina){
+    public ResponseEntity<RutinaDTO> obtenerRutinaPorId(@PathVariable Long idRutina){
         return ResponseEntity.of(this.rutinaService.obtenerRutina(idRutina).map(RutinaDTO::fromEntity));
     }
 
     @PutMapping({"{/idRutina}"})
-    public RutinaDTO actualizarRutina(Long idRutina,@RequestBody RutinaDTO rutina){
+    public RutinaDTO actualizarRutina(@PathVariable Long idRutina,@RequestBody RutinaDTO rutina){
         Rutina oldRutina = this.rutinaService.obtenerRutina(idRutina).orElseThrow(RutinaNoExisteException::new);
         Rutina newRutina = rutina.toEntity();
         newRutina.setId(idRutina);
@@ -59,7 +59,7 @@ public class ControladorRutina {
 
 
     @DeleteMapping({"{/idRutina}"})
-    public void eliminarRutinaPorId(Long idRutina){
+    public void eliminarRutinaPorId(@PathVariable Long idRutina){
         this.rutinaService.eliminarRutina(idRutina);
     }
     

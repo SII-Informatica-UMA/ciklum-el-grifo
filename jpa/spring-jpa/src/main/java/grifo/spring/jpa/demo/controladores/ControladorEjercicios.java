@@ -34,13 +34,13 @@ public class ControladorEjercicios {
     }
 
     @GetMapping //Devuelvo la lista de ejercicios pertenecientes al entrenador con id "idEntrenador"
-   public List<EjercicioDTO> obtenerEjercicios(@RequestParam Long idEntrenador) {
+   public List<EjercicioDTO> obtenerEjercicios(@RequestParam(value = "entrenador",required = true) Long idEntrenador) {
         return this.EjercicioService.obtenerEjercicios(idEntrenador).stream().map(EjercicioDTO::fromEntity).toList();
     }
 
 
     @PostMapping
-     public ResponseEntity<EjercicioDTO> creacionEjercicio(@RequestParam Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
+     public ResponseEntity<EjercicioDTO> creacionEjercicio(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
         Ejercicio ejercicioNuevo = ejercicioNuevoDTO.toEntity();
         ejercicioNuevo.setId(null);
         ejercicioNuevo.setIdEntrenador(idEntrenador);
@@ -51,7 +51,7 @@ public class ControladorEjercicios {
 
  
     @GetMapping("/{idEjercicio}")
-    public ResponseEntity<EjercicioDTO> obtenerEjercicioPorId(@RequestParam Long idEjercicio) {
+    public ResponseEntity<EjercicioDTO> obtenerEjercicioPorId(@PathVariable Long idEjercicio) {
         return ResponseEntity.of(this.EjercicioService.obtenerEjercicio(idEjercicio).map(EjercicioDTO::fromEntity));
     }
 
