@@ -256,7 +256,7 @@ public class EjerciciosRutinasAplicationTests {
             rutinaRepository.save(r2);
 
         }
+        //TODO PONER LOS TEST
 
-        
     }
 }
