@@ -3,6 +3,7 @@ package grifo.spring.jpa.demo;
 import static org.assertj.core.api.Assertions.*;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import grifo.spring.jpa.demo.dtos.EjercicioDTO;
 import grifo.spring.jpa.demo.dtos.RutinaDTO;
 import grifo.spring.jpa.demo.entities.Ejercicio;
+import grifo.spring.jpa.demo.entities.FragmentoRutina;
 import grifo.spring.jpa.demo.entities.Rutina;
 import grifo.spring.jpa.demo.repositories.EjercicioRepository;
 import grifo.spring.jpa.demo.repositories.RutinaRepository;
@@ -228,6 +230,33 @@ public class EjerciciosRutinasAplicationTests {
     @DisplayName("cuando hay datos ")
     public class EjerciciosPuestos {
 
+        @BeforeEach
+        public void insertaDatos(){
 
+            List<String> videos =new ArrayList<>();
+            videos.add("youtube.com");
+
+            Ejercicio e1= new Ejercicio(1L, "Ejercicio1", "Ejercicio de piernas", "Hacer con cuidado", "Piernas", "Gluteos,Isqueos...", "Esterilla", "Facil",videos, 1L);
+            Ejercicio e2= new Ejercicio(2L, "Ejercicio2", "Ejercicio de espalda", "No apto para principiantes", "Espalda", "Espalda,Triceps...", "Esterilla", "Intermedio",videos, 1L);
+            FragmentoRutina f1= new FragmentoRutina(1L, 10L, 5L, 15L, e1);
+            FragmentoRutina f2= new FragmentoRutina(2L, 3L, 6L, 10L, e2);
+            ejercicioRepository.save(e1);
+            ejercicioRepository.save(e2);
+
+            List<FragmentoRutina> lf1= new ArrayList<>();
+            lf1.add(f1);
+
+            List<FragmentoRutina> lf2= new ArrayList<>();
+            lf2.add(f2);
+
+            Rutina r1= new Rutina(1L,"Rutina1","Rutina que contiene el ejercicio 1","Rutina sencilla",lf1,1L);
+            rutinaRepository.save(r1);
+
+            Rutina r2= new Rutina(2L,"Rutina2","Rutina que contiene el ejercicio 2","Rutina intermedia",lf2,1L);
+            rutinaRepository.save(r2);
+
+        }
+
+        
     }
 }
