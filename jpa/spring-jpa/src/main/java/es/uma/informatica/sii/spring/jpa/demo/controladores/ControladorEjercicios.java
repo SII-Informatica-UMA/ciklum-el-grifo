@@ -1,6 +1,8 @@
 package es.uma.informatica.sii.spring.jpa.demo.controladores;
 
+import java.net.URI;
 import java.util.List;
+import java.util.function.Function;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioDTO;
@@ -42,14 +45,20 @@ public class ControladorEjercicios {
 
 
     @PostMapping
-     public ResponseEntity<EjercicioDTO> creacionEjercicio(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
-        Ejercicio ejercicioNuevo = ejercicioNuevoDTO.toEntity();
-        ejercicioNuevo.setId(null);
-        ejercicioNuevo.setIdEntrenador(idEntrenador);
-        Ejercicio EjercicioActualizado = this.EjercicioService.crearActualizarEjercicio(ejercicioNuevo);
-        
-        return ResponseEntity.ok(EjercicioDTO.fromEntity(EjercicioActualizado));
+    public ResponseEntity<EjercicioDTO> crearEjercicio(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
+        Ejercicio g = ejercicioNuevoDTO.toEntity();
+        g.setId((Long)null);
+        g.setIdEntrenador(idEntrenador);
+        g = this.EjercicioService.crearActualizarEjercicio(g);
+        return ResponseEntity.created((URI)this.generadorUri(uriBuilder.build()).apply(g)).body(EjercicioDTO.fromEntity(g));
     }
+
+    private Function<Ejercicio, URI> generadorUri(UriComponents uriBuilder) {
+        return (g) -> {
+            return UriComponentsBuilder.newInstance().uriComponents(uriBuilder).path("/ejercicio").path(String.format("/%d", g.getId())).build().toUri();
+        };
+    }
+
 
  
     @GetMapping("/{idEjercicio}")

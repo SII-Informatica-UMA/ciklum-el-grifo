@@ -1,6 +1,8 @@
 package es.uma.informatica.sii.spring.jpa.demo.controladores;
 
+import java.net.URI;
 import java.util.List;
+import java.util.function.Function;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
+
 
 import es.uma.informatica.sii.spring.jpa.demo.dtos.RutinaDTO;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.RutinaNuevaDTO;
@@ -38,13 +42,19 @@ public class ControladorRutina {
     }
 
     @PostMapping
-    public ResponseEntity<RutinaDTO> crearRutina(@RequestParam(value = "entrenador",required = true) Long idEntrenador,@RequestBody RutinaNuevaDTO rutinaNuevaDTO, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<RutinaDTO> crearRutina(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @RequestBody RutinaNuevaDTO rutinaNuevaDTO, UriComponentsBuilder uriBuilder) {
         Rutina rutina = rutinaNuevaDTO.toEntity();
         rutina.setIdEntrenador(idEntrenador);
-        rutina.setId(null);
-        Rutina rutina2 = this.rutinaService.crearActualizarRutina(rutina);
-        return ResponseEntity.ok(RutinaDTO.fromEntity(rutina2));
-    }
+        rutina.setId((Long)null);
+        rutina = this.rutinaService.crearActualizarRutina(rutina);
+        return ResponseEntity.created((URI)this.generadorUri(uriBuilder.build()).apply(rutina)).body(RutinaDTO.fromEntity(rutina));
+     }
+  
+     private Function<Rutina, URI> generadorUri(UriComponents uriBuilder) {
+        return (g) -> {
+           return UriComponentsBuilder.newInstance().uriComponents(uriBuilder).path("/rutina").path(String.format("/%d", g.getId())).build().toUri();
+        };
+     }
 
     @GetMapping({"/{idRutina}"})
     public ResponseEntity<RutinaDTO> obtenerRutinaPorId(@PathVariable Long idRutina){

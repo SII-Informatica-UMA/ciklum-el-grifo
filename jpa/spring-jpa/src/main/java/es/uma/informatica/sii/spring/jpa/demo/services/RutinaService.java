@@ -1,5 +1,6 @@
 package es.uma.informatica.sii.spring.jpa.demo.services;
 
+import es.uma.informatica.sii.spring.jpa.demo.entities.Ejercicio;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Rutina;
 import es.uma.informatica.sii.spring.jpa.demo.Excepciones.RutinaNoExisteException;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.RutinaRepository;
@@ -43,13 +44,13 @@ public class RutinaService {
         this.rutinaRepository.deleteById(idRutina);
     }
 
-    public Rutina crearActualizarRutina(Rutina rutina) {
-        if (rutina.getId() != null) {
-            obtenerRutina(rutina.getId()).ifPresentOrElse(r -> {
+    public Rutina crearActualizarRutina(Rutina g) {
+        if (g.getId() != null) {
+            obtenerRutina(g.getId()).ifPresentOrElse(r -> {
                 comprobarPermiso(r);
             }, RutinaNoExisteException::new);
         }
-        this.rutinaRepository.save(rutina);
-        return this.rutinaRepository.findById(rutina.getId()).get();
+        this.rutinaRepository.save(g);
+        return this.rutinaRepository.findById(g.getId()).get();
     }
 }

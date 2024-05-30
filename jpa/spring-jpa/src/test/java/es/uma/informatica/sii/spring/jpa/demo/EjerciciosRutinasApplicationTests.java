@@ -18,16 +18,12 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.web.util.DefaultUriBuilderFactory;
-import org.springframework.web.util.UriBuilder;
-import org.springframework.web.util.UriBuilderFactory;
+
 import org.springframework.web.util.UriComponentsBuilder;
 
-import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioDTO;
-import es.uma.informatica.sii.spring.jpa.demo.dtos.RutinaDTO;
-import es.uma.informatica.sii.spring.jpa.demo.entities.Ejercicio;
-import es.uma.informatica.sii.spring.jpa.demo.entities.FragmentoRutina;
-import es.uma.informatica.sii.spring.jpa.demo.entities.Rutina;
+import es.uma.informatica.sii.spring.jpa.demo.dtos.*;
+
+import es.uma.informatica.sii.spring.jpa.demo.entities.*;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.EjercicioRepository;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.RutinaRepository;
 
@@ -93,7 +89,7 @@ public class EjerciciosRutinasApplicationTests {
         return peticion;
     }
 
-    private <T> RequestEntity<T> post(String scheme, String host, int port,  T object,String path) {
+    private <T> RequestEntity<T> post(String scheme, String host, int port,  T object, String path) {
         URI uri = uri(scheme, host, port, path);
         var peticion = RequestEntity.post(uri)//.header("Authorization", "Bearer "+ jwtToken)
             .contentType(MediaType.APPLICATION_JSON)
@@ -101,7 +97,7 @@ public class EjerciciosRutinasApplicationTests {
         return peticion;
     }
 
-    private <T> RequestEntity<T> put(String scheme, String host, int port,  T object,String path) {
+    private <T> RequestEntity<T> put(String scheme, String host, int port,  T object, String path) {
         URI uri = uri(scheme, host, port, path);
         var peticion = RequestEntity.put(uri)//.header("Authorization", "Bearer "+ jwtToken)
             .contentType(MediaType.APPLICATION_JSON)
@@ -116,7 +112,7 @@ public class EjerciciosRutinasApplicationTests {
         @Test
         @DisplayName("devuelve la lista de ejercicios vacía")
         public void devuelveEjercicios() {
-            var peticion = get("http", "localhost", port, "/ejercicios");
+            var peticion = get("http", "localhost", port, "/ejercicio");
 
             var respuesta = restTemplate.exchange(peticion,
                     new ParameterizedTypeReference<List<EjercicioDTO>>() {
@@ -131,7 +127,7 @@ public class EjerciciosRutinasApplicationTests {
         public void obtenerEjercicioNoExiste() {
             Long idEjercicio = 1L;
 
-            var peticion = get("http", "localhost", port, "/ejercicios/" + idEjercicio);
+            var peticion = get("http", "localhost", port, "/ejercicio/" + idEjercicio);
             var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
@@ -144,7 +140,7 @@ public class EjerciciosRutinasApplicationTests {
             EjercicioDTO ejercicioActualizado = new EjercicioDTO();
             ejercicioActualizado.setNombre("Nuevo Ejercicio 1");
 
-            var peticion = put("http", "localhost", port, ejercicioActualizado, "/ejercicios/" + idEjercicio);
+            var peticion = put("http", "localhost", port, ejercicioActualizado, "/ejercicio/" + idEjercicio);
 
             var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
 
@@ -156,7 +152,7 @@ public class EjerciciosRutinasApplicationTests {
         public void eliminarEjercicioNoExiste() {
             Long idEjercicio = 1L;
 
-            var peticion = delete("http", "localhost", port, "/ejercicios/" + idEjercicio);
+            var peticion = delete("http", "localhost", port, "/ejercicio/" + idEjercicio);
             var respuesta = restTemplate.exchange(peticion, Void.class);
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
@@ -165,20 +161,20 @@ public class EjerciciosRutinasApplicationTests {
         @Test
         @DisplayName("Pone un ejercicio correctamente con la base de datos vacia")
         public void ponerEjercicioNoExiste() {
-            Long idEjercicio = 1L;
-            EjercicioDTO nuevoEjercicio = new EjercicioDTO();
+            EjercicioNuevoDTO nuevoEjercicio = new EjercicioNuevoDTO();
             nuevoEjercicio.setNombre("Nuevo Ejercicio 1");
+            
 
-            var peticion = post("http", "localhost", port, nuevoEjercicio,"/ejercicios/" + idEjercicio);
+            var peticion = post("http", "localhost", port, nuevoEjercicio,"/ejercicio");
             var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
 
-            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
         }
 
         @Test
         @DisplayName("devuelve la lista de rutinas vacía")
         public void devuelveRutinas() {
-            var peticion = get("http", "localhost", port, "/rutinas");
+            var peticion = get("http", "localhost", port, "/rutina");
 
             var respuesta = restTemplate.exchange(peticion,
                     new ParameterizedTypeReference<List<RutinaDTO>>() {
@@ -193,7 +189,7 @@ public class EjerciciosRutinasApplicationTests {
         public void obtenerRutinaNoExiste() {
             Long idRutina = 1L;
 
-            var peticion = get("http", "localhost", port, "/rutinas/" + idRutina);
+            var peticion = get("http", "localhost", port, "/rutina/" + idRutina);
             var respuesta = restTemplate.exchange(peticion, Rutina.class);
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
@@ -207,7 +203,7 @@ public class EjerciciosRutinasApplicationTests {
             RutinaDTO rutinaActualizada = new RutinaDTO();
             rutinaActualizada.setNombre("Nuevo Ejercicio 1");
 
-            var peticion = put("http", "localhost", port, rutinaActualizada, "/ejercicios/" + idEjercicio);
+            var peticion = put("http", "localhost", port, rutinaActualizada, "/ejercicio/" + idEjercicio);
 
             var respuesta = restTemplate.exchange(peticion, Rutina.class);
 
@@ -220,7 +216,7 @@ public class EjerciciosRutinasApplicationTests {
         public void eliminarRutinaNoExiste() {
             Long idRutina = 1L;
 
-            var peticion = delete("http", "localhost", port, "/rutinas/" + idRutina);
+            var peticion = delete("http", "localhost", port, "/rutina/" + idRutina);
             var respuesta = restTemplate.exchange(peticion, Void.class);
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
@@ -229,14 +225,22 @@ public class EjerciciosRutinasApplicationTests {
         @Test
         @DisplayName("Pone una rutina correctamente con la base de datos vacia")
         public void ponerRutinaNoExiste() {
-            Long idRutina = 1L;
-            RutinaDTO nuevaRutina = new RutinaDTO();
-            nuevaRutina.setNombre("Nuevo Ejercicio 1");
+            RutinaNuevaDTO nuevaRutina = new RutinaNuevaDTO();
+            nuevaRutina.setNombre("Nuevo Rutina 1");
+            List<String> videos =new ArrayList<>();
+            videos.add("youtube.com");
+            Ejercicio e1= new Ejercicio(1L, "Ejercicio1", "Ejercicio de piernas", "Hacer con cuidado", "Piernas", "Gluteos,Isqueos...", "Esterilla", "Facil",videos, 1L);
+            FragmentoRutina f1= new FragmentoRutina(1L, 10L, 5L, 15L, e1);
+            
+            List<FragmentoRutina> lf1= new ArrayList<>();
+            lf1.add(f1);
 
-            var peticion = post("http", "localhost", port, nuevaRutina,"/rutinas/" + idRutina);
+            nuevaRutina.setEjercicios(lf1);
+
+            var peticion = post("http", "localhost", port, nuevaRutina,"/rutina");
             var respuesta = restTemplate.exchange(peticion, Rutina.class);
 
-            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
         }
     }
 

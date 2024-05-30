@@ -1,4 +1,4 @@
-package es.uma.informatica.sii.spring.jpa.demo.security;
+/*package es.uma.informatica.sii.spring.jpa.demo.security;
 
 import java.util.Optional;
 
@@ -28,4 +28,4 @@ public class SecurityConfguration {
          return (UserDetails)authentication.getPrincipal();
       });
    }
-}
+}*/
