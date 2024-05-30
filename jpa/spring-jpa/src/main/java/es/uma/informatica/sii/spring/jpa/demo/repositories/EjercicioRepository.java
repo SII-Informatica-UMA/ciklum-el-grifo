@@ -12,7 +12,7 @@ import es.uma.informatica.sii.spring.jpa.demo.entities.Ejercicio;
 @Repository
 public interface EjercicioRepository  extends JpaRepository<Ejercicio,Long>{
     List<Ejercicio> findByIdEntrenador(Long idEntrenador);
-    List<Ejercicio> findByNombre(String nombre);
+    //List<Ejercicio> findByNombre(String nombre);
     
    /*@Query("select e from Ejercicio e where e.dificultad = :dificultad")
    List<Ejercicio> miConsultaCompleja(@Param("dificultad") String dificultad);*/
