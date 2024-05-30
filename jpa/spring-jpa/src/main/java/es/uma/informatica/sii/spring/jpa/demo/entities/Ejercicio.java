@@ -40,6 +40,8 @@ public class Ejercicio {
 
         
     }
+
+    public Ejercicio(){}
     
 
     public Long getIdEntrenador() {
