@@ -1,4 +1,4 @@
-package es.uma.informatica.sii.spring.jpa.demo.security;
+/*package es.uma.informatica.sii.spring.jpa.demo.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -59,4 +59,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
       chain.doFilter(request, response);
    }
 }
-
+*/

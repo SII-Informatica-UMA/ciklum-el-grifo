@@ -1,4 +1,4 @@
-package es.uma.informatica.sii.spring.jpa.demo.security;
+/*package es.uma.informatica.sii.spring.jpa.demo.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -56,4 +56,4 @@ public class JwtUtil {
       String username = this.getUsernameFromToken(token);
       return username.equals(userDetails.getUsername()) && !this.isTokenExpired(token);
    }
-}
+}*/

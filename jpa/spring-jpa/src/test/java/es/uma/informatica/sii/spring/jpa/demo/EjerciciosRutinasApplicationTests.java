@@ -42,8 +42,7 @@ public class EjerciciosRutinasApplicationTests {
 
     @Value(value = "${local.server.port}")
     private int port;
-
-    private String jwtToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.IBSSjpqzoW51MJn_pfxJbD_apZGaKI-6WQEk0ZkGKKo";
+    //private String jwtToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.jGgT0iha61tFeyXv30J931J_Z8wXnOPlr4LPwSVYwEM";
 
     @Autowired
     private EjercicioRepository ejercicioRepository;
@@ -57,7 +56,7 @@ public class EjerciciosRutinasApplicationTests {
         rutinaRepository.deleteAll();
     }
 
-    /*private URI uri(String scheme, String host, int port, String paths) {
+    private URI uri(String scheme, String host, int port, String paths) {
         URI uri = UriComponentsBuilder.newInstance()
         .scheme(scheme)
         .host(host).port(port)
@@ -66,9 +65,9 @@ public class EjerciciosRutinasApplicationTests {
         .build()
         .toUri();
         return uri;
-    }*/
+    }
 
-    private URI uri(String scheme, String host, int port, String ...paths) {
+    /*private URI uri(String scheme, String host, int port, String ...paths) {
         UriBuilderFactory ubf = new DefaultUriBuilderFactory();
         UriBuilder ub = ubf.builder()
                 .scheme(scheme)
@@ -77,11 +76,11 @@ public class EjerciciosRutinasApplicationTests {
             ub = ub.path(path);
         }
         return ub.build();
-    }
+    }*/
 
     private RequestEntity<Void> get(String scheme, String host, int port, String path) {
         URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.get(uri).header("Authorization", "Bearer "+ jwtToken)
+        var peticion = RequestEntity.get(uri)//.header("Authorization", "Bearer "+ jwtToken)
             .accept(MediaType.APPLICATION_JSON)
             .build();
         return peticion;
@@ -89,14 +88,14 @@ public class EjerciciosRutinasApplicationTests {
 
     private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
         URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.delete(uri).header("Authorization", "Bearer "+ jwtToken)
+        var peticion = RequestEntity.delete(uri)//.header("Authorization", "Bearer "+ jwtToken)
             .build();
         return peticion;
     }
 
     private <T> RequestEntity<T> post(String scheme, String host, int port,  T object,String path) {
         URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.post(uri).header("Authorization", "Bearer "+ jwtToken)
+        var peticion = RequestEntity.post(uri)//.header("Authorization", "Bearer "+ jwtToken)
             .contentType(MediaType.APPLICATION_JSON)
             .body(object);
         return peticion;
@@ -104,7 +103,7 @@ public class EjerciciosRutinasApplicationTests {
 
     private <T> RequestEntity<T> put(String scheme, String host, int port,  T object,String path) {
         URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.put(uri).header("Authorization", "Bearer "+ jwtToken)
+        var peticion = RequestEntity.put(uri)//.header("Authorization", "Bearer "+ jwtToken)
             .contentType(MediaType.APPLICATION_JSON)
             .body(object);
         return peticion;
