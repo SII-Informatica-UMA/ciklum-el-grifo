@@ -227,15 +227,20 @@ public class EjerciciosRutinasApplicationTests {
         public void ponerRutinaNoExiste() {
             RutinaNuevaDTO nuevaRutina = new RutinaNuevaDTO();
             nuevaRutina.setNombre("Nuevo Rutina 1");
+
             List<String> videos =new ArrayList<>();
             videos.add("youtube.com");
+
             Ejercicio e1= new Ejercicio(1L, "Ejercicio1", "Ejercicio de piernas", "Hacer con cuidado", "Piernas", "Gluteos,Isqueos...", "Esterilla", "Facil",videos, 1L);
             FragmentoRutina f1= new FragmentoRutina(1L, 10L, 5L, 15L, e1);
+            ejercicioRepository.save(e1);
             
-            List<FragmentoRutina> lf1= new ArrayList<>();
-            lf1.add(f1);
+            FragmentoRutinaDTO f1DTO = FragmentoRutinaDTO.fromEntity(f1);
 
-            nuevaRutina.setEjercicios(lf1);
+            List<FragmentoRutinaDTO> lf1DTO= new ArrayList<>();
+            lf1DTO.add(f1DTO);
+
+            nuevaRutina.setEjercicios(lf1DTO);
 
             var peticion = post("http", "localhost", port, nuevaRutina,"/rutina");
             var respuesta = restTemplate.exchange(peticion, Rutina.class);

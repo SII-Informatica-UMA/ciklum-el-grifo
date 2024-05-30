@@ -89,4 +89,9 @@ public class FragmentoRutina {
         + ", ejercicios= "+ this.ejercicios.getNombre()
         + "]";
     }
+
+    public Ejercicio getDescanso() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDescanso'");
+    }
 }
