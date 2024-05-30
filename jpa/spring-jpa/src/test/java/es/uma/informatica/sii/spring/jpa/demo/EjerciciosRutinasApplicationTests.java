@@ -203,11 +203,11 @@ public class EjerciciosRutinasApplicationTests {
         @Test
         @DisplayName("Error al actualizar una rutina especifica no existente")
         public void actualizarRutinaNoExiste() {
-            Long idEjercicio = 1L;
+            Long idRutina = 1L;
             RutinaDTO rutinaActualizada = new RutinaDTO();
             rutinaActualizada.setNombre("Nuevo Ejercicio 1");
 
-            var peticion = put("http", "localhost", port, rutinaActualizada, "/ejercicio/" + idEjercicio);
+            var peticion = put("http", "localhost", port, rutinaActualizada, "/rutina/" + idRutina);
 
             var respuesta = restTemplate.exchange(peticion, Rutina.class);
 
@@ -265,10 +265,12 @@ public class EjerciciosRutinasApplicationTests {
 
             Ejercicio e1= new Ejercicio(1L, "Ejercicio1", "Ejercicio de piernas", "Hacer con cuidado", "Piernas", "Gluteos,Isqueos...", "Esterilla", "Facil",videos, 1L);
             Ejercicio e2= new Ejercicio(2L, "Ejercicio2", "Ejercicio de espalda", "No apto para principiantes", "Espalda", "Espalda,Triceps...", "Esterilla", "Intermedio",videos, 1L);
+            Ejercicio e3= new Ejercicio(3L, "Ejercicio2", "Ejercicio de espalda", "No apto para principiantes", "Espalda", "Espalda,Triceps...", "Esterilla", "Intermedio",videos, 1L);
             FragmentoRutina f1= new FragmentoRutina(1L, 10L, 5L, 15L, e1);
             FragmentoRutina f2= new FragmentoRutina(2L, 3L, 6L, 10L, e2);
             ejercicioRepository.save(e1);
             ejercicioRepository.save(e2);
+            ejercicioRepository.save(e3);
 
             List<FragmentoRutina> lf1= new ArrayList<>();
             lf1.add(f1);
@@ -323,14 +325,118 @@ public class EjerciciosRutinasApplicationTests {
         }
     
         @Test
-        @DisplayName("eliminar ejercicio en especifico")
+        @DisplayName("eliminar ejercicio  especifico")
         public void eliminarEjercicioExiste() {
-            Long idEjercicio = 1L;
+            Long idEjercicio = 3L;
 
             var peticion = delete("http", "localhost", port, "/ejercicio/" + idEjercicio);
             var respuesta = restTemplate.exchange(peticion, Void.class);
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+        //TODO CASO EN EL QUE BORRAS EJERCICIO DE RUTINA Y SALE EXCEPCION
+        @Test
+        @DisplayName("pone ejercicio  ")
+        public void ponerEjercicioExiste() {
+            EjercicioNuevoDTO nuevoEjercicio = new EjercicioNuevoDTO();
+            nuevoEjercicio.setNombre("Nuevo Ejercicio 1");
+            
+
+            var peticion = post("http", "localhost", port, nuevoEjercicio,"/ejercicio");
+            var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
+        }
+
+        @Test
+        @DisplayName("devuelve la lista de rutinas")
+        public void devuelveRutinas() {
+            var peticion = get("http", "localhost", port, "/rutina");
+
+            var respuesta = restTemplate.exchange(peticion,
+                    new ParameterizedTypeReference<List<RutinaDTO>>() {
+                    });
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+            assertThat(respuesta.getBody()).isNotEmpty();
+        }
+
+        @Test
+        @DisplayName("devuelve una  rutina especifica")
+        public void obtenerRutinaExiste() {
+            Long idRutina = 1L;
+
+            var peticion = get("http", "localhost", port, "/rutina/" + idRutina);
+            var respuesta = restTemplate.exchange(peticion, Rutina.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+    
+
+        @Test
+        @DisplayName("actualiza rutina especifica")
+        public void actualizarRutinaExiste() {
+            Long idRutina = 1L;
+            RutinaDTO rutinaActualizada = new RutinaDTO();
+            rutinaActualizada.setNombre("alsjhdaasdkjñ");
+            
+            List<String> videos =new ArrayList<>();
+            videos.add("youtube.com");
+            Ejercicio e1= new Ejercicio(1L, "Ejercicio1", "Ejercicio de piernas", "Hacer con cuidado", "Piernas", "Gluteos,Isqueos...", "Esterilla", "Facil",videos, 1L);
+            FragmentoRutina f1= new FragmentoRutina(1L, 10L, 5L, 15L, e1);
+            ejercicioRepository.save(e1);
+            
+            FragmentoRutinaDTO f1DTO = FragmentoRutinaDTO.fromEntity(f1);
+
+            List<FragmentoRutinaDTO> lf1DTO= new ArrayList<>();
+            lf1DTO.add(f1DTO);
+
+            rutinaActualizada.setEjercicios(lf1DTO);
+
+
+            var peticion = put("http", "localhost", port, rutinaActualizada, "/rutina/" + idRutina);
+
+            var respuesta = restTemplate.exchange(peticion, Rutina.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+
+        
+        @Test
+        @DisplayName("elimina rutina especifica")
+        public void eliminarRutinaExiste() {
+            Long idRutina = 1L;
+
+            var peticion = delete("http", "localhost", port, "/rutina/" + idRutina);
+            var respuesta = restTemplate.exchange(peticion, Void.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+
+        @Test
+        @DisplayName("pone rutina")
+        public void ponerRutinaExiste() {
+            RutinaNuevaDTO nuevaRutina = new RutinaNuevaDTO();
+            nuevaRutina.setNombre("Nuevo Rutina 1");
+
+            List<String> videos =new ArrayList<>();
+            videos.add("youtube.com");
+
+            Ejercicio e1= new Ejercicio(1L, "Ejercicio1", "Ejercicio de piernas", "Hacer con cuidado", "Piernas", "Gluteos,Isqueos...", "Esterilla", "Facil",videos, 1L);
+            FragmentoRutina f1= new FragmentoRutina(1L, 10L, 5L, 15L, e1);
+            ejercicioRepository.save(e1);
+            
+            FragmentoRutinaDTO f1DTO = FragmentoRutinaDTO.fromEntity(f1);
+
+            List<FragmentoRutinaDTO> lf1DTO= new ArrayList<>();
+            lf1DTO.add(f1DTO);
+
+            nuevaRutina.setEjercicios(lf1DTO);
+
+            var peticion = post("http", "localhost", port, nuevaRutina,"/rutina");
+            var respuesta = restTemplate.exchange(peticion, Rutina.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(201);
         }
     }
 
