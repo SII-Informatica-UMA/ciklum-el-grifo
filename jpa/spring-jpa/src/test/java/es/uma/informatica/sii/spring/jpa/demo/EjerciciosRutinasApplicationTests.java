@@ -18,12 +18,16 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.test.annotation.DirtiesContext;
-
 import org.springframework.web.util.UriComponentsBuilder;
 
-import es.uma.informatica.sii.spring.jpa.demo.dtos.*;
-
-import es.uma.informatica.sii.spring.jpa.demo.entities.*;
+import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioDTO;
+import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioNuevoDTO;
+import es.uma.informatica.sii.spring.jpa.demo.dtos.FragmentoRutinaDTO;
+import es.uma.informatica.sii.spring.jpa.demo.dtos.RutinaDTO;
+import es.uma.informatica.sii.spring.jpa.demo.dtos.RutinaNuevaDTO;
+import es.uma.informatica.sii.spring.jpa.demo.entities.Ejercicio;
+import es.uma.informatica.sii.spring.jpa.demo.entities.FragmentoRutina;
+import es.uma.informatica.sii.spring.jpa.demo.entities.Rutina;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.EjercicioRepository;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.RutinaRepository;
 
@@ -57,7 +61,7 @@ public class EjerciciosRutinasApplicationTests {
         .scheme(scheme)
         .host(host).port(port)
         .path(paths)
-        .queryParam("entrenador",1)
+        .queryParam("entrenador",1L)
         .build()
         .toUri();
         return uri;
@@ -279,7 +283,56 @@ public class EjerciciosRutinasApplicationTests {
             rutinaRepository.save(r2);
 
         }
-        //TODO PONER LOS TEST
+        
+        @Test
+        @DisplayName("devuelve la lista de ejercicios")
+        public void devuelveEjercicios() {
+            var peticion = get("http", "localhost", port, "/ejercicio");
 
+            var respuesta = restTemplate.exchange(peticion,
+                    new ParameterizedTypeReference<List<EjercicioDTO>>() {
+                    });
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+            assertThat(respuesta.getBody()).isNotEmpty();
+        }
+
+        @Test
+        @DisplayName("devuelve un ejercicio especifico")
+        public void obtenerEjercicioExiste() {
+            Long idEjercicio = 1L;
+
+            var peticion = get("http", "localhost", port, "/ejercicio/" + idEjercicio);
+            var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+
+        @Test
+        @DisplayName("actualiza un ejercicio correctamente")
+        public void actualizarEjercicioExiste() {
+            Long idEjercicio = 1L;
+            EjercicioDTO ejercicioActualizado = new EjercicioDTO();
+            ejercicioActualizado.setNombre("lajshfjasd");
+
+            var peticion = put("http", "localhost", port, ejercicioActualizado, "/ejercicio/" + idEjercicio);
+
+            var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
+    
+        @Test
+        @DisplayName("eliminar ejercicio en especifico")
+        public void eliminarEjercicioExiste() {
+            Long idEjercicio = 1L;
+
+            var peticion = delete("http", "localhost", port, "/ejercicio/" + idEjercicio);
+            var respuesta = restTemplate.exchange(peticion, Void.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+        }
     }
+
+    
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Ejercicio;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.EjercicioRepository;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.RutinaRepository;
-import es.uma.informatica.sii.spring.jpa.demo.Excepciones.EjercicioEnRutinaException;
 import jakarta.transaction.Transactional;
 
 @Transactional
@@ -47,7 +46,7 @@ public class EjercicioService {
     public void eliminarEjercicio(Long id) {
         /*if (this.rutinaRepository.existsRutinaWithEjercicio(id)) {
             throw new EjercicioEnRutinaException(); 
-        }*/
+        }*/ //TODO 
         this.ejercicioRepository.deleteById(id);
     }
 

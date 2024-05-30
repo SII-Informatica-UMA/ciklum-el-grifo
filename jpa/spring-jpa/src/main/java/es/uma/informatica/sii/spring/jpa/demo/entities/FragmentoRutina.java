@@ -26,6 +26,9 @@ public class FragmentoRutina {
         this.ejercicios = ejercicio;
     }
 
+    public FragmentoRutina() {
+        
+    }
     public Long getId() {
         return this.id;
     }
@@ -91,7 +94,6 @@ public class FragmentoRutina {
     }
 
     public Ejercicio getDescanso() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getDescanso'");
     }
 }

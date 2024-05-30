@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import es.uma.informatica.sii.spring.jpa.demo.Excepciones.EjercicioEnRutinaException;
+import es.uma.informatica.sii.spring.jpa.demo.Excepciones.EjercicioNoExiste;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioDTO;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioNuevoDTO;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Ejercicio;
 import es.uma.informatica.sii.spring.jpa.demo.services.EjercicioService;
-import es.uma.informatica.sii.spring.jpa.demo.Excepciones.EjercicioEnRutinaException;
-import es.uma.informatica.sii.spring.jpa.demo.Excepciones.EjercicioNoExiste;
 
 
 @RestController
@@ -82,10 +82,11 @@ public class ControladorEjercicios {
         this.EjercicioService.obtenerEjercicio(idEjercicio).orElseThrow(EjercicioNoExiste::new);
         try {
             this.EjercicioService.eliminarEjercicio(idEjercicio);
-            return ResponseEntity.ok().build();
-        } catch (EjercicioEnRutinaException e) { // TODO PROBAR SI ES STATUS FORBIDDEN O EXPECTATION FAILED
+            
+        } catch (EjercicioEnRutinaException e) {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
         }
+        return ResponseEntity.ok().build();
     }
 
     @ExceptionHandler(EjercicioNoExiste.class)

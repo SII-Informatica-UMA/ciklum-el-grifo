@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Login, UsuarioSesion, Rol, RolCentro } from "../entities/login";
-import { Observable, of, forkJoin, concatMap, lastValueFrom } from "rxjs";
-import {map} from 'rxjs/operators';
 import * as jose from 'jose';
+import { Observable, concatMap, forkJoin, lastValueFrom, of } from "rxjs";
+import { map } from 'rxjs/operators';
+import { Login, Rol, RolCentro, UsuarioSesion } from "../entities/login";
 
 import { Usuario } from "../entities/usuario";
 import { BackendFakeService } from "./backend.fake.service";
-import { BackendService } from "./backend.service";
 
 @Injectable({
   providedIn: 'root'
