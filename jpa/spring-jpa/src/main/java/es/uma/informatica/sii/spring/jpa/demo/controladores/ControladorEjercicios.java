@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,30 +28,30 @@ import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioNuevoDTO;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Ejercicio;
 import es.uma.informatica.sii.spring.jpa.demo.services.EjercicioService;
 
-
 @RestController
 @RequestMapping("/ejercicio")
 public class ControladorEjercicios {
 
-	private EjercicioService EjercicioService;
+    private final EjercicioService ejercicioService;
 
     public ControladorEjercicios(EjercicioService ejercicioService) {
-    this.EjercicioService = ejercicioService;
+        this.ejercicioService = ejercicioService;
     }
 
-    @GetMapping //Devuelvo la lista de ejercicios pertenecientes al entrenador con id "idEntrenador"
-   public List<EjercicioDTO> obtenerEjercicios(@RequestParam(value = "entrenador",required = true) Long idEntrenador) {
-        return this.EjercicioService.obtenerEjercicios(idEntrenador).stream().map(EjercicioDTO::fromEntity).toList();
+    @GetMapping
+    @PreAuthorize("hasRole('USER')")
+    public List<EjercicioDTO> obtenerEjercicios(@RequestParam(value = "entrenador", required = true) Long idEntrenador) {
+        return this.ejercicioService.obtenerEjercicios(idEntrenador).stream().map(EjercicioDTO::fromEntity).toList();
     }
-
 
     @PostMapping
-    public ResponseEntity<EjercicioDTO> crearEjercicio(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<EjercicioDTO> crearEjercicio(@RequestParam(value = "entrenador", required = true) Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
         Ejercicio g = ejercicioNuevoDTO.toEntity();
-        g.setId((Long)null);
+        g.setId((Long) null);
         g.setIdEntrenador(idEntrenador);
-        g = this.EjercicioService.crearActualizarEjercicio(g);
-        return ResponseEntity.created((URI)this.generadorUri(uriBuilder.build()).apply(g)).body(EjercicioDTO.fromEntity(g));
+        g = this.ejercicioService.crearActualizarEjercicio(g);
+        return ResponseEntity.created(this.generadorUri(uriBuilder.build()).apply(g)).body(EjercicioDTO.fromEntity(g));
     }
 
     private Function<Ejercicio, URI> generadorUri(UriComponents uriBuilder) {
@@ -59,30 +60,28 @@ public class ControladorEjercicios {
         };
     }
 
-
- 
     @GetMapping("/{idEjercicio}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<EjercicioDTO> obtenerEjercicioPorId(@PathVariable Long idEjercicio) {
-        return ResponseEntity.of(this.EjercicioService.obtenerEjercicio(idEjercicio).map(EjercicioDTO::fromEntity));
+        return ResponseEntity.of(this.ejercicioService.obtenerEjercicio(idEjercicio).map(EjercicioDTO::fromEntity));
     }
 
     @PutMapping("/{idEjercicio}")
-     public EjercicioDTO actualizacionEjercicio(@PathVariable Long idEjercicio, @RequestBody EjercicioDTO ejercicio) {
-        Ejercicio ejercicioComprobado = this.EjercicioService.obtenerEjercicio(idEjercicio).orElseThrow(() -> {
-            return new EjercicioNoExiste();
-        });
+    @PreAuthorize("hasRole('USER')")
+    public EjercicioDTO actualizacionEjercicio(@PathVariable Long idEjercicio, @RequestBody EjercicioDTO ejercicio) {
+        Ejercicio ejercicioComprobado = this.ejercicioService.obtenerEjercicio(idEjercicio).orElseThrow(EjercicioNoExiste::new);
         Ejercicio ejercicioADevolver = ejercicio.toEntity();
         ejercicioADevolver.setId(idEjercicio);
         ejercicioADevolver.setIdEntrenador(ejercicioComprobado.getIdEntrenador());
-        return EjercicioDTO.fromEntity(this.EjercicioService.crearActualizarEjercicio(ejercicioADevolver));
+        return EjercicioDTO.fromEntity(this.ejercicioService.crearActualizarEjercicio(ejercicioADevolver));
     }
 
-    @DeleteMapping({"/{idEjercicio}"})
+    @DeleteMapping("/{idEjercicio}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> eliminacionEjercicioPorId(@PathVariable Long idEjercicio) {
-        this.EjercicioService.obtenerEjercicio(idEjercicio).orElseThrow(EjercicioNoExiste::new);
+        this.ejercicioService.obtenerEjercicio(idEjercicio).orElseThrow(EjercicioNoExiste::new);
         try {
-            this.EjercicioService.eliminarEjercicio(idEjercicio);
-            
+            this.ejercicioService.eliminarEjercicio(idEjercicio);
         } catch (EjercicioEnRutinaException e) {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).build();
         }

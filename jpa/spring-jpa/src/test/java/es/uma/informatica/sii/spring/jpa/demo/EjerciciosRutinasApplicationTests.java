@@ -11,7 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import es.uma.informatica.sii.spring.jpa.demo.controladores.ControladorEjercicios;
+import es.uma.informatica.sii.spring.jpa.demo.controladores.ControladorRutina;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioDTO;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.EjercicioNuevoDTO;
 import es.uma.informatica.sii.spring.jpa.demo.dtos.FragmentoRutinaDTO;
@@ -34,6 +42,9 @@ import es.uma.informatica.sii.spring.jpa.demo.entities.FragmentoRutina;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Rutina;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.EjercicioRepository;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.RutinaRepository;
+import es.uma.informatica.sii.spring.jpa.demo.security.JwtUtil;
+import es.uma.informatica.sii.spring.jpa.demo.services.EjercicioService;
+import es.uma.informatica.sii.spring.jpa.demo.services.RutinaService;
 
 import static org.mockito.Mockito.when;
 
@@ -46,26 +57,46 @@ public class EjerciciosRutinasApplicationTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Mock 
+    private RestTemplate restMock;
+
     @Value(value = "${local.server.port}")
     private int port;
-    //private String jwtToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.jGgT0iha61tFeyXv30J931J_Z8wXnOPlr4LPwSVYwEM";
-
+    
     @Autowired
     private EjercicioRepository ejercicioRepository;
 
     @Autowired
     private RutinaRepository rutinaRepository;
 
+    @Autowired
+	private JwtUtil jwtUtil;
+
+    String jwtToken ;
+
+	@InjectMocks
+	private EjercicioService ejercicioService;
+	@InjectMocks
+	private ControladorEjercicios ControladorEjercicios;
+
+    @InjectMocks
+	private RutinaService rutinaService;
+	@InjectMocks
+	private ControladorRutina controladorRutina;
+    
+
     @BeforeEach
     public void initializeDatabase() {
         ejercicioRepository.deleteAll();
         rutinaRepository.deleteAll();
+        jwtToken = jwtUtil.generateToken("1");
     }
 
     private URI uri(String scheme, String host, int port, String paths) {
         URI uri = UriComponentsBuilder.newInstance()
         .scheme(scheme)
-        .host(host).port(port)
+        .host(host)
+        .port(port)
         .path(paths)
         .queryParam("entrenador",1L)
         .build()
@@ -73,47 +104,56 @@ public class EjerciciosRutinasApplicationTests {
         return uri;
     }
 
-    /*private URI uri(String scheme, String host, int port, String ...paths) {
-        UriBuilderFactory ubf = new DefaultUriBuilderFactory();
-        UriBuilder ub = ubf.builder()
-                .scheme(scheme)
-                .host(host).port(port);
-        for (String path: paths) {
-            ub = ub.path(path);
-        }
-        return ub.build();
-    }*/
+     /*	public URI uriQuery(String scheme, String host, int port, String query, String ...paths) {
+		UriBuilderFactory ubf = new DefaultUriBuilderFactory();
+		UriBuilder ub = ubf.builder()
+				.scheme(scheme)
+				.host(host).port(port);
+		for (String path: paths) {
+			ub = ub.path(path);
+		}
+		ub = ub.query("plan=1");
+		return ub.build();
+	} */
+
+
 
     private RequestEntity<Void> get(String scheme, String host, int port, String path) {
-        URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.get(uri)//.header("Authorization", "Bearer "+ jwtToken)
-            .accept(MediaType.APPLICATION_JSON)
-            .build();
-        return peticion;
-    }
+            URI uri = uri(scheme, host,port,path);
 
+            return RequestEntity.get(uri)
+                .header("Authorization", "Bearer "+jwtToken)
+                .accept(MediaType.APPLICATION_JSON)
+                .build();
+        }
+    
+        
     private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
-        URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.delete(uri)//.header("Authorization", "Bearer "+ jwtToken)
-            .build();
-        return peticion;
+        URI uri = uri(scheme, host,port,path);
+
+        return RequestEntity.delete(uri)
+                    .header("Authorization", "Bearer "+jwtToken)
+                    .accept(MediaType.APPLICATION_JSON).build();
+    }
+        
+    private <T> RequestEntity<T> post(String scheme, String host, int port, T body, String path) {
+        URI uri = uri(scheme, host,port,path);
+
+        return RequestEntity.post(uri)
+            .header("Authorization", "Bearer "+jwtToken)
+            .accept(MediaType.APPLICATION_JSON)
+            .body(body);
+        }
+
+    private <T> RequestEntity<T> put(String scheme, String host, int port, T body, String path) {
+            URI uri = uri(scheme, host,port,path);
+
+        return RequestEntity.put(uri)
+            .header("Authorization", "Bearer "+jwtToken)
+            .accept(MediaType.APPLICATION_JSON)
+            .body(body);
     }
 
-    private <T> RequestEntity<T> post(String scheme, String host, int port,  T object, String path) {
-        URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.post(uri)//.header("Authorization", "Bearer "+ jwtToken)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(object);
-        return peticion;
-    }
-
-    private <T> RequestEntity<T> put(String scheme, String host, int port,  T object, String path) {
-        URI uri = uri(scheme, host, port, path);
-        var peticion = RequestEntity.put(uri)//.header("Authorization", "Bearer "+ jwtToken)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(object);
-        return peticion;
-    }
 
     @Nested
     @DisplayName("cuando no hay datos")
@@ -123,11 +163,11 @@ public class EjerciciosRutinasApplicationTests {
         @DisplayName("Devuelve la lista de ejercicios vacía")
         public void devuelveEjercicios() {
             var peticion = get("http", "localhost", port, "/ejercicio");
-
+        
             var respuesta = restTemplate.exchange(peticion,
                     new ParameterizedTypeReference<List<EjercicioDTO>>() {
                     });
-
+        
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
             assertThat(respuesta.getBody()).isEmpty();
         }
@@ -156,6 +196,7 @@ public class EjerciciosRutinasApplicationTests {
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
         }
+
 
         @Test
         @DisplayName("Error al eliminar ejercicio especifico no existente")
@@ -232,6 +273,8 @@ public class EjerciciosRutinasApplicationTests {
             assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
         }
 
+        
+
         @Test
         @DisplayName("Añade una rutina correctamente con la base de datos vacia")
         public void ponerRutinaNoExiste() {
@@ -264,13 +307,13 @@ public class EjerciciosRutinasApplicationTests {
     @DisplayName("cuando hay datos")
     public class EjerciciosPuestos {
 
+        
 
         @BeforeEach
         public void insertaDatos(){
 
             List<String> videos =new ArrayList<>();
             videos.add("youtube.com");
-
             Ejercicio e1= new Ejercicio(1L, "Ejercicio1", "Ejercicio de piernas", "Hacer con cuidado", "Piernas", "Gluteos,Isqueos...", "Esterilla", "Facil",videos, 1L);
             Ejercicio e2= new Ejercicio(2L, "Ejercicio2", "Ejercicio de espalda", "No apto para principiantes", "Espalda", "Espalda,Triceps...", "Esterilla", "Intermedio",videos, 1L);
             Ejercicio e3= new Ejercicio(3L, "Ejercicio2", "Ejercicio de espalda", "No apto para principiantes", "Espalda", "Espalda,Triceps...", "Esterilla", "Intermedio",videos, 1L);

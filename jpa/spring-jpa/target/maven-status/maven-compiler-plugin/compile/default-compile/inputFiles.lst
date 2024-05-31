@@ -1,21 +1,24 @@
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\controladores\ControladorEjercicios.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\controladores\ControladorRutina.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\EjercicioDTO.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\EjercicioNuevoDTO.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\FragmentoRutinaDTO.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\RutinaDTO.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\RutinaNuevaDTO.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\EjerciciosRutinaApplication.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\Ejercicio.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\FragmentoRutina.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\Rutina.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\Excepciones\EjercicioEnRutinaException.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\Excepciones\EjercicioNoExiste.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\Excepciones\RutinaNoExisteException.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\repositories\EjercicioRepository.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\repositories\RutinaRepository.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\JwtRequestFilter.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\JwtUtil.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\SecurityConfguration.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\services\EjercicioService.java
-C:\Users\Windows 11\Documents\GitHub\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\services\RutinaService.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\controladores\ControladorEjercicios.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\controladores\ControladorRutina.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\EjercicioDTO.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\EjercicioNuevoDTO.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\EntrenadorDTO.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\EntrenadorNuevoDTO.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\FragmentoRutinaDTO.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\RutinaDTO.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\dtos\RutinaNuevaDTO.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\EjerciciosRutinaApplication.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\Ejercicio.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\Entrenador.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\FragmentoRutina.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\entities\Rutina.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\Excepciones\EjercicioEnRutinaException.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\Excepciones\EjercicioNoExiste.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\Excepciones\RutinaNoExisteException.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\repositories\EjercicioRepository.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\repositories\RutinaRepository.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\JwtRequestFilter.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\JwtUtil.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\security\SecurityConfguration.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\services\EjercicioService.java
+C:\Users\juanc\Documents\GitHub\UMA-IIS23-A-E7\ciklum-el-grifo\jpa\spring-jpa\src\main\java\es\uma\informatica\sii\spring\jpa\demo\services\RutinaService.java
