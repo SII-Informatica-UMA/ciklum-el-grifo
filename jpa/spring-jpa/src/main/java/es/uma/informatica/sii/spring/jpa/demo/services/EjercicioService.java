@@ -45,11 +45,11 @@ public class EjercicioService {
     }
 
     public void eliminarEjercicio(Long idEjercicio) {
-        /* 
+        
         if (this.rutinaRepository.existsRutinaWithEjercicio(idEjercicio)) {
             throw new EjercicioEnRutinaException();      
         }
-        */
+        
     this.ejercicioRepository.deleteById(idEjercicio);
     }
 }   

@@ -303,7 +303,6 @@ public class EjerciciosRutinasApplicationTests {
     }
 
     @Nested
-    @ExtendWith(MockitoExtension.class)
     @DisplayName("cuando hay datos")
     public class EjerciciosPuestos {
 
@@ -377,7 +376,7 @@ public class EjerciciosRutinasApplicationTests {
         }
     
         @Test
-        @DisplayName("Elimina ejercicio  especifico")
+        @DisplayName("Elimina ejercicio especifico, no asignado a ninguna rutina")
         public void eliminarEjercicioExiste() {
             Long idEjercicio = 3L;
 
@@ -386,18 +385,13 @@ public class EjerciciosRutinasApplicationTests {
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
-/* 
+
         @Test
-        @DisplayName("Fallo al eliminar ejercicio especifico")
+        @DisplayName("Fallo al eliminar ejercicio asignado a una rutina")
         public void errorEliminarEjercicioExistente() {
 
-            Long idEjercicio = 3L;
+            Long idEjercicio = 1L;
 
-            // Inicializar los mocks
-        MockitoAnnotations.openMocks(this);
-
-        // Configurar el comportamiento del mock
-        when(rutinaRepository.existsRutinaWithEjercicio(3L)).thenReturn(true);
            
             var peticion = delete("http", "localhost", port, "/ejercicio/" + idEjercicio);
             var respuesta = restTemplate.exchange(peticion, Void.class);
@@ -405,7 +399,7 @@ public class EjerciciosRutinasApplicationTests {
             assertThat(respuesta.getStatusCode().value()).isEqualTo(417);
         }
 
-*/
+
 
 
         //TODO CASO EN EL QUE BORRAS EJERCICIO DE RUTINA Y SALE EXCEPCION

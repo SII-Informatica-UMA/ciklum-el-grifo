@@ -14,9 +14,9 @@ public interface RutinaRepository extends JpaRepository<Rutina,Long> {
     List<Rutina> findByIdEntrenador(Long idEntrenador);
     List<Rutina> findByIdAndNombreOrderByNombreAsc(Long id, String nombre);
 
-/* 
-    @Query("SELECT CASE WHEN (COUNT(r) > 0) THEN true ELSE false END FROM Rutina r JOIN r.ejercicios e WHERE e.id = :idEjercicio")
+
+    @Query("SELECT CASE WHEN (COUNT(r) > 0) THEN true ELSE false END FROM Rutina r JOIN r.ejercicios fr JOIN fr.ejercicios e WHERE e.id = :idEjercicio")
     boolean existsRutinaWithEjercicio(@Param("idEjercicio") Long idEjercicio);
-    */
+    
     
 }

@@ -6,8 +6,4 @@ public class RutinaNoExisteException extends RuntimeException{
         super();
     }
 
-    public RutinaNoExisteException(String msg){
-        super(msg);
-    }
-    
 }
