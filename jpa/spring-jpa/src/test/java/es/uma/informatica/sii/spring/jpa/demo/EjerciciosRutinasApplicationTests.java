@@ -10,6 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,6 +34,8 @@ import es.uma.informatica.sii.spring.jpa.demo.entities.FragmentoRutina;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Rutina;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.EjercicioRepository;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.RutinaRepository;
+
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) 
 @DisplayName("En el servicio de Rutinas y Ejercicios")
@@ -114,7 +120,7 @@ public class EjerciciosRutinasApplicationTests {
     public class EjerciciosVacios {
 
         @Test
-        @DisplayName("devuelve la lista de ejercicios vacía")
+        @DisplayName("Devuelve la lista de ejercicios vacía")
         public void devuelveEjercicios() {
             var peticion = get("http", "localhost", port, "/ejercicio");
 
@@ -127,7 +133,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("error al intentar obtener ejercicio especifico cuando no hay ejercicios")
+        @DisplayName("Error al intentar obtener ejercicio especifico cuando no hay ejercicios")
         public void obtenerEjercicioNoExiste() {
             Long idEjercicio = 1L;
 
@@ -152,7 +158,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("error al eliminar ejercicio especifico no existente")
+        @DisplayName("Error al eliminar ejercicio especifico no existente")
         public void eliminarEjercicioNoExiste() {
             Long idEjercicio = 1L;
 
@@ -163,7 +169,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("Pone un ejercicio correctamente con la base de datos vacia")
+        @DisplayName("Añade un ejercicio correctamente con la base de datos vacia")
         public void ponerEjercicioNoExiste() {
             EjercicioNuevoDTO nuevoEjercicio = new EjercicioNuevoDTO();
             nuevoEjercicio.setNombre("Nuevo Ejercicio 1");
@@ -176,7 +182,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("devuelve la lista de rutinas vacía")
+        @DisplayName("Devuelve la lista de rutinas vacía")
         public void devuelveRutinas() {
             var peticion = get("http", "localhost", port, "/rutina");
 
@@ -189,7 +195,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("error al intentar obtener rutina especifica cuando no hay rutinas")
+        @DisplayName("Error al intentar obtener rutina especifica cuando no hay rutinas")
         public void obtenerRutinaNoExiste() {
             Long idRutina = 1L;
 
@@ -216,7 +222,7 @@ public class EjerciciosRutinasApplicationTests {
 
         
         @Test
-        @DisplayName("error al eliminar rutina especifica no existente")
+        @DisplayName("Error al eliminar rutina especifica no existente")
         public void eliminarRutinaNoExiste() {
             Long idRutina = 1L;
 
@@ -227,7 +233,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("Pone una rutina correctamente con la base de datos vacia")
+        @DisplayName("Añade una rutina correctamente con la base de datos vacia")
         public void ponerRutinaNoExiste() {
             RutinaNuevaDTO nuevaRutina = new RutinaNuevaDTO();
             nuevaRutina.setNombre("Nuevo Rutina 1");
@@ -254,8 +260,10 @@ public class EjerciciosRutinasApplicationTests {
     }
 
     @Nested
-    @DisplayName("cuando hay datos ")
+    @ExtendWith(MockitoExtension.class)
+    @DisplayName("cuando hay datos")
     public class EjerciciosPuestos {
+
 
         @BeforeEach
         public void insertaDatos(){
@@ -284,10 +292,11 @@ public class EjerciciosRutinasApplicationTests {
             Rutina r2= new Rutina(2L,"Rutina2","Rutina que contiene el ejercicio 2","Rutina intermedia",lf2,1L);
             rutinaRepository.save(r2);
 
+             
         }
         
         @Test
-        @DisplayName("devuelve la lista de ejercicios")
+        @DisplayName("Devuelve la lista de ejercicios")
         public void devuelveEjercicios() {
             var peticion = get("http", "localhost", port, "/ejercicio");
 
@@ -300,7 +309,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("devuelve un ejercicio especifico")
+        @DisplayName("Devuelve un ejercicio especifico")
         public void obtenerEjercicioExiste() {
             Long idEjercicio = 1L;
 
@@ -311,7 +320,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("actualiza un ejercicio correctamente")
+        @DisplayName("Actualiza un ejercicio correctamente")
         public void actualizarEjercicioExiste() {
             Long idEjercicio = 1L;
             EjercicioDTO ejercicioActualizado = new EjercicioDTO();
@@ -325,7 +334,7 @@ public class EjerciciosRutinasApplicationTests {
         }
     
         @Test
-        @DisplayName("eliminar ejercicio  especifico")
+        @DisplayName("Elimina ejercicio  especifico")
         public void eliminarEjercicioExiste() {
             Long idEjercicio = 3L;
 
@@ -334,9 +343,31 @@ public class EjerciciosRutinasApplicationTests {
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
+/* 
+        @Test
+        @DisplayName("Fallo al eliminar ejercicio especifico")
+        public void errorEliminarEjercicioExistente() {
+
+            Long idEjercicio = 3L;
+
+            // Inicializar los mocks
+        MockitoAnnotations.openMocks(this);
+
+        // Configurar el comportamiento del mock
+        when(rutinaRepository.existsRutinaWithEjercicio(3L)).thenReturn(true);
+           
+            var peticion = delete("http", "localhost", port, "/ejercicio/" + idEjercicio);
+            var respuesta = restTemplate.exchange(peticion, Void.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(417);
+        }
+
+*/
+
+
         //TODO CASO EN EL QUE BORRAS EJERCICIO DE RUTINA Y SALE EXCEPCION
         @Test
-        @DisplayName("pone ejercicio  ")
+        @DisplayName("Añade ejercicio")
         public void ponerEjercicioExiste() {
             EjercicioNuevoDTO nuevoEjercicio = new EjercicioNuevoDTO();
             nuevoEjercicio.setNombre("Nuevo Ejercicio 1");
@@ -349,7 +380,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("devuelve la lista de rutinas")
+        @DisplayName("Devuelve la lista de rutinas")
         public void devuelveRutinas() {
             var peticion = get("http", "localhost", port, "/rutina");
 
@@ -362,7 +393,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("devuelve una  rutina especifica")
+        @DisplayName("Devuelve una  rutina especifica")
         public void obtenerRutinaExiste() {
             Long idRutina = 1L;
 
@@ -374,7 +405,7 @@ public class EjerciciosRutinasApplicationTests {
     
 
         @Test
-        @DisplayName("actualiza rutina especifica")
+        @DisplayName("Actualiza una rutina especifica")
         public void actualizarRutinaExiste() {
             Long idRutina = 1L;
             RutinaDTO rutinaActualizada = new RutinaDTO();
@@ -403,7 +434,7 @@ public class EjerciciosRutinasApplicationTests {
 
         
         @Test
-        @DisplayName("elimina rutina especifica")
+        @DisplayName("Elimina rutina especifica")
         public void eliminarRutinaExiste() {
             Long idRutina = 1L;
 
@@ -414,7 +445,7 @@ public class EjerciciosRutinasApplicationTests {
         }
 
         @Test
-        @DisplayName("pone rutina")
+        @DisplayName("Añade rutina")
         public void ponerRutinaExiste() {
             RutinaNuevaDTO nuevaRutina = new RutinaNuevaDTO();
             nuevaRutina.setNombre("Nuevo Rutina 1");

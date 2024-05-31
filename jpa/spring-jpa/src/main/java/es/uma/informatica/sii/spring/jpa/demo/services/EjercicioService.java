@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import es.uma.informatica.sii.spring.jpa.demo.Excepciones.EjercicioEnRutinaException;
 import es.uma.informatica.sii.spring.jpa.demo.entities.Ejercicio;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.EjercicioRepository;
 import es.uma.informatica.sii.spring.jpa.demo.repositories.RutinaRepository;
@@ -43,11 +44,12 @@ public class EjercicioService {
         return (Ejercicio) this.ejercicioRepository.save(ejercicio);
     }
 
-    public void eliminarEjercicio(Long id) {
-        /*if (this.rutinaRepository.existsRutinaWithEjercicio(id)) {
-            throw new EjercicioEnRutinaException(); 
-        }*/ //TODO 
-        this.ejercicioRepository.deleteById(id);
+    public void eliminarEjercicio(Long idEjercicio) {
+        /* 
+        if (this.rutinaRepository.existsRutinaWithEjercicio(idEjercicio)) {
+            throw new EjercicioEnRutinaException();      
+        }
+        */
+    this.ejercicioRepository.deleteById(idEjercicio);
     }
-
-}
+}   
