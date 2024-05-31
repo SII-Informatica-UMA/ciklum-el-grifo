@@ -13,19 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,8 +40,6 @@ import es.uma.informatica.sii.spring.jpa.demo.repositories.RutinaRepository;
 import es.uma.informatica.sii.spring.jpa.demo.security.JwtUtil;
 import es.uma.informatica.sii.spring.jpa.demo.services.EjercicioService;
 import es.uma.informatica.sii.spring.jpa.demo.services.RutinaService;
-
-import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) 
 @DisplayName("En el servicio de Rutinas y Ejercicios")
@@ -386,29 +379,21 @@ public class EjerciciosRutinasApplicationTests {
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
 
-/* 
+
         @Test
         @DisplayName("Fallo al eliminar ejercicio especifico")
         public void errorEliminarEjercicioExistente() {
 
-            Long idEjercicio = 3L;
-
-            // Inicializar los mocks
-        MockitoAnnotations.openMocks(this);
-
-        // Configurar el comportamiento del mock
-        when(rutinaRepository.existsRutinaWithEjercicio(3L)).thenReturn(true);
-           
+            Long idEjercicio = 1L;
             var peticion = delete("http", "localhost", port, "/ejercicio/" + idEjercicio);
             var respuesta = restTemplate.exchange(peticion, Void.class);
 
             assertThat(respuesta.getStatusCode().value()).isEqualTo(417);
         }
 
-*/
 
 
-        //TODO CASO EN EL QUE BORRAS EJERCICIO DE RUTINA Y SALE EXCEPCION
+
         @Test
         @DisplayName("Añade ejercicio")
         public void ponerEjercicioExiste() {
