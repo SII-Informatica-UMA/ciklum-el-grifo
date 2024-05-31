@@ -39,13 +39,11 @@ public class ControladorEjercicios {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
     public List<EjercicioDTO> obtenerEjercicios(@RequestParam(value = "entrenador", required = true) Long idEntrenador) {
         return this.ejercicioService.obtenerEjercicios(idEntrenador).stream().map(EjercicioDTO::fromEntity).toList();
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<EjercicioDTO> crearEjercicio(@RequestParam(value = "entrenador", required = true) Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) {
         Ejercicio g = ejercicioNuevoDTO.toEntity();
         g.setId((Long) null);
@@ -61,13 +59,11 @@ public class ControladorEjercicios {
     }
 
     @GetMapping("/{idEjercicio}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<EjercicioDTO> obtenerEjercicioPorId(@PathVariable Long idEjercicio) {
         return ResponseEntity.of(this.ejercicioService.obtenerEjercicio(idEjercicio).map(EjercicioDTO::fromEntity));
     }
 
     @PutMapping("/{idEjercicio}")
-    @PreAuthorize("hasRole('USER')")
     public EjercicioDTO actualizacionEjercicio(@PathVariable Long idEjercicio, @RequestBody EjercicioDTO ejercicio) {
         Ejercicio ejercicioComprobado = this.ejercicioService.obtenerEjercicio(idEjercicio).orElseThrow(EjercicioNoExiste::new);
         Ejercicio ejercicioADevolver = ejercicio.toEntity();
@@ -77,7 +73,6 @@ public class ControladorEjercicios {
     }
 
     @DeleteMapping("/{idEjercicio}")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> eliminacionEjercicioPorId(@PathVariable Long idEjercicio) {
         this.ejercicioService.obtenerEjercicio(idEjercicio).orElseThrow(EjercicioNoExiste::new);
         try {
